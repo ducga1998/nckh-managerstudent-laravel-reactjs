@@ -1,0 +1,185 @@
+.full-page-absolute .bg-mask {
+    z-index: 1;
+}
+
+.full-page-absolute .bg-img {
+    background: #fff;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.bg-holder>.bg-img {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.full,
+.full-page {
+    width: 100%;
+    height: 100%;
+}
+
+.bg-img,
+.bg-holder>.bg-mask,
+.bg-holder>.bg-parallax {
+    width: 100%;
+    height: 100%;
+}
+
+.bg-holder>.bg-holder-content {
+    position: absolute;
+    z-index: 7;
+    top: 0px;
+}
+
+.clock {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    box-shadow: inset 0 10px 0 rgba(0, 0, 0, 0.1);
+    border: 10px solid black;
+    border-radius: 50px;
+    position: relative;
+}
+
+.clock::before {
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    background-color: black;
+    border-radius: 6px;
+    content: "";
+    margin: -6px 0 0 -6px;
+    z-index: 1;
+}
+
+.hand {
+    animation-name: hand;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    width: 10px;
+    background-color: black;
+    border-radius: 5px;
+    margin-left: -5px;
+}
+
+.bg-holder>.bg-holder-content {
+    position: absolute;
+    z-index: 7;
+    top: 0px;
+}
+
+.hand.minute {
+    animation-duration: 1s;
+    transform-origin: center bottom;
+    position: absolute;
+    top: 5px;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    height: 35px;
+}
+
+.hand.hour {
+    animation-duration: 12s;
+    transform-origin: center bottom;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    height: 25px;
+}
+
+@-webkit-keyframes hand {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes hand {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@keyframes hand {
+    from {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.logo-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 30px 0 0 30px;
+    display: block;
+    opacity: .5;
+    filter: alpha(opacity=50);
+    transition: .3s;
+}
+
+.full-center {
+    top: 50%!important;
+    left: 50%!important;
+    position: absolute!important;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    position: relative;
+}
+
+.None {
+    display: none!important;
+}
+
+.opacity {
+    opacity: 0;
+    transition: .5s;
+}
+
+.notice-sucess {
+    background: #48c148;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+}
+
+.hiden {}
+
+.m-viewdiglog {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
