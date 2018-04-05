@@ -21,6 +21,10 @@ class MonRepository extends BaseRepository
         $mon=$lopmonhoc->LayMonTrongLopMonHoc->toArray();
        return $mon;
     }
+    public function GetToanBoMonHoc(){
+        $monhoc=Mon::all()->toArray();
+        return $monhoc;
+    }
 
 
 }

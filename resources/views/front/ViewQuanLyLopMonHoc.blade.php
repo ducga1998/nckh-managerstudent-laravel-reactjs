@@ -1,7 +1,6 @@
-@extends('front.layout',['NameAdmin' =>"csacsacsa",'GmailAdmin'=>"csacascsacsa"])
-@section('m-content') {{-- Id IdGiangVien TenGiangVien BoMon Gmail updated_at created_at password --}}
-<div id="content-ajax"></div>
-<div class="m-portlet  m-viewdiglog">
+@extends('front.layout')
+@section('m-content')
+    <div class="m-portlet  m-viewdiglog">
 						<div class="m-portlet__head">
 							<div class="m-portlet__head-caption">
 								<div class="m-portlet__head-title">
@@ -9,7 +8,7 @@
 										<i class="la la-gear"></i>
 									</span>
 									<h3 class="m-portlet__head-text">
-										Thêm Giảng Viên
+										Thêm Lớp Học
 									</h3>
 								</div>
 							</div>
@@ -20,54 +19,28 @@
 							<div class="m-portlet__body">
 								<div class="form-group m-form__group row">
 									<label class="col-lg-1 col-form-label">
-										Full Name:
+										Tên Lớp
 									</label>
 									<div class="col-lg-3">
-										<input name="name" class="form-control m-input" placeholder="Full name">
+										<input name="tenlop" class="form-control m-input" placeholder="Nhập tên Lớp">
 										<span class="m-form__help">
-											Nhập tên Giảng Viên
+											Nhập tên lớp
 										</span>
 									</div>
+									
 									<label class="col-lg-1 col-form-label">
-										Email Của Giảng Viên:
+										Chọn Khóa Học
 									</label>
 									<div class="col-lg-3">
-										<input name="email" type="email" class="form-control m-input" placeholder="Email">
-										<span class="m-form__help">
-											Nhập Gmail của Giảng viên
-										</span>
-									</div>
-									<label class="col-lg-1 col-form-label">
-										Bộ Môn
-									</label>
-									<div class="col-lg-3">
-										<select name="bomon" class="form-control m-input m-input--square" id="exampleSelect1">
-											<option value="KHMT">
-												KHMT
-											</option>
-											<option value="CNPM">
-												CNPM
-											</option>
-											<option value="MANG">
-												MANG
-											</option>
-											<option value="HTTT">
-												HTTT
-											</option>
-											<option value="TRIET">
-												Triết học
-											</option>
+										<select name="khoahoc" class="form-control m-input m-input--square" id="selectKhoaHoc">
+											@foreach ($ArrayKhoa as $item )
+                                                <option idkhoahoc="{{$item['IdKhoaHoc']}}">
+                                                    {{$item["TenKhoaHoc"]}}
+                                                </option>
+                                            @endforeach
 										</select>
 									</div>
-										<label class="col-lg-1 col-form-label">
-									password
-									</label>
-									<div class="col-lg-3">
-										<input name="password" type ="password"class="form-control m-input" placeholder="Password">
-										<span class="m-form__help">
-											Nhập Password
-										</span>
-									</div>
+										
 
 
 								</div>
@@ -80,7 +53,7 @@
 										<div class="col-lg-5"></div>
 										<div class="col-lg-7">
 											<button type="submit"  class="btn btn-brand SubmitAddSinhVien">
-												Submit
+												Thêm
 											</button>
 											<button type="reset" class="btn btn-secondary">
 												Cancel
@@ -99,7 +72,7 @@
         <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
                 <h3 class="m-portlet__head-text">
-                    Danh sách Giảng Viên
+                   Danh Sách Lớp Học
                 </h3>
             </div>
         </div>
@@ -132,7 +105,7 @@
                     </th>
 
                     <th data-field="OrderID" class="m-datatable__cell m-datatable__cell--sort" data-sort="asc">
-                        <span style="width: 100px;">Tên Giảng Viên
+                        <span style="width: 100px;">Id Lớp Môn Học
                             <i class="la la-arrow-up"></i>
                         </span>
                     </th>
@@ -207,32 +180,5 @@
         </table>
     </div>
 </div>
-<button type="button" class="ajaxSucess" style="width:0px" data-toggle="modal" data-target="#m_modal_1">
+@endsection
 
-</button>
-<div class="modal fade show" id="m_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none; padding-right: 17px;">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                   Thông Báo
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        ×
-                    </span>
-                </button>
-            </div>
-            <div class="modal-body">
-              Xóa Thành Công Giảng Viên 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Đóng 
-                </button>
-               
-            </div>
-        </div>
-    </div>
-</div>
-{{-- end model m_modal_1 --}} @endsection

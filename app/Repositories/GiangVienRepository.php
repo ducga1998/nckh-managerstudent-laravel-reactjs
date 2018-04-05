@@ -29,6 +29,8 @@ class GiangVienRepository extends BaseRepository
 //    }
     public function ThemGiangVien($request){
         $user=new User;
+        $id = User::count() + 1;
+        $user->id=$id;
         $user->role_id =2;
         $user->confirmed=1;
         $user->username= $request["name"];
@@ -37,7 +39,7 @@ class GiangVienRepository extends BaseRepository
 
         $user->save();
         $giangvien = new giangvien;
-        $id = User::count() + 1; // tất cả id đều phải theo id của User để tránh trùng lặp
+         // tất cả id đều phải theo id của User để tránh trùng lặp
         $giangvien->Id = $id;
         $giangvien->TenGiangVien = $request["name"];
         $giangvien->BoMon = $request["bomon"];

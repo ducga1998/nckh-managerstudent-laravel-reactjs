@@ -46,8 +46,9 @@ class SinhVienRepository extends BaseRepository
         $password =   $request->password;
         $handleUserName= str_replace(' ', '', $tensinhvien); // xóa tất cả khoảng trắng để làm usename
         //thêm cả user vào 
-        $id = User::count() + 2;
+        $id = User::count() + 1;
         $user = new User;
+        $user->id= $id ;
         $user->role_id = 3;
         $user->confirmed = 1;
 

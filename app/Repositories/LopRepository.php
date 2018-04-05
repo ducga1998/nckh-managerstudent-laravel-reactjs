@@ -15,6 +15,9 @@ class LopRepository extends BaseRepository
        return $lophoc = lophoc::all();
       
     }
+    public function GetToanBoLopMonHoc(){
+        return lophoc::all()->toArray();
+    }
 
    
 

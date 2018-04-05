@@ -1,121 +1,71 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Erreur 404</title>
+<!-- 
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
+Version: 5.0.4
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<html lang="en" >
+	<!-- begin::Head -->
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			Metronic | Error Page - 1
+		</title>
+		<meta name="description" content="Latest updates and statistic charts">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!--begin::Web font -->
+		<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+		<script>
+          WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+		</script>
+		<!--end::Web font -->
+        <!--begin::Base Styles -->
+		@include('common.linkCSS')
+		<!--end::Base Styles -->
+		
+	</head>
+	<!-- end::Head -->
+    <!-- end::Body -->
+	<body class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+		<!-- begin:: Page -->
+		<div class="m-grid m-grid--hor m-grid--root m-page">
+			<div class="m-grid__item m-grid__item--fluid m-grid  m-error-1" style="background-image: url(../../../assets/app/media/img//error/bg1.jpg);">
+				<div class="m-error_container">
+					<span class="m-error_number">
+						<h1>
+							404
+						</h1>
+					</span>
+					<p class="m-error_desc">
+						OOPS! Something went wrong here
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- end:: Page -->
+    	<!--begin::Base Scripts -->
 
-    {!! HTML::style('css/main_front.css') !!}
+    <script src="{{ URL::asset('assets/vendors/base/vendors.bundle.js')}}" type="text/javascript"></script>
+	<script src="{{ URL::asset('assets/demo/default/base/scripts.bundle.js')}}" type="text/javascript"></script>
 
-    <style type="text/css">
+	<script src="{{ URL::asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
 
-      a,
-      a:focus,
-      a:hover {
-        color: #fff;
-      }
-
-      .btn-default,
-      .btn-default:hover,
-      .btn-default:focus {
-        color: #333;
-        text-shadow: none;
-        background-color: #fff;
-        border: 1px solid #fff;
-      }
-
-      html,
-      body {
-        height: 100%;
-        background-color: #333;
-      }
-      body {
-        color: #fff;
-        text-align: center;
-        text-shadow: 0 1px 3px rgba(0,0,0,.5);
-      }
-
-      .site-wrapper {
-        display: table;
-        width: 100%;
-        height: 100%; /* For at least Firefox */
-        min-height: 100%;
-        -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-                box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-      }
-      .site-wrapper-inner {
-        display: table-cell;
-        vertical-align: top;
-      }
-      .cover-container {
-        margin-right: auto;
-        margin-left: auto;
-      }
-
-      .inner {
-        padding: 30px;
-      }
-
-      .cover {
-        padding: 0 20px;
-      }
-      .cover .btn-lg {
-        padding: 10px 20px;
-        font-weight: bold;
-      }
-
-      @media (min-width: 768px) {
-        .site-wrapper-inner {
-          vertical-align: middle;
-        }
-        .cover-container {
-          width: 100%; 
-        }
-      }
-
-      @media (min-width: 992px) {
-        .cover-container {
-          width: 700px;
-        }
-      }
-
-    </style>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-
-  <body>
-
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <div class="inner cover">
-            <h1 class="cover-heading">{{ trans('front/missing.error-404') }}</h1>
-            <p class="lead">{{ trans('front/missing.info') }}</p>
-            <p class="lead">
-              <a href="{!! url('/') !!}" class="btn btn-lg btn-default">{{ trans('front/missing.button') }}</a>
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    {!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-    {!! HTML::script('js/vendor/docs.min.js') !!}
-    {!! HTML::script('js/vendor/ie10-viewport-bug-workaround.js') !!}
-    
-  </body>
+	<script src="{{ URL::asset('assets/app/js/dashboard.js')}}" type="text/javascript"></script>
+    <!--end::Base Scripts -->
+	</body>
+	<!-- end::Body -->
 </html>

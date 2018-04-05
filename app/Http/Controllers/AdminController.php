@@ -16,6 +16,8 @@ use App\Models\khoahoc;
 use App\Models\giangvien;
 use Illuminate\Http\Request;
 use App\Models\admin;
+use App\Models\Mon;
+use App\Repositories\LopMonHocRespository;
 
 class Object
 {
@@ -55,7 +57,7 @@ class AdminController extends Controller {
 	* @return Response
 	*/
 	public function admin(
-		ContactRepository $contact_gestion, 
+		ContactRepository $contact_gestion,
 		BlogRepository $blog_gestion,
 		CommentRepository $comment_gestion)
 	{	
@@ -77,16 +79,12 @@ class AdminController extends Controller {
 		$url = config('medias.url') . '?langCode=' . config('app.locale');
 		
 		return view('back.filemanager', compact('url'));
-
 	}
 	public function postAddGiangVien(Request $request,GiangVienRepository $giangvien){
-	
 		$giangvien->ThemGiangVien($request);
-		
-	}
+}
 	public function GetGiangVien(GiangVienRepository $giangvien){
 		$listgiangvien=$giangvien->getAllListGiangVien();
-		
 		return view('front/listgiangvien',['list'=>$listgiangvien]);
 	}
 	public function DeleteGiangVien(Request $request,GiangVienRepository $giangvien){
@@ -97,23 +95,18 @@ class AdminController extends Controller {
 	public function LayToanBoLopHoc(LopRepository $lophoc){
 		$useArrayLopHoc = lophoc::all()->toJson();
 		return $useArrayLopHoc;
-	
-	}
-	
+}
 	public function AllSinhVien(){
 		$sinhvien=SinhVien::all()->toArray();
 		$useArrayLopHoc =lophoc::all()->toArray();
-		
-			return view("front/listsinhvien",['list'=>$sinhvien, 'useArrayLopHoc'=> $useArrayLopHoc]);
+		return view("front/listsinhvien",['list'=>$sinhvien, 'useArrayLopHoc'=> $useArrayLopHoc]);
 	}
 	//api 
 	public function AllSinhVienTheoKhoa($idkhoa){
 		$idkhoa =(int)$idkhoa;
 		$sinhvientheokhoa=SinhVien::all()->where('IdKhoaHoc', $idkhoa);
 		return $sinhvientheokhoa->toJson();
-		
-	}
-	
+		}
 	public function AllSinhVienTheoLop($idlophoc){
 		$idlophoc =(int)$idlophoc;
 		$sinhvientheolop = SinhVien::all()->where('IdLop', $idlophoc);
@@ -125,7 +118,6 @@ class AdminController extends Controller {
 	}
 	//ajax
 	public function ThemSinhVienAjax(SinhVienRepository $sinhvien,Request $request){
-	
 		$sinhvien->ThemSinhVienAJaxSP($request);
 	}
 	//view  quan lý lớp môn học
@@ -138,7 +130,6 @@ class AdminController extends Controller {
         // cần thông tin toàn bộ sinh viên. sô lượng sinh viên và bộ môn 
 		foreach ($lopmonhoc as $item) {
 			$object = new Object;
-		
 			$idlopmonhoc = $item["IdLopMonHoc"];
 			$monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
 			$tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
@@ -153,7 +144,6 @@ class AdminController extends Controller {
 			else{
 				$tengiangvien="a";
 			}
-			
 			//create object . handle object
 			$object->TenGiangVienDK= $tengiangvien;
 			$object->IdLopMonHoc = $idlopmonhoc;
@@ -164,12 +154,37 @@ class AdminController extends Controller {
 			array_push($arrayInfo, $object);
             //  return $listsinhvien
 		}
-      
-        //từ id lớp môn học query ra rất nhiều thứ
+       //từ id lớp môn học query ra rất nhiều thứ
 		return view('front.listlopmonhoc', [
 			'array' => $arrayInfo,
 			'info' => $inforadmin
 		]);
 	}
+	public function ViewTaoLopMonHoc(){
+	$monhoc=	Mon::all()->toArray();
+	
+		return view('front.taolopmonhoc',['ArrayMonHoc'=>$monhoc]);
+	}
+	public function ViewTudong(LopRepository $lop,MonRepository $mon){
+		$arrayMon=$mon->GetToanBoMonHoc();
+		$arrayLop=$lop->GetToanBoLopMonHoc();
+		return view('front.taotudong',["ArrayMon"=>$arrayMon,"ArrayLop"=>$arrayLop]);
+	}
+	public function ThemLopMonHoc(Request $request,LopMonHocRespository $lopmonhoc){
+				$lopmonhoc->ThemLopMonHoc($request);
+	}
+	public function ThemAutoLopMonHoc(Request $request,LopMonHocRespository $lopmonhoc){
+		$lopmonhoc->ThemAutoLopMonHoc($request);
+	}
+	public function ViewQuanLyLopMonHoc(LopRepository $lop){
+		$ArrayKhoa=khoahoc::all()->toArray();
+		return view('front.ViewQuanLyLopMonHoc',['ArrayKhoa'=> $ArrayKhoa]);
+	}
+	public function  TaoLopMonHoc(){
 
+	}
+	public function profileview()
+	{
+		return view('front.profile.profile');
+	}
 }

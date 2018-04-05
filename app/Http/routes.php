@@ -36,25 +36,20 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
 	Route::get('auth/confirm/{token}', 'Auth\AuthController@getConfirm');
 	Route::group(['middleware' => ['admin']], function () {
-		Route::post("/themgiangvien", 'AdminController@postAddGiangVien');
-		Route::post('themsinhvienajax', 'AdminController@ThemSinhVienAjax');
-		Route::post('/listgiangvien/deletegiangvien', 'AdminController@DeleteGiangVien');
+		Route::get('/quanlylistlophoc', 'AdminController@ViewQuanLyLopMonHoc');
 		Route::get('/listgiangvien', 'AdminController@GetGiangVien');
 		//end manager giang vien
 		Route::get('/listsinhvien', 'AdminController@AllSinhVien');
-		
-	
-	
-		//api 
-		
-		
-		//api
-		//end manager sinh vien theo 3 loai
-		
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
 	//end manager lop hoc
-	});
-	
+});
+	Route::post("/themgiangvien", 'AdminController@postAddGiangVien');
+	Route::post('themsinhvienajax', 'AdminController@ThemSinhVienAjax');
+	Route::post('/listgiangvien/deletegiangvien', 'AdminController@DeleteGiangVien');
+	Route::post('/ajaxautothemlopmonhoc', 'AdminController@ThemAutoLopMonHoc');
+	Route::post("/ajaxthemmonhoc", "AdminController@ThemLopMonHoc");// ajax thêm môn học
+	Route::get('/taolopmonhocbangtay', "AdminController@ViewTaoLopMonHoc");
+	Route::get('/taotudong','AdminController@ViewTudong');
 	Route::get(
 		'/listsinhvientheolophoc/{idlophoc}',
 		['uses' => 'AdminController@AllSinhVienTheoLop']
@@ -62,6 +57,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/listsinhvientheokhoa/{idkhoa}', 'AdminController@AllSinhVienTheoKhoa');
 	Route::get('/listlophoc', 'AdminController@LayToanBoLopHoc');
 	Route::get('listkhoahoc', 'AdminController@AllKhoaHoc');
+	Route::get("profileMe","AdminController@profileview");
 
 	//end middlware admin access
 	
