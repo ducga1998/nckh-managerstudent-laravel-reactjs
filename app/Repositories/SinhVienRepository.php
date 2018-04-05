@@ -4,6 +4,7 @@ use App\Models\SinhVien;
 use App\Models\User;
 use App\Models\giangvien;
 use App\Models\lopmonhoc;
+use Illuminate\Support\Facades\Input;
 class SinhVienRepository extends BaseRepository
 {
         protected $SinhVien;
@@ -71,6 +72,10 @@ class SinhVienRepository extends BaseRepository
         $sinhvien->save();
 
     }
+    public function GetSinhVienByIdSinhVien($idsinhvien){
+               $sinhvien= SinhVien::find($idsinhvien)->toArray();
+               return $sinhvien;
+    }
     // trả về array list sinh viên
     public function GetListSinhVienByIdLopMonHoc($idlopmonhoc)
     {
@@ -85,5 +90,20 @@ class SinhVienRepository extends BaseRepository
         $Listsinhvien = $lopmonhoc->LayToanBoSinhVienTrongLopMonHoc->toJson();
         
         return $Listsinhvien;
+    }
+    //update
+    public function UpdateInfoSv(){
+       $array= Input::all();
+    /* khoahoc: khoahoc,
+      ngaysinh: ngaysinh,
+      idsinhvien: idsinhvien,
+      tensinhvien: tensinhvien*/ 
+     $sinhvien= SinhVien::find($array['idsinhvien']);
+    
+     $sinhvien->TenSv= $array['tensinhvien'];
+     $sinhvien->NgaySinh=$array['ngaysinh'];
+     $sinhvien->IdKhoaHoc= $array['khoahoc'];
+    $sinhvien->save();
+
     }
 }

@@ -62,14 +62,7 @@
         <table class="m-datatable__table" id="m-datatable--1018619778392" style="display: block; max-height: 380px;">
             <thead class="m-datatable__head">
                 <tr class="m-datatable__row" style="height: 56px; left: 0px;">
-                    <th data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                        <span style="width: 40px;">
-                            <label class="m-checkbox m-checkbox--single m-checkbox--all m-checkbox--solid m-checkbox--brand">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </span>
-                    </th>
+                    
 
                     <th data-field="OrderID" class="m-datatable__cell m-datatable__cell--sort" data-sort="asc">
                         <span style="width: 90px;">Id Lớp
@@ -94,14 +87,7 @@
                 data-scrollbar-shown="true">
                 @foreach ($list as $item )
                 <tr data-row="0" class="m-datatable__row m-datatable__row--even" style="height: 55px;">
-                    <td data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                        <span style="width: 40px;">
-                            <label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
-                                <input type="checkbox" value="1">
-                                <span></span>
-                            </label>
-                        </span>
-                    </td>
+                   
                     {{-- Id IdGiangVien TenGiangVien BoMon Gmail updated_at created_at password --}}
 
                     <td data-field="ShipDate" class="m-datatable__cell">

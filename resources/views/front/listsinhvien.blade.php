@@ -14,7 +14,7 @@
     <div class="containerAjaxContent col-xl-4"></div>
 
     <button routetheokhoa="{{url('/listsinhvientheokhoa')}}" routetheolop="{{url('/listsinhvientheolophoc')}}" type="button"
-        class=" filter-btn btn btn-primary btn-sm m-btn m-btn--custom col-xl-2">
+        class=" filter-btn btn btn-primary btn-sm m-btn m-btn--custom col-xl-2" id="m_blockui_1_5">
         Filter
     </button>
 
@@ -31,46 +31,11 @@
         <div class="m-portlet__head-tools">
             <ul class="m-portlet__nav">
                 <li class="m-portlet__nav-item">
-                    <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover"
-                        aria-expanded="true">
-                        <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                            <i class="la la-ellipsis-h m--font-brand"></i>
+                    <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push m-dropdown--open" data-dropdown-toggle="hover" aria-expanded="true">
+                        <a href="#" class="viewAddGiangVien m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                            <i class="fa fa-plus"></i>
                         </a>
-                        <div class="m-dropdown__wrapper">
-                            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                            <div class="m-dropdown__inner">
-                                <div class="m-dropdown__body">
-                                    <div class="m-dropdown__content">
-                                        <ul class="m-nav">
-                                            <li class="m-nav__section m-nav__section--first">
-                                                <span class="m-nav__section-text">
-                                                    Quick Actions
-                                                </span>
-                                            </li>
-                                            <li class="m-nav__item">
-                                                <a href="#" class="m-nav__link viewAddGiangVien">
-                                                    <i class="m-nav__link-icon flaticon-share"></i>
-                                                    <span class="m-nav__link-text">
-                                                        Create Post
-                                                    </span>
-                                                </a>
-                                            </li>
-
-
-
-
-
-                                            <li class="m-nav__separator m-nav__separator--fit m--hide"></li>
-                                            <li class="m-nav__item m--hide">
-                                                <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">
-                                                    Submit
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </li>
             </ul>
@@ -90,7 +55,7 @@
         <thead class="m-datatable__head">
             <tr class="m-datatable__row" style="height: 56px; left: 0px;">
                 <th data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                    <span style="width: 40px;">
+                    <span style="width: 100px;">
                         <label class="m-checkbox m-checkbox--single m-checkbox--all m-checkbox--solid m-checkbox--brand">
                             <input type="checkbox">
                             <span></span>
@@ -128,13 +93,13 @@
 
             </tr>
         </thead>
-        <tbody class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide" style="max-height: 324px; height: 324px; position: relative; overflow: visible;"
-            data-scrollbar-shown="true">
-
+        <tbody id="containerHTMLListSinhVien" class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide" style="max-height: 324px; height: 324px; position: relative; overflow: visible;"
+            data-scrollbar-shown="false">
+        <div id="m_blockui_1_content">
             @foreach ($list as $item )
             <tr data-row="0" class="m-datatable__row m-datatable__row--even" style="height: 55px;">
                 <td data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                    <span style="width: 40px;">
+                    <span style="width: 100px;">
                         <label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
                             <input type="checkbox" value="1">
                             <span></span>
@@ -168,21 +133,9 @@
 
 
                 <td data-field="Actions" class="m-datatable__cell">
-                    <span style="overflow: visible; width: 110px;">
-                        <div class="dropdown ">
-                            <a href="#" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown">
-                                <i class="la la-ellipsis-h"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">
-                                    <i class="la la-edit"></i> Edit Details</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="la la-leaf"></i> Update Status</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="la la-print"></i> Generate Report</a>
-                            </div>
-                        </div>
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
+                    <span style="overflow: visible; width: 100px;">
+                        
+                        <a idsinhvien="{{$item["IdSinhVien"]}}" href="#" data-toggle="modal" data-target="#modalupdate"  class="btn-edit-sinhvien m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                             <i class="la la-edit"></i>
                         </a>
                         <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv" title="Delete">
@@ -193,7 +146,8 @@
             </tr>
 
             @endforeach
-
+        </div>
+</div>
         </tbody>
     </table>
     @endif
@@ -208,6 +162,8 @@
                 </span>
                 <h3 class="m-portlet__head-text">
                     Thêm Sinh Viên
+
+
                 </h3>
             </div>
         </div>
@@ -305,4 +261,83 @@
     <div class="notice-sucess"></div>
     <!--end::Form-->
 </div>
+
+    {{-- code modal update !!!!!!! --}}
+    <div class="modal fade show" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">
+											Update Info
+										</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">
+												×
+											</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form id="FormUpdateInfoSinhVien" method="POST">
+											<div class="form-group m-form__group">
+												<label for="exampleInputEmail1">
+												Id Sinh Viên
+												</label>
+												<input name="idsinhvien" class="form-control m-input" aria-describedby="emailHelp" disabled placeholder="Id Sinh Viên....">
+												<span class="m-form__help">
+													Id của sinh viên
+												</span>
+                                            </div>
+                                           
+											<div class="form-group m-form__group">
+												<label for="exampleInputEmail1">
+													Tên Sinh Viên
+												</label>
+												<input value="" id="tensvupdate" name="tensinhvien" class="form-control m-input"   placeholder="Tên Sinh Viên....">
+												<span class="m-form__help">
+													Nhập Tên Sinh Viên
+												</span>
+                                            </div>
+
+                                            <div class="form-group m-form__group">
+												<label for="exampleInputEmail1">
+													Khóa Học
+												</label>
+												<input value="" name="khoahoc" class="form-control m-input"   placeholder="Khóa học .....">
+												<span class="m-form__help">
+													Khóa học
+												</span>
+                                            </div>
+
+
+                                       
+
+                                            <div class="form-group m-form__group">
+												 <div class="input-group date" id="m_datetimepicker_3">
+												<input  name="ngaysinh" type="text" class="form-control m-input" readonly="" value="1899-11-29 00:30">
+												<span class="input-group-addon">
+													<i class="la la-calendar glyphicon-th"></i>
+												</span>
+											</div>
+											<span class="m-form__help">
+												Ngày Sinh của sinh viên
+											</span>
+                                            </div>
+                                            <button type="reset" class="btn btn-primary" >Reset
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" >
+											Lưu
+                                        </button>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">
+											Close
+										</button>
+										
+                                        
+											
+									</div>
+								</div>
+							</div>
+						</div>
 @endsection

@@ -1,5 +1,12 @@
 $(document).ready(function () {
-  //
+  // $(document).ajaxStart(function(){
+    $(document).ajaxStart(function() {
+      $("#wait").css("display", "block");
+    });
+    $(document).ajaxComplete(function() {
+      $("#wait").css("display", "none");
+    });
+   
   $(".clickThemSV").click(function () {
     console.log("click");
 
@@ -155,7 +162,7 @@ $(document).ready(function () {
           });
         }
 
-        var htmlData = `<select class="form-control m-input m-input--air" id="select">	${ListLi}		</select>`;
+        var htmlData = `<select class="form-control m-input m-input--air" id="select2">	${ListLi}		</select>`;
         $(".containerAjaxContent").html(htmlData);
         console.log("fwqfffffffffffffffffffffff");
       });
@@ -171,7 +178,7 @@ $(document).ready(function () {
     }
   }
   $(".filter-btn").on("click", function () {
-    var element = $("#select");
+    var element = $("#select2");
     var select = $(element).find("option:selected");
 
     //  check use use category fitler
@@ -188,7 +195,7 @@ $(document).ready(function () {
             HTML += renderHtmlListSinhVien(data[element]);
             console.log(element);
           }
-          $("#mCSB_1_container").html(HTML);
+          $("#containerHTMLListSinhVien").html(HTML);
           //get api
 
         });
@@ -208,7 +215,7 @@ $(document).ready(function () {
             HTML += renderHtmlListSinhVien(data[element]);
             console.log(element);
           }
-          $("#mCSB_1_container").html(HTML);
+          $("#containerHTMLListSinhVien").html(HTML);
 
         });
     }

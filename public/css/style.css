@@ -149,9 +149,9 @@
 }
 
 .full-center {
-    top: 50%!important;
-    left: 50%!important;
-    position: absolute!important;
+    top: 50% !important;
+    left: 50% !important;
+    position: absolute !important;
     transform: translate(-50%, -50%);
 }
 
@@ -160,7 +160,7 @@
 }
 
 .None {
-    display: none!important;
+    display: none !important;
 }
 
 .opacity {
@@ -182,4 +182,91 @@
     width: 0;
     height: 0;
     opacity: 0;
+}
+
+.m-login__logo {
+    transition: 2s;
+}
+
+.m-aside-menu .m-menu__nav>.m-menu__item>.m-menu__submenu>.m-menu__subnav>.m-menu__item>.m-menu__link {
+    padding: 1px 0px;
+    padding-left: 10px;
+}
+
+
+/* css important */
+
+.cssload-thecube {
+    width: 71px;
+    height: 71px;
+    margin: 0 auto;
+    margin-top: 47px;
+    transform: rotateZ(45deg);
+}
+
+.cssload-thecube .cssload-cube {
+    position: relative;
+    transform: rotateZ(45deg);
+}
+
+.cssload-thecube .cssload-cube {
+    float: left;
+    width: 50%;
+    height: 50%;
+    position: relative;
+    transform: scale(1.1);
+}
+
+.cssload-thecube .cssload-cube:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(43, 160, 199);
+    animation: cssload-fold-thecube 1s infinite linear both;
+    transform-origin: 100% 100%;
+}
+
+.cssload-thecube .cssload-c2 {
+    transform: scale(1.1) rotateZ(90deg);
+}
+
+.cssload-thecube .cssload-c3 {
+    transform: scale(1.1) rotateZ(180deg);
+}
+
+.cssload-thecube .cssload-c4 {
+    transform: scale(1.1) rotateZ(270deg);
+}
+
+.cssload-thecube .cssload-c2:before {
+    animation-delay: 0.1s;
+}
+
+.cssload-thecube .cssload-c3:before {
+    animation-delay: 0.6s;
+}
+
+.cssload-thecube .cssload-c4:before {
+    animation-delay: 0.9s;
+}
+
+@keyframes cssload-fold-thecube {
+    0%,
+    10% {
+        transform: perspective(133px) rotateX(-180deg);
+        opacity: 0;
+    }
+    25%,
+    75% {
+        transform: perspective(133px) rotateX(0deg);
+        opacity: 1;
+    }
+    90%,
+    100% {
+        transform: perspective(133px) rotateY(180deg);
+        opacity: 0;
+    }
 }

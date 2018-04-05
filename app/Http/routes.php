@@ -36,13 +36,17 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
 	Route::get('auth/confirm/{token}', 'Auth\AuthController@getConfirm');
 	Route::group(['middleware' => ['admin']], function () {
-		Route::get('/quanlylistlophoc', 'AdminController@ViewQuanLyLopMonHoc');
+		route::get('quanlylistmon', 'AdminController@viewQuanLyMon');
+		Route::get('/quanlylistlophoc', 'AdminController@ViewQuanLyLopHoc');
 		Route::get('/listgiangvien', 'AdminController@GetGiangVien');
 		//end manager giang vien
 		Route::get('/listsinhvien', 'AdminController@AllSinhVien');
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
 	//end manager lop hoc
 });
+	Route::post('ajaxUpdateSinhVien', 'AdminController@UpdateInfoSinhVien');
+	Route::post('ajaxthemmon', 'AdminController@themmon');
+	Route::post('ajaxthemlophoc', 'AdminController@themlophoc');
 	Route::post("/themgiangvien", 'AdminController@postAddGiangVien');
 	Route::post('themsinhvienajax', 'AdminController@ThemSinhVienAjax');
 	Route::post('/listgiangvien/deletegiangvien', 'AdminController@DeleteGiangVien');
@@ -54,6 +58,7 @@ Route::group(['middleware' => ['web']], function () {
 		'/listsinhvientheolophoc/{idlophoc}',
 		['uses' => 'AdminController@AllSinhVienTheoLop']
 	);
+	Route::get('GetSinhVienTheoIdSinhVien/{idsinhvien}', 'AdminController@LaySinhVienBangIdSinhVien');
 	Route::get('/listsinhvientheokhoa/{idkhoa}', 'AdminController@AllSinhVienTheoKhoa');
 	Route::get('/listlophoc', 'AdminController@LayToanBoLopHoc');
 	Route::get('listkhoahoc', 'AdminController@AllKhoaHoc');
@@ -79,7 +84,9 @@ Route::group(['middleware' => ['web']], function () {
 		return bcrypt('admin');
 	});
 	Route::get('test',function(){
-		return giangvien::where('IdGiangVien', 3)->get(['TenGiangVien'])->first()->TenGiangVien;
+		$lophoc = lophoc::find(1);
+		$list = $lophoc->LayToanBoSinhVienTrongLop->toArray();
+		dd($list);
 		
 	});
 });

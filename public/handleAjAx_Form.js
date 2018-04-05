@@ -128,7 +128,137 @@ $(".btn-themlopmonhoc").on("click", function() {
     }
     return text;
   }
+  $("#FormSubmitLopHoc").on('submit',function(e){
+      e.preventDefault();
 
+      var tenlop = $("input[name=tenlop]").val();
+    
+      
+      var khoahoc = $("#selectKhoaHoc")
+        .find(":selected")
+        .attr("idkhoahoc");
+
+      $.ajax({
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        },
+        type: "POST",
+        url: '/ajaxthemlophoc',
+        data: {
+          khoahoc:khoahoc,
+          tenlop:tenlop
+        },
+        success: function(html) {
+          toastr.success(
+            `Thêm Thành Công Lớp học ${tenlop}, Khóa ${khoahoc} `,
+            {
+              timeOut: 1000
+            }
+          );
+          $("[type=reset]").click();
+        
+        },
+        error: function(error) {
+          toastr.error(`Error rồi bạn ê : (( ,Thử gmail khác xem!!!`, {
+            timeOut: 1000
+          });
+        }
+      });
+  });
+  
+  $("#FormMon").on("submit", function(e) {
+    e.preventDefault();
+
+    var tenmon = $("input[name=tenmon]").val();
+    var tinchi = $("input[name=tinchi]").val();
+
+    var bomon = $("#selectbomon")
+      .find(":selected")
+      .val();
+console.log(tenmon+tinchi+bomon);
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      type: "POST",
+      url: "/ajaxthemmon",
+      data: {
+        tenmon: tenmon,
+        tinchi: tinchi,
+        bomon: bomon
+      },
+      success: function(html) {
+        toastr.success(
+          `Thêm Thành Công Môn ${tenmon}, có tín chỉ ${tinchi} `,
+          {
+            timeOut: 1000
+          }
+        );
+        $("[type=reset]").click();
+      },
+      error: function(error) {
+        toastr.error(`Error rồi bạn ê : (( ,Thử gmail khác xem!!!`, {
+          timeOut: 1000
+        });
+      }
+    });
+  });
+//code ajax phần edit
+//  idsinhvien tensinhvien khoahoc ngaysinh
+$(".btn-edit-sinhvien").on("click",function(){
+    var element = $(this);
+    var IdSinhVien = element.attr("idsinhvien");
+
+    var url = "/GetSinhVienTheoIdSinhVien/" + IdSinhVien;
+    console.log(url);
+    fetch(url)
+      .then(resp => resp.json())
+      .then(function(data) {
+        let ngaysinh;
+        data.NgaySinh == null ? (ngaysinh = "chưa có ngày sinh") : (ngaysinh = data.ngaysinh);
+                             console.log(data);
+                              $("input[name=idsinhvien]").val(data.IdSinhVien);
+                              $("input[name=tensinhvien]").val(data.TenSv);
+                              $("input[name=khoahoc]").val(data.IdKhoaHoc);
+                              $("input[name=ngaysinh]").val(ngaysinh);
+                           });
+
+});
+$("#FormUpdateInfoSinhVien").on("submit", function(e) {
+  e.preventDefault();
+
+  var idsinhvien=$("input[name=idsinhvien]").val();
+  var tensinhvien = $("#tensvupdate").val();
+  var khoahoc=$("input[name=khoahoc]").val();
+  var ngaysinh=$("input[name=ngaysinh]").val();
+console.log(idsinhvien+tensinhvien+khoahoc+ngaysinh);
+ 
+
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    },
+    type: "POST",
+    url: "/ajaxUpdateSinhVien",
+    data: {
+      khoahoc: khoahoc,
+      ngaysinh: ngaysinh,
+      idsinhvien: idsinhvien,
+      tensinhvien: tensinhvien
+    },
+    success: function(html) {
+      toastr.success(`Update thành công `, {
+        timeOut: 1000
+      });
+      
+    },
+    error: function(error) {
+      toastr.error(`Update Thất bại, fix lại bug đi bạn ê!!`, {
+        timeOut: 1000
+      });
+    }
+  });
+});
 
   //ES6 javscript
 

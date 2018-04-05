@@ -8,38 +8,61 @@
 										<i class="la la-gear"></i>
 									</span>
 									<h3 class="m-portlet__head-text">
-										Thêm Lớp Học
+									Thêm Môn Học
 									</h3>
 								</div>
 							</div>
 						</div>
 						<!--begin::Form-->
-						<form  routeThemGiangVien="{{url('themgiangvien')}}" id="FormAddGiangVien" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+						<form id="FormMon"  class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
 							{!! csrf_field() !!}
 							<div class="m-portlet__body">
 								<div class="form-group m-form__group row">
 									<label class="col-lg-1 col-form-label">
-										Tên Lớp
+										Tên Môn
 									</label>
 									<div class="col-lg-3">
-										<input name="tenlop" class="form-control m-input" placeholder="Nhập tên Lớp">
+										<input name="tenmon" class="form-control m-input" placeholder="Nhập tên Môn">
 										<span class="m-form__help">
-											Nhập tên lớp
+											Nhập tên môn
 										</span>
-									</div>
-									
-									<label class="col-lg-1 col-form-label">
-										Chọn Khóa Học
+                                    </div>
+                                    <label class="col-lg-1 col-form-label">
+										Số tín chỉ
 									</label>
 									<div class="col-lg-3">
-										<select name="khoahoc" class="form-control m-input m-input--square" id="selectKhoaHoc">
-											@foreach ($ArrayKhoa as $item )
-                                                <option idkhoahoc="{{$item['IdKhoaHoc']}}">
-                                                    {{$item["TenKhoaHoc"]}}
+										<input type="number" name="tinchi" class="form-control m-input" placeholder="Nhập tên Môn">
+										<span class="m-form__help">
+											Khuyếch khích nhập ít thôi !!
+										</span>
+                                    </div>
+                                     <label class="col-lg-1 col-form-label">
+										BỘ MÔN
+									</label>
+									<div class="col-lg-3">
+									<select name="bomon" class="form-control m-input m-input--square" id="selectbomon">
+											
+                                                <option value="KHMT">
+                                                  KHMT
                                                 </option>
-                                            @endforeach
+                                                <option value="LTM">
+                                                   LTM
+                                                </option value="KHMT">
+                                                <option value="bla bla ">
+                                                    bla bla 
+                                                </option>
+                                                <option value="ngu nguoi">
+                                                    ngu nguoi
+                                                </option>
+                                            
 										</select>
-									</div>
+										<span class="m-form__help">
+											Khuyếch khích nhập ít thôi !!
+										</span>
+                                    </div>
+                                    
+									
+									
 										
 
 
@@ -52,7 +75,7 @@
 									<div class="row">
 										<div class="col-lg-5"></div>
 										<div class="col-lg-7">
-											<button type="submit"  class="btn btn-brand SubmitAddSinhVien">
+											<button type="submit"  class="btn btn-brand ">
 												Thêm
 											</button>
 											<button type="reset" class="btn btn-secondary">
@@ -72,7 +95,7 @@
         <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
                 <h3 class="m-portlet__head-text">
-                   Danh Sách Lớp Học
+                  Danh sách môn
                 </h3>
             </div>
         </div>
@@ -92,7 +115,7 @@
     </div>
     <div class="m_datatable m-datatable m-datatable--default m-datatable--scroll m-datatable--loaded" id="m_datatable_latest_orders"
         style="">
-        <table class="m-datatable__table" id="m-datatable--1018619778392" style="display: block; max-height: 380px;">
+        <table class="m-datatable__table" id="tableMon" style="display: block; max-height: 380px;">
             <thead class="m-datatable__head">
                 <tr class="m-datatable__row" style="height: 56px; left: 0px;">
                     <th data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
@@ -105,32 +128,31 @@
                     </th>
 
                     <th data-field="OrderID" class="m-datatable__cell m-datatable__cell--sort" data-sort="asc">
-                        <span style="width: 100px;">Id Lớp Môn Học
+                        <span style="width: 100px;">Id Môn
                             <i class="la la-arrow-up"></i>
                         </span>
                     </th>
                     <th data-field="ShipName" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">Id Giảng Viên</span>
+                        <span style="width: 100px;">Tên Môn</span>
                     </th>
                     <th data-field="ShipDate" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">Ngày tạo tài khoản</span>
+                        <span style="width: 100px;">Số tín chỉ</span>
                     </th>
-                    <th data-field="Type" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">Gmail</span>
+                     <th data-field="ShipDate" class="m-datatable__cell m-datatable__cell--sort">
+                        <span style="width: 100px;">Bộ môn</span>
                     </th>
-                    <th data-field="Actions" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">BỘ Môn</span>
+                     <th data-field="ShipDate" class="m-datatable__cell m-datatable__cell--sort">
+                        <span style="width: 100px;">Setting</span>
                     </th>
-                    <th data-field="Status" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">Status</span>
-                    </th>
+                  
+                   
 
 
                 </tr>
             </thead>
             <tbody class="m-datatable__body mCustomScrollbar _mCS_8 mCS-autoHide" style="max-height: 324px; height: 324px; position: relative; overflow: visible;"
                 data-scrollbar-shown="true">
-                @foreach ($list as $item )
+                @foreach ($ArrayMon as $item )
                 <tr data-row="0" class="m-datatable__row m-datatable__row--even" style="height: 55px;">
                     <td data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
                         <span style="width: 100px;">
@@ -143,31 +165,27 @@
                     {{-- Id IdGiangVien TenGiangVien BoMon Gmail updated_at created_at password --}}
 
                     <td data-field="ShipDate" class="m-datatable__cell">
-                        <span style="width: 100px;">{{$item["TenGiangVien"]}}</span>
+                        <span style="width: 100px;">{{$item["IdMon"]}}</span>
                     </td>
                     <td data-field="OrderID" class="m-datatable__cell--sorted m-datatable__cell">
-                        <span style="width: 100px;">{{$item["IdGiangVien"]}}</span>
+                        <span style="width: 100px;">{{$item["TenMon"]}}</span>
                     </td>
                     <td data-field="ShipName" class="m-datatable__cell">
-                        <span style="width: 100px;">{{$item["updated_at"]}}</span>
+                        <span style="width: 100px;">{{$item["SoTinChi"]}}</span>
                     </td>
-
-
-                    <td data-field="Type" class="m-datatable__cell">
-                        <span style="width: 100px;">{{$item["Gmail"]}}</span>
-
-                    </td>
-                    <td data-field="Status" class="m-datatable__cell">
+                     <td data-field="ShipName" class="m-datatable__cell">
                         <span style="width: 100px;">{{$item["BoMon"]}}</span>
-
                     </td>
+
+
+                   
                     <td data-field="Actions" class="m-datatable__cell">
                         <span style="overflow: visible; width: 100px;">
                             
                             <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                                 <i class="la la-edit"></i>
                             </a>
-                            <a IdGiangVien="{{$item["IdGiangVien"]}}" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv"
+                            <a IdMon="{{$item["IdMon"]}}" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv"
                                 title="Delete">
                                 <i class="la la-trash"></i>
                             </a>

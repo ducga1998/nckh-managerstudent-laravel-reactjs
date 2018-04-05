@@ -101,6 +101,13 @@ class AdminController extends Controller {
 		$useArrayLopHoc =lophoc::all()->toArray();
 		return view("front/listsinhvien",['list'=>$sinhvien, 'useArrayLopHoc'=> $useArrayLopHoc]);
 	}
+	public function LaySinhVienBangIdSinhVien($idsinhvien,SinhVienRepository $sinhvien){
+		$sv=$sinhvien->GetSinhVienByIdSinhVien($idsinhvien);
+		return $sv;
+	}
+	public function UpdateInfoSinhVien(SinhVienRepository $sinhvien){
+		$sinhvien->UpdateInfoSv();
+	}
 	//api 
 	public function AllSinhVienTheoKhoa($idkhoa){
 		$idkhoa =(int)$idkhoa;
@@ -176,13 +183,27 @@ class AdminController extends Controller {
 	public function ThemAutoLopMonHoc(Request $request,LopMonHocRespository $lopmonhoc){
 		$lopmonhoc->ThemAutoLopMonHoc($request);
 	}
-	public function ViewQuanLyLopMonHoc(LopRepository $lop){
+	public function ViewQuanLyLopHoc(LopRepository $lop){
 		$ArrayKhoa=khoahoc::all()->toArray();
-		return view('front.ViewQuanLyLopMonHoc',['ArrayKhoa'=> $ArrayKhoa]);
+		$ArrayLop=lophoc::all()->toArray();
+		return view('front.ViewQuanLyLopHoc',['ArrayKhoa'=> $ArrayKhoa,'ArrayLop'=>$ArrayLop]);
 	}
-	public function  TaoLopMonHoc(){
+	public function themlophoc(LopRepository $lop){
+		$lop->ThemLopHocAjAx();
+	}
+
+	//manager mon
+	public function viewQuanLyMon(){
+		$mon = Mon::all()->toArray();
+		return view('front.QuanLyMonHoc', ['ArrayMon' => $mon]);
+	}
+	public function themmon(MonRepository $mon){
+		$mon->ThemMonHocAjAx();
+	}
+	public function XoaMon(){
 
 	}
+
 	public function profileview()
 	{
 		return view('front.profile.profile');
