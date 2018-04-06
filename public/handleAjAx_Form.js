@@ -259,6 +259,158 @@ console.log(idsinhvien+tensinhvien+khoahoc+ngaysinh);
     }
   });
 });
+$(".deletesinhvien").on("click", function() {
+  var idsinhvien = $(this).attr("idsinhvien");
+  let flag = confirm("Are you Sure Delete ???? : (((");
+  if (flag == true) {
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      type: "POST",
+      url: "/ajaxxoasinhvien",
+      data: {
+        idsinhvien: idsinhvien
+      },
+      success: function(html) {
+        toastr.success(`Xóa thành Công thành công Sinh Viên Có id:${idsinhvien} `, {
+          timeOut: 1000
+        });
+      },
+      error: function(error) {
+         toastr.error(`${error} `, { timeOut: 1000 });
+      }
+    });
+    $(this)
+      .parent()
+      .parent()
+      .parent()
+      .remove();
+  }
+});
+//update giang vien
+$("#FormUpdateInfoGiangVien").on("submit", function(e) {
+  e.preventDefault();
+  var idgiangvien = $("input[name='idgiangvien']").val();
+  var tengiangvien = $("input[name='tengiangvien']").val();
+  var gmail = $("input[name='gmail']").val();
+  var password = $("input[name=password]").val();
+  var bomon = $("#bomonselect")
+    .find(":selected")
+    .val();
+  console.log(tengiangvien + tengiangvien + password);
+
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    },
+    type: "POST",
+    url: "/ajaxupdategiangvien",
+    data: {
+      idgiangvien:idgiangvien,
+      tengiangvien: tengiangvien,
+      gmail: gmail,
+      password: password,
+      bomon:bomon
+
+    },
+    success: function(html) {
+      toastr.success(`Update thành công `, {
+        timeOut: 1000
+      });
+    },
+    error: function(error) {
+      toastr.error(`Update Thất bại, fix lại bug đi bạn ê!!`, {
+        timeOut: 1000
+      });
+    }
+  });
+});
+$(".btn-add-giangvien").on("click",function () {
+    var tengiangvien=$(this).attr("tengiangvien");
+    var bomon = $(this).attr("bomon");
+    var idgiangvien = $(this).attr("idgiangvien");
+    var gmail = $(this).attr("gmail");
+    $("input[name='idgiangvien']").val(idgiangvien);
+    $("input[name='tengiangvien']").val(tengiangvien);
+    $("input[name='gmail']").val(gmail);
+    
+    $("#bomonselect").val(bomon);
+ 
+
+});
+$(".btn-huydk").on("click",function(){
+  //link 
+  var element=$(this);
+    var idlopmonhoc = $(this).attr("idlopmonhoc");
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      type: "POST",
+      url: "/ajaxXoaGiangVienLopMonHoc",
+      data: {
+        idlopmonhoc: idlopmonhoc
+      },
+      success: function(html) {
+        toastr.success(`Xóa thành công giảng viên này ra khỏi lớp  `, {
+          timeOut: 1000
+        });
+element
+  .parent()
+  .html(`<button  idlopmonhoc="${idlopmonhoc}" type="button" class="btn btn-danger ">
+												Chưa có người dạy
+											</button>`);
+      },
+      error: function(error) {
+        toastr.error(`Xóa thất bại `, {
+          timeOut: 1000
+        });
+      }
+    });
+});
+$(".btn-dkLopGiangVien").on("click", function() {
+  var idlopmonhoc = $(this).attr("idlopmonhoc");
+  $(".daylophocnay").attr("idlopmonhoc", idlopmonhoc);
+  $
+
+});
+$(".daylophocnay").on("click",function () {
+    var element=$(this);
+   var idlopmonhoc= element.attr("idlopmonhoc");
+   var idgiangvien= element.attr("idgiangvien");
+   
+   $.ajax({
+     headers: {
+       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+     },
+     type: "POST",
+     url: "/ajaxBoNhiemGiangVienDayLopMonHoc",
+     data: {
+       idlopmonhoc: idlopmonhoc,
+       idgiangvien:idgiangvien
+     },
+     success: function(html) {
+       toastr.success(`Bổ nhiệm giảng viên vào lớp này thành công  `, {
+         timeOut: 1000
+       });
+       $(`[idget=${idlopmonhoc}]`).parent().html(` <button  type="button" class="btn btn-success btn-huydk">
+											Giảng Viên có Id: ${idgiangvien} Đã dạy ...
+											</button>`);
+      //  element.parent()
+      //    .html(`<button  idlopmonhoc="${idlopmonhoc}" type="button" class="btn btn-danger ">
+			// 									Chưa có người dạy
+			// 								</button>`);
+     },
+     error: function(error) {
+       toastr.error(`Xóa thất bại `, {
+         timeOut: 1000
+       });
+     }
+   });
+
+});
+
 
   //ES6 javscript
 

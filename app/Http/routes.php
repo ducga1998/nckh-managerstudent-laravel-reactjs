@@ -44,6 +44,10 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
 	//end manager lop hoc
 });
+	Route::post('ajaxBoNhiemGiangVienDayLopMonHoc', 'AdminController@BoNhiemGiangVien');
+	Route::post('ajaxXoaGiangVienLopMonHoc', 'AdminController@XoaGiangVienDayLopHocDcChon');
+	Route::post('ajaxupdategiangvien', 'AdminController@updategiangvien');
+	Route::post('ajaxxoasinhvien', 'AdminController@DeleteSinhvien');
 	Route::post('ajaxUpdateSinhVien', 'AdminController@UpdateInfoSinhVien');
 	Route::post('ajaxthemmon', 'AdminController@themmon');
 	Route::post('ajaxthemlophoc', 'AdminController@themlophoc');

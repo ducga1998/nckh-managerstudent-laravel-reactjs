@@ -1,99 +1,102 @@
-@extends('front.layout',['NameAdmin' =>"csacsacsa",'GmailAdmin'=>"csacascsacsa"])
-@section('m-content') {{-- Id IdGiangVien TenGiangVien BoMon Gmail updated_at created_at password --}}
+@extends('front.layout')
+ @section('m-content') {{-- Id IdGiangVien
+TenGiangVien BoMon Gmail updated_at created_at password --}}
 <div id="content-ajax"></div>
 <div class="m-portlet  m-viewdiglog">
-						<div class="m-portlet__head">
-							<div class="m-portlet__head-caption">
-								<div class="m-portlet__head-title">
-									<span class="m-portlet__head-icon m--hide">
-										<i class="la la-gear"></i>
-									</span>
-									<h3 class="m-portlet__head-text">
-										Thêm Giảng Viên
-									</h3>
-								</div>
-							</div>
-						</div>
-						<!--begin::Form-->
-						<form  routeThemGiangVien="{{url('themgiangvien')}}" id="FormAddGiangVien" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
-							{!! csrf_field() !!}
-							<div class="m-portlet__body">
-								<div class="form-group m-form__group row">
-									<label class="col-lg-1 col-form-label">
-										Full Name:
-									</label>
-									<div class="col-lg-3">
-										<input name="name" class="form-control m-input" placeholder="Full name">
-										<span class="m-form__help">
-											Nhập tên Giảng Viên
-										</span>
-									</div>
-									<label class="col-lg-1 col-form-label">
-										Email Của Giảng Viên:
-									</label>
-									<div class="col-lg-3">
-										<input name="email" type="email" class="form-control m-input" placeholder="Email">
-										<span class="m-form__help">
-											Nhập Gmail của Giảng viên
-										</span>
-									</div>
-									<label class="col-lg-1 col-form-label">
-										Bộ Môn
-									</label>
-									<div class="col-lg-3">
-										<select name="bomon" class="form-control m-input m-input--square" id="exampleSelect1">
-											<option value="KHMT">
-												KHMT
-											</option>
-											<option value="CNPM">
-												CNPM
-											</option>
-											<option value="MANG">
-												MANG
-											</option>
-											<option value="HTTT">
-												HTTT
-											</option>
-											<option value="TRIET">
-												Triết học
-											</option>
-										</select>
-									</div>
-										<label class="col-lg-1 col-form-label">
-									password
-									</label>
-									<div class="col-lg-3">
-										<input name="password" type ="password"class="form-control m-input" placeholder="Password">
-										<span class="m-form__help">
-											Nhập Password
-										</span>
-									</div>
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon m--hide">
+                    <i class="la la-gear"></i>
+                </span>
 
 
-								</div>
+                <h3 class="m-portlet__head-text">
+                    Thêm Giảng Viên
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form routeThemGiangVien="{{url('themgiangvien')}}" id="FormAddGiangVien" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+        {!! csrf_field() !!}
+        <div class="m-portlet__body">
+            <div class="form-group m-form__group row">
+                <label class="col-lg-1 col-form-label">
+                    Full Name:
+                </label>
+                <div class="col-lg-3">
+                    <input name="name" class="form-control m-input" placeholder="Full name">
+                    <span class="m-form__help">
+                        Nhập tên Giảng Viên
+                    </span>
+                </div>
+                <label class="col-lg-1 col-form-label">
+                    Email Của Giảng Viên:
+                </label>
+                <div class="col-lg-3">
+                    <input name="email" type="email" class="form-control m-input" placeholder="Email">
+                    <span class="m-form__help">
+                        Nhập Gmail của Giảng viên
+                    </span>
+                </div>
+                <label class="col-lg-1 col-form-label">
+                    Bộ Môn
+                </label>
+                <div class="col-lg-3">
+                    <select name="bomon" class="form-control m-input m-input--square" id="exampleSelect1">
+                        <option value="KHMT">
+                            KHMT
+                        </option>
+                        <option value="CNPM">
+                            CNPM
+                        </option>
+                        <option value="MANG">
+                            MANG
+                        </option>
+                        <option value="HTTT">
+                            HTTT
+                        </option>
+                        <option value="TRIET">
+                            Triết học
+                        </option>
+                    </select>
+                </div>
+                <label class="col-lg-1 col-form-label">
+                    password
+                </label>
+                <div class="col-lg-3">
+                    <input name="password" type="password" class="form-control m-input" placeholder="Password">
+                    <span class="m-form__help">
+                        Nhập Password
+                    </span>
+                </div>
 
 
-							</div>
-							<div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-								<div class="m-form__actions m-form__actions--solid">
-									<div class="row">
-										<div class="col-lg-5"></div>
-										<div class="col-lg-7">
-											<button type="submit"  class="btn btn-brand SubmitAddSinhVien">
-												Submit
-											</button>
-											<button type="reset" class="btn btn-secondary">
-												Cancel
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-						<div class="notice-sucess"></div>
-						<!--end::Form-->
+            </div>
+
+
+        </div>
+        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+            <div class="m-form__actions m-form__actions--solid">
+                <div class="row">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-7">
+                        <button type="submit" class="btn btn-brand SubmitAddSinhVien">
+                            Submit
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            Cancel
+                        </button>
                     </div>
-                    {{--end s phần thêm lớp môn học --}}
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="notice-sucess"></div>
+    <!--end::Form-->
+</div>
+{{--end s phần thêm lớp môn học --}}
 <div class="m-portlet m-portlet--mobile ">
     <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
@@ -111,7 +114,7 @@
                         <a href="#" class="viewAddGiangVien m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
                             <i class="fa fa-plus"></i>
                         </a>
-                        
+
                     </div>
                 </li>
             </ul>
@@ -190,11 +193,14 @@
                     </td>
                     <td data-field="Actions" class="m-datatable__cell">
                         <span style="overflow: visible; width: 100px;">
-                            
-                            <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
+
+                            <a tengiangvien="{{$item["TenGiangVien"]}}" bomon="{{$item["BoMon"]}}" gmail="{{$item["Gmail"]}}" idgiangvien="{{$item["IdGiangVien"]}}" data-toggle="modal"
+                             data-target="#modalupdate" href="#"
+                              class="btn-add-giangvien m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"
+                                title="Edit details">
                                 <i class="la la-edit"></i>
                             </a>
-                            <a IdGiangVien="{{$item["IdGiangVien"]}}" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv"
+                            <a idgiangvien="{{$item["IdGiangVien"]}}" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv"
                                 title="Delete">
                                 <i class="la la-trash"></i>
                             </a>
@@ -215,7 +221,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                   Thông Báo
+                    Thông Báo
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">
@@ -224,13 +230,118 @@
                 </button>
             </div>
             <div class="modal-body">
-              Xóa Thành Công Giảng Viên 
+                Xóa Thành Công Giảng Viên
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Đóng 
+                    Đóng
                 </button>
-               
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade show" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Update Info
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        ×
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="FormUpdateInfoGiangVien" method="POST">
+                    <div class="form-group m-form__group">
+                        <label for="exampleInputEmail1">
+                            Id Giảng viên
+                        </label>
+                        <input name="idgiangvien" class="form-control m-input" aria-describedby="emailHelp" disabled placeholder="Id Giảng Viên....">
+                        <span class="m-form__help">
+                            Id của Giảng Viên
+                        </span>
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <label for="exampleInputEmail1">
+                            Tên Giảng Viên
+                        </label>
+                        <input value="" id="tengiangvien" name="tengiangvien" class="form-control m-input" placeholder="Tên Giảng Viên....">
+                        <span class="m-form__help">
+                            Nhập Giảng Viên
+                        </span>
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <label for="exampleInputEmail1">
+                            Gmail
+                        </label>
+                        <input type="email" value="" name="gmail" class="form-control m-input" placeholder="Gmail giảng viên .....">
+                        <span class="m-form__help">
+                            Gmail của giảng viên
+                        </span>
+                    </div>
+
+                    <div class="form-group m-form__group">
+                        <label for="exampleInputEmail1">
+                            Password
+                        </label>
+                        <input value="" type="password" min="6" name="password" class="form-control m-input" placeholder="pasword ....">
+                        <span class="m-form__help">
+                            Chỉ đổi khi giảng viên quên mật khẩu hmm....!!
+                        </span>
+                    </div>
+                    <div class="form-group m-form__group">
+                        <label for="exampleInputEmail1">
+                          Chọn   Bộ Môn
+                        </label>
+                        <select name="bomon" class="form-control m-input m-input--square" id="bomonselect">
+                            <option value="KHMT">
+                                KHMT
+                            </option>
+                            <option value="CNPM">
+                                CNPM
+                            </option>
+                            <option value="MANG">
+                                MANG
+                            </option>
+                            <option value="HTTT">
+                                HTTT
+                            </option>
+                            <option value="TRIET">
+                                Triết học
+                            </option>
+                        </select>
+                        <span class="m-form__help">
+                            Chỉ đổi khi giảng viên quên mật khẩu hmm....!!
+                        </span>
+                    </div>
+
+
+
+
+
+
+                    <button type="reset" class="btn btn-primary">Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Lưu
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+
+
+
             </div>
         </div>
     </div>

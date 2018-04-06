@@ -106,4 +106,9 @@ class SinhVienRepository extends BaseRepository
     $sinhvien->save();
 
     }
+    public function DeleteSinhVien($IdSinhVien){
+
+       $sinhvien= SinhVien::find($IdSinhVien);
+       $sinhvien->delete();
+    }
 }

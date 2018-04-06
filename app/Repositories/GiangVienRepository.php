@@ -3,7 +3,7 @@
 use App\Models\giangvien;
 use App\Models\User;
 use App\Models\lopmonhoc;
-
+use Illuminate\Support\Facades\Input;
 class GiangVienRepository extends BaseRepository
 {
     protected $GiangVien;
@@ -68,6 +68,27 @@ class GiangVienRepository extends BaseRepository
         $lopmonhoc->save();
 
 
+    }
+
+    public function UpdateInfoGiangVien()
+    {
+        $array = Input::all();
+       
+        $giangvien = giangvien::find($array['idgiangvien']);
+
+        $giangvien->Gmail = $array['gmail'];
+        $giangvien->BoMon = $array['bomon'];
+        $giangvien->TenGiangVien = $array['tengiangvien'];
+        $giangvien->password= bcrypt($array["password"]);
+        
+        $giangvien->save();
+
+    }
+    public function DeleteSinhVien($IdSinhVien)
+    {
+
+        $giangvien = giangvien::find($IdSinhVien);
+        $giangvien->delete();
     }
 
 }

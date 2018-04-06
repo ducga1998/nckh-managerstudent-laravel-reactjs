@@ -36,26 +36,6 @@ class LopMonHocRespository extends BaseRepository
     }
     public function ThemAutoLopMonHoc($request){
         $array = Input::all();
-       
-     
-       
-            // foreach ($array as  $item) {
-
-            
-           
-            // 
-            // $IdMon= $arrayString[2];
-        //     $lopmonhoc = new lopmonhoc;
-
-        //     $lopmonhoc->IdLopMonHoc = $item;
-        //     $lopmonhoc->Mon_Id = 1;
-            
-        //     }
-        // $name = $request->title;
-        // $description = $request->email;
-
-
-
         foreach ($array["ArrayIdLopMonHoc"] as $item) {
             $MonHoc_id = explode("-", $item)[2];
             $data = array(
@@ -68,9 +48,22 @@ class LopMonHocRespository extends BaseRepository
 
         lopmonhoc::insert($insertData);
     }
-    // public function ThemLopMonHocHelp($idlopmonhoc){
-     
-    // }
+   
+    public function XoaGiangVienDay(){
+        $array=Input::all();
+        $idlopmonhoc=$array['idlopmonhoc'];
+        $lopmonhoc=lopmonhoc::find($idlopmonhoc);
+        $lopmonhoc->GiangVien_Id=null;
+        $lopmonhoc->save();
+    }
+    public function BoNhiemGiangVien(){
+        $array=Input::all();
+        $idlopmonhoc=$array['idlopmonhoc'];
+        $idgiangvien=$array['idgiangvien'];
+        $lopmonhoc=lopmonhoc::find($idlopmonhoc);
+        $lopmonhoc->GiangVien_Id= $idgiangvien;
+        $lopmonhoc->save();
+    }
 
 
 

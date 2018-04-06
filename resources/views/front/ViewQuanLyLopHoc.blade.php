@@ -95,14 +95,7 @@
         <table class="m-datatable__table" id="m-datatable--1018619778392" style="display: block; max-height: 380px;">
             <thead class="m-datatable__head">
                 <tr class="m-datatable__row" style="height: 56px; left: 0px;">
-                    <th data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                        <span style="width: 100px;">
-                            <label class="m-checkbox m-checkbox--single m-checkbox--all m-checkbox--solid m-checkbox--brand">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </span>
-                    </th>
+                    
 
                     <th data-field="OrderID" class="m-datatable__cell m-datatable__cell--sort" data-sort="asc">
                         <span style="width: 100px;">Id Lớp 
@@ -116,8 +109,12 @@
                         <span style="width: 100px;">Khóa</span>
                     </th>
                      <th data-field="ShipDate" class="m-datatable__cell m-datatable__cell--sort">
-                        <span style="width: 100px;">Setting</span>
+                        <span style="width: 100px;">Số Lượng Sinh Viên trong Lớp</span>
                     </th>
+                    <th>
+                        
+                    </th>
+                    
                   
                    
 
@@ -128,14 +125,7 @@
                 data-scrollbar-shown="true">
                 @foreach ($ArrayLop as $item )
                 <tr data-row="0" class="m-datatable__row m-datatable__row--even" style="height: 55px;">
-                    <td data-field="RecordID" class="m-datatable__cell--center m-datatable__cell m-datatable__cell--check">
-                        <span style="width: 100px;">
-                            <label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
-                                <input type="checkbox" value="1">
-                                <span></span>
-                            </label>
-                        </span>
-                    </td>
+                    
                     {{-- Id IdGiangVien TenGiangVien BoMon Gmail updated_at created_at password --}}
 
                     <td data-field="ShipDate" class="m-datatable__cell">
@@ -147,21 +137,14 @@
                     <td data-field="ShipName" class="m-datatable__cell">
                         <span style="width: 100px;">{{$item["IdKhoaHoc"]}}</span>
                     </td>
+                      <td data-field="ShipName" class="m-datatable__cell">
+                        <span style="width: 100px;">{{$item["IdKhoaHoc"]}}</span>
+                    </td>
+                    
 
 
                    
-                    <td data-field="Actions" class="m-datatable__cell">
-                        <span style="overflow: visible; width: 100px;">
-                            
-                            <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
-                                <i class="la la-edit"></i>
-                            </a>
-                            <a IdLop="{{$item["IdLop"]}}" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv"
-                                title="Delete">
-                                <i class="la la-trash"></i>
-                            </a>
-                        </span>
-                    </td>
+                    
                 </tr>
 
                 @endforeach {{-- end row --}}

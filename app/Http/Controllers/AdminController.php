@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\Mon;
 use App\Repositories\LopMonHocRespository;
-
+use Illuminate\Support\Facades\Input;
 class Object
 {
 	public $IdLopMonHoc;
@@ -26,6 +26,8 @@ class Object
 	public $CoutSinhvien;
 	public $Checkgiangvien;
 	public $Listsinhvien;
+	public $IdGiangVien;
+	public $ListGiangVien;
 
 }
 class AdminController extends Controller {
@@ -82,13 +84,21 @@ class AdminController extends Controller {
 	}
 	public function postAddGiangVien(Request $request,GiangVienRepository $giangvien){
 		$giangvien->ThemGiangVien($request);
-}
+	}
+	public function DeleteSinhvien(SinhVienRepository $sinhvien){
+		$array=Input::all();
+		$idsinhvien=$array["idsinhvien"];
+		$sinhvien->DeleteSinhVien($idsinhvien);
+	}
 	public function GetGiangVien(GiangVienRepository $giangvien){
 		$listgiangvien=$giangvien->getAllListGiangVien();
 		return view('front/listgiangvien',['list'=>$listgiangvien]);
 	}
 	public function DeleteGiangVien(Request $request,GiangVienRepository $giangvien){
 		$giangvien->deleteGiangVien($request->id);
+	}
+	public function updategiangvien(GiangVienRepository $giangvien){
+		$giangvien->UpdateInfoGiangVien();
 	}
 	//end controller giangvien
 	//controller lophoc
@@ -127,6 +137,8 @@ class AdminController extends Controller {
 	public function ThemSinhVienAjax(SinhVienRepository $sinhvien,Request $request){
 		$sinhvien->ThemSinhVienAJaxSP($request);
 	}
+	// manager Lop mon Hoc
+	
 	//view  quan lý lớp môn học
 	public function ViewLopMonHoc(MonRepository $mon, SinhVienRepository $sinhvien)
 	{
@@ -152,6 +164,8 @@ class AdminController extends Controller {
 				$tengiangvien="a";
 			}
 			//create object . handle object
+			$ListGiangVien=giangvien::all()->toArray();
+			$object->IdGiangVien= $item["GiangVien_Id"];
 			$object->TenGiangVienDK= $tengiangvien;
 			$object->IdLopMonHoc = $idlopmonhoc;
 			$object->TenMonBoMon = $tenMonBoMon;
@@ -164,11 +178,13 @@ class AdminController extends Controller {
        //từ id lớp môn học query ra rất nhiều thứ
 		return view('front.listlopmonhoc', [
 			'array' => $arrayInfo,
-			'info' => $inforadmin
+			'info' => $inforadmin,
+			'arrayGiangVien'=> $ListGiangVien
 		]);
 	}
+	
 	public function ViewTaoLopMonHoc(){
-	$monhoc=	Mon::all()->toArray();
+	$monhoc=Mon::all()->toArray();
 	
 		return view('front.taolopmonhoc',['ArrayMonHoc'=>$monhoc]);
 	}
@@ -177,8 +193,15 @@ class AdminController extends Controller {
 		$arrayLop=$lop->GetToanBoLopMonHoc();
 		return view('front.taotudong',["ArrayMon"=>$arrayMon,"ArrayLop"=>$arrayLop]);
 	}
+	
 	public function ThemLopMonHoc(Request $request,LopMonHocRespository $lopmonhoc){
 				$lopmonhoc->ThemLopMonHoc($request);
+	}
+	public function XoaGiangVienDayLopHocDcChon(LopMonHocRespository $lop){
+		$lop->XoaGiangVienDay();
+	}
+	public function  BoNhiemGiangVien(LopMonHocRespository $lop){
+		$lop->BoNhiemGiangVien();
 	}
 	public function ThemAutoLopMonHoc(Request $request,LopMonHocRespository $lopmonhoc){
 		$lopmonhoc->ThemAutoLopMonHoc($request);
@@ -186,6 +209,7 @@ class AdminController extends Controller {
 	public function ViewQuanLyLopHoc(LopRepository $lop){
 		$ArrayKhoa=khoahoc::all()->toArray();
 		$ArrayLop=lophoc::all()->toArray();
+		$arraySinhVien=SinhVien::all()->ToArray();
 		return view('front.ViewQuanLyLopHoc',['ArrayKhoa'=> $ArrayKhoa,'ArrayLop'=>$ArrayLop]);
 	}
 	public function themlophoc(LopRepository $lop){

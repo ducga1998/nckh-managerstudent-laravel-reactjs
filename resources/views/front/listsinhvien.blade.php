@@ -138,7 +138,7 @@
                         <a idsinhvien="{{$item["IdSinhVien"]}}" href="#" data-toggle="modal" data-target="#modalupdate"  class="btn-edit-sinhvien m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit details">
                             <i class="la la-edit"></i>
                         </a>
-                        <a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletegv" title="Delete">
+                        <a href="#" idsinhvien="{{$item["IdSinhVien"]}}" class="m-portlet__nav-link btn m-btn m-btn--hover-danger m-btn--icon m-btn--icon-only m-btn--pill deletesinhvien" title="Delete">
                             <i class="la la-trash"></i>
                         </a>
                     </span>
