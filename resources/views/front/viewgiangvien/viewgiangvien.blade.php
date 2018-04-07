@@ -33,7 +33,7 @@
                        {{$item->CoutSinhvien}}
                     </td>
                     <td>
-                       <a IdLopMonHoc="{{$item->IdLopMonHoc}}" href="#"  class="btn btn-deauft btn-ViewListSinhVien">Hiện thị danh sách</a>
+                       <a IdLopMonHoc="{{$item->IdLopMonHoc}}" href="#"  data-toggle="modal" data-target="#viewlistsinhvien" class="btn btn-deauft btn-ViewListSinhVien">Hiện thị danh sách</a>
                     </td>
                     <td>
                         @if($item->Checkgiangvien)
@@ -55,7 +55,7 @@
     </div>
 </div>
 {{-- modal view list sinh vien --}}
-<button style="width:0px;height:0px;padding:0px" type="button" class="btn btn-warning btn-modal" data-toggle="modal" data-target="#viewlistsinhvien"></button>
+<button style="width:0px;height:0px;padding:0px" type="button" class="btn btn-warning btn-modal" ></button>
 <div class="modal fade show" id="viewlistsinhvien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 							<div class="modal-dialog modal-lg" role="document">
 								<div class="modal-content">

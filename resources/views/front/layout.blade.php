@@ -795,7 +795,7 @@
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
 						</li>
 						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-							<a href="#" class="m-menu__link m-menu__toggle">
+							<a href="#" class="m-menu__link m-menu__toggle autoclick">
 								<i class="m-menu__link-icon flaticon-layers"></i>
 								<span class="m-menu__link-text">
 										Quản lý 
@@ -885,7 +885,7 @@
 
 						<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
-								Tạo Lớp Môn Học
+								 	 Quản lý lớp môn học
 							</h4>
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
 						</li>
@@ -894,7 +894,12 @@
 							<a href="#" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-icon flaticon-interface-3"></i>
 								<span class="m-menu__link-text">
+										@if(session('statut') == 'admin' )
 									Tạo Lớp Môn Học
+									@endif
+										@if(session('statut') == 'redac' )
+									Quản lý Lớp Môn Học
+									@endif
 								</span>
 								<i class="m-menu__ver-arrow la la-angle-right"></i>
 							</a>
@@ -904,7 +909,12 @@
 									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 										<a href="#" class="m-menu__link ">
 											<span class="m-menu__link-text">
-											Tạo Lớp Môn học
+									@if(session('statut') == 'admin' )
+									Tạo Lớp Môn Học
+									@endif
+									@if(session('statut') == 'redac' )
+									Quản lý Lớp Môn Học
+										@endif
 											</span>
 										</a>
 									</li>
@@ -928,6 +938,20 @@
 											</i>
 											<span class="m-menu__link-text">
 												Tạo Tự động 
+											</span>
+											
+										</a>
+										
+									</li>
+									@endif
+									@if(session('statut') == 'redac' )
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+										<a href="{{url('viewlistlopmonhocGiangVien')}}" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Tất cả các lớp môn học đã đăng ký
 											</span>
 											
 										</a>
@@ -1625,56 +1649,7 @@
 	
 	<script src="{{URL::asset('handleAjax.js')}}"></script>  
 	<script src="{{URL::asset('handleAjAx_Form.js')}}"></script>
-	<script>
-		$(document).ready(function() {
-
-    $("#FormThemSinhVien").on("submit", function (e) {
-    e.preventDefault();
-    var routeThemSinhVien = $(this).attr("routethemsinhvien");
-    console.log(routeThemSinhVien);
-    var idsinhvien = $("input[name=idsinhvien]").val();
-    var tensinhvien = $("input[name=tensinhvien]").val();
-    var password = $("input[name=password]").val();
-
-  
-
-    var infolophoc = $("#selectLopHoc").find(":selected").val();
-    var arrayinfo = infolophoc.split(" ");
-    var idlophoc = arrayinfo[0];
-    var idkhoa=arrayinfo[1];
-    console.log(arrayinfo);
-    var gioitinh = $("input[name=gioitinh]:checked").val();
-
-
-    $.ajax({
-     headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-      type: "POST",
-      url: routeThemSinhVien,
-      data: {
-        idsinhvien: idsinhvien,
-        tensinhvien: tensinhvien,
-        password: password,
-      
-        idlophoc: idlophoc,
-        gioitinh: gioitinh,
-        idkhoa: idkhoa
-      },
-      success: function(html) {
-        toastr.success("Thêm Sinh viên tên :tensinhvien thành công ^^ ", {
-          timeOut: 2000
-        });
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });
-});
-
 	
-});
-	</script>
 	<script >
 		function noneLoading() {
 

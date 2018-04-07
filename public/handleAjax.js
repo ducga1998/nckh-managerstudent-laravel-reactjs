@@ -12,12 +12,7 @@ $(document).ready(function () {
 
     $(".m-portlet").removeClass("hiden");
   });
-  //   $(".SubmitAddSinhVien").onClick(function(e) {
-  //     e.preventDefault();
-  //     console.log("submit");
-
-  //   });
-  $("#FormAddGiangVien").on("submit", function (e) {
+$("#FormAddGiangVien").on("submit", function (e) {
     e.preventDefault();
 
     var name = $("input[name=name]").val();
@@ -341,10 +336,7 @@ $(document).ready(function () {
             </tr>`;
   }
   //end click button fitler-btn
-  $(".SubmitAddSinhVien").on("click", function () {
-
-
-  });
+  
 
 
   $("#FormThemSinhVien").on("submit", function (e) {
@@ -450,7 +442,7 @@ $(document).ready(function () {
           $(".viewlistsinhvien").html("<h2 style='text-align: center;' >Lớp chưa có sinh viên nào đăng ký</h2>");
         }
         $(".viewlistsinhvien").html(HTML);
-        $(".btn-modal").click();
+        
       });
 
   });
@@ -473,5 +465,5 @@ $(document).ready(function () {
 													</td>
 												</tr>`;
   }
-
+      
 });

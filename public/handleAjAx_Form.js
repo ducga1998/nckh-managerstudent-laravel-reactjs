@@ -341,6 +341,8 @@ $(".btn-add-giangvien").on("click",function () {
 });
 $(".btn-huydk").on("click",function(){
   //link 
+  var flag=confirm("Xác nhận xác hủy lớp giảng viên đang dạy hnmm.. ko khuyếnh khích điều này !!! ");
+  if(flag){
   var element=$(this);
     var idlopmonhoc = $(this).attr("idlopmonhoc");
     $.ajax({
@@ -368,6 +370,8 @@ element
         });
       }
     });
+
+  }
 });
 $(".btn-dkLopGiangVien").on("click", function() {
   var idlopmonhoc = $(this).attr("idlopmonhoc");
@@ -376,6 +380,8 @@ $(".btn-dkLopGiangVien").on("click", function() {
 
 });
 $(".daylophocnay").on("click",function () {
+  var flag = confirm("Xác nhận bổ nhiệm giảng viên này dạy ??");
+  if(flag){
     var element=$(this);
    var idlopmonhoc= element.attr("idlopmonhoc");
    var idgiangvien= element.attr("idgiangvien");
@@ -394,7 +400,7 @@ $(".daylophocnay").on("click",function () {
        toastr.success(`Bổ nhiệm giảng viên vào lớp này thành công  `, {
          timeOut: 1000
        });
-       $(`[idget=${idlopmonhoc}]`).parent().html(` <button  type="button" class="btn btn-success btn-huydk">
+       $(`[idget=${idlopmonhoc}]`).parent().html(` <button idlopmonhoc='${idlopmonhoc}' type="button" class="btn btn-success btn-huydk">
 											Giảng Viên có Id: ${idgiangvien} Đã dạy ...
 											</button>`);
       //  element.parent()
@@ -408,10 +414,77 @@ $(".daylophocnay").on("click",function () {
        });
      }
    });
+  }
+});
+$(".btn-ViewLinkBaiTap").on("click",function(){
+  var element=$(this);
+  var idlopmonhoc = element.attr("idlopmonhoc");
+  var url = element.attr("routelink");
+  var HTML="";
+  console.log(url);
+   fetch(url)
+     .then(resp => resp.json())
+     .then(function(data) {
+
+      for (ele in data){
+        HTML += HTMLRender(data[ele]);
+        console.log(data[ele]);
+      }
+      $(".viewlistlinkbaitap").html(HTML);
+     });
 
 });
+function HTMLRender(object){
+  return `
+  <tr>
+  <td>
+  ${object.Id}
+  </td>
+  <td>
+    ${object.Id_LinkBaiTap}
+  </td>
+  <td>
+         <a href="${object.LinkBaiTap}">${object.LinkBaiTap}</a> 
+  </td></tr>`;
+}
 
+$("#formThemLinkBaiTap").on("submit", function(e) {
+  e.preventDefault();
 
+  var linkbaitap = $('input[name="linkbaitap"]').val();
+  var idlopmonhoc = $(this).attr("idlopmonhoc");
+console.log(linkbaitap+" "+idlopmonhoc);
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    },
+    type: "POST",
+    url: "/themlinkbaitap",
+    data: {
+      idlopmonhoc: idlopmonhoc,
+      linkbaitap: linkbaitap
+    },
+    success: function(html) {
+      toastr.success(
+        `Thêm Bài tập thành công cho lớp học có Id: ${idlopmonhoc}`,
+        {
+          timeOut: 1000
+        }
+      );
+    },
+    error: function(error) {
+      toastr.error(`Error rồi bạn ê : (( ,Debug thôi!!!`, {
+        timeOut: 1000
+      });
+    }
+  });
+});
+//binding idlopmonoc vào form formThemLinkBaiTap
+$(".giaobaitap").on("click",function () {
+  $('input[name="linkbaitap"]').val("");
+  var idlopmonhoc=$(this).attr("idlopmonhoc");
+    $("#formThemLinkBaiTap").attr("idlopmonhoc", idlopmonhoc);
+});
   //ES6 javscript
 
 });

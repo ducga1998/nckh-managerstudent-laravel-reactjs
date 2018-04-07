@@ -3,9 +3,9 @@ use App\Models\SinhVien;
 use App\Models\khoahoc;
 use App\Models\lophoc;
 use App\Models\giangvien;
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web']], function () {	
 
-// Home
+	// Home
 	Route::get('/', [
 		'uses' => 'HomeController@index', 
 		'as' => 'home'
@@ -22,14 +22,14 @@ Route::group(['middleware' => ['web']], function () {
 		'as' => 'medias',
 		'middleware' => 'redac'
 	]);
-// User
+	// User
 	Route::get('user/sort/{role}', 'UserController@indexSort');
 	
 	Route::get('user/roles', 'UserController@getRoles');
 	Route::post('user/roles', 'UserController@postRoles');
 
 	Route::put('userseen/{user}', 'UserController@updateSeen');
-// Authentication routes...
+	// Authentication routes...
 	Route::resource('user', 'UserController');
 	Route::get('auth/login', 'Auth\AuthController@getLogin');
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -42,8 +42,9 @@ Route::group(['middleware' => ['web']], function () {
 		//end manager giang vien
 		Route::get('/listsinhvien', 'AdminController@AllSinhVien');
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
-	//end manager lop hoc
+		//end manager lop hoc
 });
+
 	Route::post('ajaxBoNhiemGiangVienDayLopMonHoc', 'AdminController@BoNhiemGiangVien');
 	Route::post('ajaxXoaGiangVienLopMonHoc', 'AdminController@XoaGiangVienDayLopHocDcChon');
 	Route::post('ajaxupdategiangvien', 'AdminController@updategiangvien');
@@ -62,21 +63,23 @@ Route::group(['middleware' => ['web']], function () {
 		'/listsinhvientheolophoc/{idlophoc}',
 		['uses' => 'AdminController@AllSinhVienTheoLop']
 	);
+	
+	//end middlware admin access
 	Route::get('GetSinhVienTheoIdSinhVien/{idsinhvien}', 'AdminController@LaySinhVienBangIdSinhVien');
 	Route::get('/listsinhvientheokhoa/{idkhoa}', 'AdminController@AllSinhVienTheoKhoa');
 	Route::get('/listlophoc', 'AdminController@LayToanBoLopHoc');
 	Route::get('listkhoahoc', 'AdminController@AllKhoaHoc');
 	Route::get("profileMe","AdminController@profileview");
-
-	//end middlware admin access
-	
+	//end request to AdminController
+	//start request to GiangVienController
+	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
 	Route::get('listlopmonhocviewgiangvien','GiangVienController@viewListLopMonHoc');
-	Route::get('test',"GiangVienController@test");
-
+	
+	Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
 	//ajax giang viên đăng ký môn học
 	Route::post('/ajaxgiangviendangkylopmonhoc', 'GiangVienController@GiangVienDangKyLopMonHoc');
 	Route::get('/ajaxlistlopsinhvien/{idlopmonhoc}', "GiangVienController@GetSinhVienAjax");
-
+	Route::post('/themlinkbaitap', 'GiangVienController@AJAXthemLinkBaiTap');
 
 
 

@@ -145,6 +145,7 @@ class AdminController extends Controller {
 		$IdUser = Auth::user()->id;
 		$inforadmin = admin::where('Id', $IdUser)->first()->toArray();
 		$lopmonhoc = lopmonhoc::all()->toArray();
+		$ListGiangVien = giangvien::all()->toArray();
 		$arrayInfo = [];
         // cần thông tin toàn bộ sinh viên. sô lượng sinh viên và bộ môn 
 		foreach ($lopmonhoc as $item) {
@@ -164,7 +165,7 @@ class AdminController extends Controller {
 				$tengiangvien="a";
 			}
 			//create object . handle object
-			$ListGiangVien=giangvien::all()->toArray();
+			
 			$object->IdGiangVien= $item["GiangVien_Id"];
 			$object->TenGiangVienDK= $tengiangvien;
 			$object->IdLopMonHoc = $idlopmonhoc;
@@ -176,11 +177,7 @@ class AdminController extends Controller {
             //  return $listsinhvien
 		}
        //từ id lớp môn học query ra rất nhiều thứ
-		return view('front.listlopmonhoc', [
-			'array' => $arrayInfo,
-			'info' => $inforadmin,
-			'arrayGiangVien'=> $ListGiangVien
-		]);
+		return view('front.listlopmonhoc', ['array' => $arrayInfo,'info' => $inforadmin,'arrayGiangVien'=> $ListGiangVien]);
 	}
 	
 	public function ViewTaoLopMonHoc(){

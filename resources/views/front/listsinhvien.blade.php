@@ -169,7 +169,7 @@
         </div>
     </div>
     <!--begin::Form-->
-    <form method="POST" id="FormThemSinhVien" routethemsinhvien="{{url('themsinhvienajax')}}" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+    <form  id="FormThemSinhVien" routethemsinhvien="{{url('themsinhvienajax')}}" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <div class="m-portlet__body">
             <div class="form-group m-form__group row">
@@ -247,7 +247,7 @@
                 <div class="row">
                     <div class="col-lg-5"></div>
                     <div class="col-lg-7">
-                        <button type="submit" class="btn btn-brand SubmitAddSinhVien">
+                        <button type="submit" class="btn btn-brand">
                             Thêm 
                         </button>
                         <button type="reset" class="btn btn-secondary">
