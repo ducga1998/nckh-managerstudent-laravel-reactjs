@@ -4,7 +4,9 @@ use App\Models\SinhVien;
 use App\Models\User;
 use App\Models\giangvien;
 use App\Models\lopmonhoc;
+use App\Models\lophoc;
 use Illuminate\Support\Facades\Input;
+use Auth;
 class SinhVienRepository extends BaseRepository
 {
         protected $SinhVien;
@@ -32,10 +34,18 @@ class SinhVienRepository extends BaseRepository
         $user->password = $request["password"];
         $giangvien->save();
     }
-        public function getAllSinhVienTrongLop($id){
-        $sinhvientronglop = SinhVien::all()->where('IdLop', $id)->toArray();
-       
+    public function getAllSinhVienTrongLop(){
+        $id=Auth::user()->id;
+        $idlopsinhdanghoc=sinhvien::where('Id',$id)->first()->toArray();
+        $sinhvientronglop = SinhVien::all()->where('IdLop', $idlopsinhdanghoc["IdLop"])->toArray();
         return $sinhvientronglop;
+    }
+    public function getTenLopByIdSinhVien()
+    {
+        $id = Auth::user()->id;
+        $idlopsinhdanghoc = sinhvien::where('Id', $id)->first()->toArray();
+        $lophoc=lophoc::find($idlopsinhdanghoc["IdLop"]);
+         return $lophoc["TenLop"];
     }
     // chỉ cần request
     public function ThemSinhVienAJaxSP($request){

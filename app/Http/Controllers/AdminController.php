@@ -158,16 +158,15 @@ class AdminController extends Controller {
 			$checkgiangvien = $item["GiangVien_Id"] == null ? 0 : 1;
 			//truy vấn dài vãi cả đái
 			//nếu mà có đăng ký thì in tên . ko có thì trả về 0
-			if($checkgiangvien==1){
+			if ($checkgiangvien == 1) {
 				$tengiangvien = giangvien::where('IdGiangVien', $item["GiangVien_Id"])->get(['TenGiangVien'])->first()->TenGiangVien;
-			}
-			else{
-				$tengiangvien="a";
+			} else {
+				$tengiangvien = "a";
 			}
 			//create object . handle object
-			
-			$object->IdGiangVien= $item["GiangVien_Id"];
-			$object->TenGiangVienDK= $tengiangvien;
+
+			$object->IdGiangVien = $item["GiangVien_Id"];
+			$object->TenGiangVienDK = $tengiangvien;
 			$object->IdLopMonHoc = $idlopmonhoc;
 			$object->TenMonBoMon = $tenMonBoMon;
 			$object->CoutSinhvien = $coutSinhvien;

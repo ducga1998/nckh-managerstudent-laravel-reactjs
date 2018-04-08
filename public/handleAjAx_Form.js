@@ -486,5 +486,12 @@ $(".giaobaitap").on("click",function () {
     $("#formThemLinkBaiTap").attr("idlopmonhoc", idlopmonhoc);
 });
   //ES6 javscript
-
+$(".BtnDkLopMonHocChoSinhVien").on("click",function (e) {
+e.preventDefault();
+  var link=  $(this).attr("link");
+  var flag=confirm("Xác nhận đăng ký lớp môn học này????");
+  if (flag){
+    window.location.href = link;
+  } 
+});
 });

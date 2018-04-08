@@ -1,5 +1,16 @@
 @extends('front.layout',["TenGiangVien"=>$info["TenGiangVien"]])
  @section('content-giangvien')
+ <div class="m-portlet">
+    <div class="m-portlet__body">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                       Đăng ký Dạy
+                    </h3>
+                </div>
+            </div>
+        </div>
 <div class="m-section">
     <div class="m-section__content">
         <table class="table table-bordered table-hover">
@@ -103,4 +114,6 @@
 								</div>
 							</div>
 						</div>
+	</div>
+ </div>
 @endsection

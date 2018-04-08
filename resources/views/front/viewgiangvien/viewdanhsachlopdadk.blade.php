@@ -1,45 +1,63 @@
 @extends('front.layout') @section('content-giangvien')
-<table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand">
-	<thead>
-		<tr>
+<div class="m-portlet">
+	<div class="m-portlet__body">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						Đăng ký Dạy
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="m-section">
+			<div class="m-section__content">
+				<table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand">
+					<thead>
+						<tr>
 
-			<th>
-				Id lớp môn học
-			</th>
-			<th>
-				Tên Bộ Môn
-			</th>
-			<th>
-				Số lượng Sinh viên đã đk
-			</th>
-			<th>Settting</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach ($dataMergen as $item )
-		<tr>
+							<th>
+								Id lớp môn học
+							</th>
+							<th>
+								Tên Bộ Môn
+							</th>
+							<th>
+								Số lượng Sinh viên đã đk
+							</th>
+							<th>Settting</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach ($dataMergen as $item )
+						<tr>
 
-			<td>
-				{{$item->IdLopMonHoc}}
-			</td>
-			<td>
-				{{$item->TenMonBoMon}}
-			</td>
-			<td>
-				{{$item->CoutSinhvien}}
-			</td>
-			<td>
-				<a idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class="btn btn-deauft btn-ViewListSinhVien" data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị danh sách</a>
-				<a routelink="{{url('GetLinkApiLinkBaiTap/'.$item->IdLopMonHoc.'')}}" idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class="btn btn-deauft btn-ViewLinkBaiTap"
-				    data-toggle="modal" data-target="#viewlistlinkbaitap">Link BT Giảng Viên Đã Giao</a>
-				<a class="giaobaitap" idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="btn btn-deauft" href="#">Giao Bài tập</a>
-			</td>
-		</tr>
-		@endforeach
+							<td>
+								{{$item->IdLopMonHoc}}
+							</td>
+							<td>
+								{{$item->TenMonBoMon}}
+							</td>
+							<td>
+								{{$item->CoutSinhvien}}
+							</td>
+							<td>
+								<a idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class=" btn m-btn--pill m-btn--air btn-outline-brand btn-ViewListSinhVien" data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị danh sách</a>
+								<a routelink="{{url('GetLinkApiLinkBaiTap/'.$item->IdLopMonHoc.'')}}" idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class="btn m-btn--pill m-btn--air btn-outline-brand btn-ViewLinkBaiTap"
+								    data-toggle="modal" data-target="#viewlistlinkbaitap">Link BT Giảng Viên Đã Giao</a>
+								<a  idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="giaobaitap btn m-btn--pill m-btn--air btn-outline-brand"
+								    href="#">Giao Bài tập</a>
+							</td>
+						</tr>
+						@endforeach
 
 
-	</tbody>
-</table>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 {{-- modal view list sinh vien --}}
 
 <div class="modal fade show" id="viewlistsinhvien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -163,12 +181,14 @@
 									Nhập Link Bài tập
 								</span>
 							</div>
-							<div class="col-lg-4">	<button type="submit" class="btn btn-primary">
-							Thêm
-						</button></div>
+							<div class="col-lg-4">
+								<button type="submit" class="btn btn-primary">
+									Thêm
+								</button>
+							</div>
 						</div>
 
-					
+
 
 					</form>
 

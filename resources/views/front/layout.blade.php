@@ -67,8 +67,7 @@
 							</div>
 							<div class="m-stack__item m-stack__item--middle m-brand__tools">
 								<!-- BEGIN: Left Aside Minimize Toggle -->
-								<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block 
-					 ">
+								<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block ">
 									<span></span>
 								</a>
 								<!-- END -->
@@ -153,11 +152,7 @@
 																			<span class="m-nav__link-text">
 																				Thông tin tài khoản
 																			</span>
-																			<span class="m-nav__link-badge">
-																				<span class="m-badge m-badge--success">
-																					2
-																				</span>
-																			</span>
+																			
 																		</span>
 																	</span>
 																</a>
@@ -178,13 +173,7 @@
 											</div>
 										</div>
 									</li>
-									<li id="m_quick_sidebar_toggle" class="m-nav__item">
-										<a href="#" class="m-nav__link m-dropdown__toggle">
-											<span class="m-nav__link-icon">
-												<i class="flaticon-grid-menu"></i>
-											</span>
-										</a>
-									</li>
+									
 								</ul>
 							</div>
 						</div>
@@ -206,7 +195,7 @@
 				    data-menu-scrollable="false" data-menu-dropdown-timeout="500">
 					<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-							<a href="{{url(" / ")}}" class="m-menu__link ">
+							<a href="{{url("/")}}" class="m-menu__link ">
 								<i class="m-menu__link-icon flaticon-line-graph"></i>
 								<span class="m-menu__link-title">
 									<span class="m-menu__link-wrap">
@@ -225,7 +214,8 @@
 						<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
 								@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') Xem Tình
-								hình học tập @endif
+								hình học tập 
+								@endif
 							</h4>
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
 						</li>
@@ -233,7 +223,7 @@
 							<a href="#" class="m-menu__link m-menu__toggle autoclick">
 								<i class="m-menu__link-icon flaticon-layers"></i>
 								<span class="m-menu__link-text">
-									@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') học tập
+									@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') Học Tập
 									@endif
 
 								</span>
@@ -245,7 +235,11 @@
 									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 										<a href="#" class="m-menu__link ">
 											<span class="m-menu__link-text">
-												@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') học tập
+												@if(session('statut') == 'admin'|| session('statut') == 'redac') 
+													Quản lý
+												@endif 
+												@if(session('statut') == 'user') 
+													Học tập
 												@endif
 
 											</span>
@@ -253,7 +247,7 @@
 									</li>
 									@if(session('statut') == 'admin' )
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listsinhvien ")}}" class="m-menu__link ">
+										<a href="{{url("/listsinhvien ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -273,7 +267,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listlopmonhoc ")}}" class="m-menu__link ">
+										<a href="{{url("/listlopmonhoc ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -283,7 +277,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /quanlylistlophoc ")}}" class="m-menu__link ">
+										<a href="{{url("/quanlylistlophoc ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -293,7 +287,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /quanlylistmon ")}}" class="m-menu__link ">
+										<a href="{{url("/quanlylistmon ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -302,15 +296,41 @@
 											</span>
 										</a>
 									</li>
-									@endif @if(session('statut') == 'redac')
+									@endif 
+									@if(session('statut') == 'redac')
 
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listlopmonhocviewgiangvien ")}}" class="m-menu__link ">
+										<a href="{{url("/listlopmonhocviewgiangvien")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
 											<span class="m-menu__link-text">
 												Đăng ký các lớp môn học
+											</span>
+										</a>
+									</li>
+
+									@endif
+									{{-- của sinh viên --}}
+									 @if(session('statut') == 'user')
+
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url("/listsinhvienlopdanghoc")}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Tất cả Các Sinh Viên Lớp Đang Học
+											</span>
+										</a>
+									</li>
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url("/dangkylopmonhoc")}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Đăng ký lớp môn học
 											</span>
 										</a>
 									</li>
@@ -323,16 +343,24 @@
 
 						<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
-								Quản lý lớp môn học
-							</h4>
-							<i class="m-menu__section-icon flaticon-more-v3"></i>
+							@if(session('statut') == 'admin' ||session('statut') == 'redac')
+								Quản lý Lớp môn học
+							@endif
+							@if(session('statut') == 'user')
+								Quản lý Phần Môn Học
+							@endif
+							
+									</h4>
+						<i class="m-menu__section-icon flaticon-more-v3"></i>
 						</li>
 
 						<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
 							<a href="#" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-icon flaticon-interface-3"></i>
 								<span class="m-menu__link-text">
-									@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif @if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif
+									@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif 
+									@if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif
+
 								</span>
 								<i class="m-menu__ver-arrow la la-angle-right"></i>
 							</a>
@@ -342,7 +370,9 @@
 									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 										<a href="#" class="m-menu__link ">
 											<span class="m-menu__link-text">
-												@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif @if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif
+												@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif
+												@if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif
+												@if(session('statut') == 'user' ) Xem Các Lớp Đã Đăng ký @endif
 											</span>
 										</a>
 									</li>
@@ -371,7 +401,8 @@
 										</a>
 
 									</li>
-									@endif @if(session('statut') == 'redac' )
+									@endif 
+									@if(session('statut') == 'redac' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
 										<a href="{{url('viewlistlopmonhocGiangVien')}}" class="m-menu__link m-menu__toggle">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -379,6 +410,21 @@
 											</i>
 											<span class="m-menu__link-text">
 												Tất cả các lớp môn học đã đăng ký
+											</span>
+
+										</a>
+
+									</li>
+									@endif
+									
+									@if(session('statut') == 'user' )
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
+										<a href="" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Xem Các lớp Đã Đăng ký
 											</span>
 
 										</a>
@@ -397,8 +443,21 @@
 			<div class="m-grid__item m-grid__item--fluid m-wrapper">
 				
 				<div class="m-content">
-					@if(session('statut') == 'admin' ) @section('m-content') @show @endif @if(session('statut') == 'redac' ) @section('content-giangvien')
-					Welcome Giang Vien @show @endif
+					@if(session('statut') == 'admin')
+					 @section('m-content')
+					 	Welcome admin
+					  @show
+					@endif
+					@if(session('statut') == 'redac')
+					 @section('content-giangvien')
+						Welcome Giang Vien 
+						@show
+					@endif
+					@if(session('statut') == 'user' )
+					 @section('content-sinhvien')
+					 	Welcome Sinh Viên
+					  @show
+					@endif
 				</div>
 
 			</div>
@@ -425,180 +484,7 @@
 	</div>
 	<!-- end:: Page -->
 	<!-- begin::Quick Sidebar -->
-	<div id="m_quick_sidebar" class="m-quick-sidebar m-quick-sidebar--tabbed m-quick-sidebar--skin-light">
-		<div class="m-quick-sidebar__content m--hide">
-			<span id="m_quick_sidebar_close" class="m-quick-sidebar__close">
-				<i class="la la-close"></i>
-			</span>
-			<ul id="m_quick_sidebar_tabs" class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--brand" role="tablist">
-				<li class="nav-item m-tabs__item">
-					<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_quick_sidebar_tabs_messenger" role="tab">
-						Messages
-					</a>
-				</li>
-				
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane active m-scrollable" id="m_quick_sidebar_tabs_messenger" role="tabpanel">
-					<div class="m-messenger m-messenger--message-arrow m-messenger--skin-light">
-						<div class="m-messenger__messages">
-							<div class="m-messenger__message m-messenger__message--in">
-								<div class="m-messenger__message-pic">
-									<img src="assets/app/media/img//users/user3.jpg" alt="" />
-								</div>
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-username">
-											Megan wrote
-										</div>
-										<div class="m-messenger__message-text">
-											Hi Bob. What time will be the meeting ?
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--out">
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-text">
-											Hi Megan. It's at 2.30PM
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--in">
-								<div class="m-messenger__message-pic">
-									<img src="assets/app/media/img//users/user3.jpg" alt="" />
-								</div>
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-username">
-											Megan wrote
-										</div>
-										<div class="m-messenger__message-text">
-											Will the development team be joining ?
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--out">
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-text">
-											Yes sure. I invited them as well
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__datetime">
-								2:30PM
-							</div>
-							<div class="m-messenger__message m-messenger__message--in">
-								<div class="m-messenger__message-pic">
-									<img src="assets/app/media/img//users/user3.jpg" alt="" />
-								</div>
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-username">
-											Megan wrote
-										</div>
-										<div class="m-messenger__message-text">
-											Noted. For the Coca-Cola Mobile App project as well ?
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--out">
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-text">
-											Yes, sure.
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--out">
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-text">
-											Please also prepare the quotation for the Loop CRM project as well.
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__datetime">
-								3:15PM
-							</div>
-							<div class="m-messenger__message m-messenger__message--in">
-								<div class="m-messenger__message-no-pic m--bg-fill-danger">
-									<span>
-										M
-									</span>
-								</div>
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-username">
-											Megan wrote
-										</div>
-										<div class="m-messenger__message-text">
-											Noted. I will prepare it.
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--out">
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-text">
-											Thanks Megan. I will see you later.
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="m-messenger__message m-messenger__message--in">
-								<div class="m-messenger__message-pic">
-									<img src="assets/app/media/img//users/user3.jpg" alt="" />
-								</div>
-								<div class="m-messenger__message-body">
-									<div class="m-messenger__message-arrow"></div>
-									<div class="m-messenger__message-content">
-										<div class="m-messenger__message-username">
-											Megan wrote
-										</div>
-										<div class="m-messenger__message-text">
-											Sure. See you in the meeting soon.
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="m-messenger__seperator"></div>
-						<div class="m-messenger__form">
-							<div class="m-messenger__form-controls">
-								<input type="text" name="" placeholder="Type here..." class="m-messenger__form-input">
-							</div>
-							<div class="m-messenger__form-tools">
-								<a href="" class="m-messenger__form-attachment">
-									<i class="la la-paperclip"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			
-			</div>
-		</div>
-	</div>
+	
 	<!-- end::Quick Sidebar -->
 	<!-- begin::Scroll Top -->
 	<div class="m-scroll-top m-scroll-top--skin-top" data-toggle="m-scroll-top" data-scroll-offset="500" data-scroll-speed="300">
@@ -608,31 +494,7 @@
 	<!-- begin::Quick Nav -->
 	
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-	<script src="{{URL::asset('handleAjax.js')}}"></script>
-	<script src="{{URL::asset('handleAjAx_Form.js')}}"></script>
-
-	<script>
-		function noneLoading() {
-
-			$(".full-page-absolute").addClass("None");
-		}
-
-		setTimeout(() => {
-			$(".full-page-absolute").addClass("opacity");
-			setTimeout(() => {
-				noneLoading()
-			}, 1000);
-		}, 3000);
-	</script>
-
-	<script src="{{ URL::asset('assets/vendors/base/vendors.bundle.js')}}" type="text/javascript"></script>
-	<script src="{{ URL::asset('assets/demo/default/base/scripts.bundle.js')}}" type="text/javascript"></script>
-	<script src="{{URL::asset('assets/demo/default/custom/components/base/blockui.js')}}" type="text/javascript"></script>
-	<script src="{{ URL::asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
-	<script src="{{ URL::asset('assets/demo/default/custom/components/forms/widgets/bootstrap-datetimepicker.js')}}" type="text/javascript"></script>
-	<script src="{{ URL::asset('assets/app/js/dashboard.js')}}" type="text/javascript"></script>
+	@include('common.linkJavascript')
 
 </body>
 <!-- end::Body -->
