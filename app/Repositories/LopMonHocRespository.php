@@ -20,7 +20,15 @@ class Object
     public $Listsinhvien;
 
 }
+class ObjectDanhChoGiangVien
+{
+    public $IdLopMonHoc;
+    public $TenMonBoMon;
+    public $CoutSinhvien;
+    public $Checkgiangvien;
+    public $Listsinhvien;
 
+}
 class LopMonHocRespository extends BaseRepository
 {
     protected $lopmonhoc;
@@ -30,10 +38,7 @@ class LopMonHocRespository extends BaseRepository
         $this->lopmonhoc = $lopmonhoc;
     }
     // lấy tất cả các môn theo Id Lớp môn Học
-   
-  
-   
-    public function getLopMonHocByIdGiangVien($idgiangvien){
+   public function getLopMonHocByIdGiangVien($idgiangvien){
       $giangvien=  giangvien::find($idgiangvien);
       $lopmonhoc=  $giangvien->LayToanBoLopGiangVienDay->toArray();
       dd($lopmonhoc);
@@ -80,6 +85,30 @@ class LopMonHocRespository extends BaseRepository
         $lopmonhoc=lopmonhoc::find($idlopmonhoc);
         $lopmonhoc->GiangVien_Id= $idgiangvien;
         $lopmonhoc->save();
+    }
+    public function viewListLopMonHocChoGiangVien($mon,$sinhvien){
+        $lopmonhoc = lopmonhoc::all()->toArray();
+        $arrayInfo = [];
+        // cần thông tin toàn bộ sinh viên. sô lượng sinh viên và bộ môn 
+        foreach ($lopmonhoc as $item) {
+            $object = new ObjectDanhChoGiangVien;
+
+            $idlopmonhoc = $item["IdLopMonHoc"];
+            $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
+            $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
+            $listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
+            $coutSinhvien = count($listsinhvien);
+            $checkgiangvien = $item["GiangVien_Id"] == null ? 0 : 1;
+            //create object . handle object
+            $object->IdLopMonHoc = $idlopmonhoc;
+            $object->TenMonBoMon = $tenMonBoMon;
+            $object->CoutSinhvien = $coutSinhvien;
+            $object->Checkgiangvien = $checkgiangvien;
+            $object->Listsinhvien = $listsinhvien;
+            array_push($arrayInfo, $object);
+            //  return $listsinhvien
+        }
+        return $arrayInfo;
     }
     //sử dụng 3 model, rồi trộn data cần thiết rồi view lên
     public function GetListLopMonHocDaDangKy($mon, $sinhvien){
@@ -151,7 +180,7 @@ class LopMonHocRespository extends BaseRepository
         $lopmonhoc = lopmonhoc::all()->toArray();
         $ListGiangVien = giangvien::all()->toArray();
         $arrayInfo = [];
-        // cần thông tin toàn bộ sinh viên. sô lượng sinh viên và bộ môn 
+        // 
         foreach ($lopmonhoc as $item) {
             $object = new ObjectDataMergen;
             $idlopmonhoc = $item["IdLopMonHoc"];
@@ -173,9 +202,68 @@ class LopMonHocRespository extends BaseRepository
         }
         return $arrayInfo;
     }
+    public function LayToanBoLopMonHocSinhVienDaDk($mon,$sinhvien)
+    {
+        $arrayLopMonHoc=[];
+        $idUser = Auth::user()->id;
+        $ThongTinSinhVienDangNhap = SinhVien::where('Id', $idUser)->first()->toArray();
+        $idsinhvien = (int)$ThongTinSinhVienDangNhap["IdSinhVien"];
+        
+        $pivot = lopmonhoc_sinhvien::where('IdSinhVien', $idsinhvien)->get()->toArray();
+      
+        foreach ($pivot as $key => $itemlopmonhoc_sinhvien) {
+           
+
+            $idlopmonhoc = $itemlopmonhoc_sinhvien["IdLopMonHoc"];
+            $lopmonhoc = lopmonhoc::findOrFail($idlopmonhoc)->toArray();
+           
+            // check Mon_id phải != null và chưa tồn tại trong mảng
+            
+                array_push($arrayLopMonHoc, $lopmonhoc);
+            
+        }
+       
+        
+        $arrayInfo = [];
+        foreach ($arrayLopMonHoc as $item) {
+            $object = new ObjectDataMergen;
+            $idlopmonhoc = $item["IdLopMonHoc"];
+            $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
+            $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
+            // check in array for me wath idmon 
+           
+            $listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
+            $coutSinhvien = count($listsinhvien);
+            //handle sinh viên
+            $object->idmon = $monByidlopmonhoc["IdMon"];
+          
+            $object->IdLopMonHoc = $idlopmonhoc;
+            $object->TenMonBoMon = $tenMonBoMon;
+            $object->CoutSinhvien = $coutSinhvien;
+            
+            array_push($arrayInfo, $object);
+            //  return $listsinhvien
+        }
+        return $arrayInfo;
+    }
+    public function HuyLopMonHocDaDangKy(){
+        $array=Input::all();
+        $idlopmonhoc=$array["idlopmonhoc"];
+        $idsinhvien=(int)$array["idsinhvien"];
+       $lopmonhoc= lopmonhoc_sinhvien::where([
+            ['idlopmonhoc','=', $idlopmonhoc],
+            ['idsinhvien', '=', $idsinhvien ]
+        ]);
+        $lopmonhoc->delete();
+
+    }
+   
 }
+
+
 class ObjectDataMergen
-{   public $idmon;
+{
+    public $idmon;
     public $IdLopMonHoc;
     public $TenMonBoMon;
     public $CoutSinhvien;

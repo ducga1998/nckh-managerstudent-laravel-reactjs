@@ -26,9 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 		'middleware' => 'redac'
 	]);
 	// User
-	Route::get('user/sort/{role}', 'UserController@indexSort');
-	Route::get('user/roles', 'UserController@getRoles');
-	Route::post('user/roles', 'UserController@postRoles');
+
 
 	Route::put('userseen/{user}', 'UserController@updateSeen');
 	// Authentication routes...
@@ -36,14 +34,15 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('auth/login', 'Auth\AuthController@getLogin');
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
 	Route::get('auth/logout', 'Auth\AuthController@getLogout');
-	Route::get('auth/confirm/{token}', 'Auth\AuthController@getConfirm');
+	
 	Route::group(['middleware' => ['admin']], function () {
-		route::get('quanlylistmon', 'AdminController@viewQuanLyMon');
+		Route::get('quanlylistmon', 'AdminController@viewQuanLyMon');
 		Route::get('/quanlylistlophoc', 'AdminController@ViewQuanLyLopHoc');
 		Route::get('/listgiangvien', 'AdminController@GetGiangVien');
-		//end manager giang vien
 		Route::get('/listsinhvien', 'AdminController@AllSinhVien');
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
+		Route::get('/taolopmonhocbangtay', "AdminController@ViewTaoLopMonHoc");
+		Route::get('/taotudong', 'AdminController@ViewTudong');
 		//end manager lop hoc
 	});
 
@@ -59,8 +58,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/listgiangvien/deletegiangvien', 'AdminController@DeleteGiangVien');
 	Route::post('/ajaxautothemlopmonhoc', 'AdminController@ThemAutoLopMonHoc');
 	Route::post("/ajaxthemmonhoc", "AdminController@ThemLopMonHoc");// ajax thêm môn học
-	Route::get('/taolopmonhocbangtay', "AdminController@ViewTaoLopMonHoc");
-	Route::get('/taotudong','AdminController@ViewTudong');
+	
 	Route::get(
 		'/listsinhvientheolophoc/{idlophoc}',
 		['uses' => 'AdminController@AllSinhVienTheoLop']
@@ -73,18 +71,27 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get("profileMe","AdminController@profileview");
 	//end request to AdminController
 	//start request to GiangVienController
+	Route::group(['middleware' => ['redac']], function () {
+		Route::get('listlopmonhocviewgiangvien', 'GiangVienController@viewListLopMonHoc');
+		Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
+	});
 	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
-	Route::get('listlopmonhocviewgiangvien','GiangVienController@viewListLopMonHoc');
-	Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
 	//ajax giang viên đăng ký môn học
 	Route::post('/ajaxgiangviendangkylopmonhoc', 'GiangVienController@GiangVienDangKyLopMonHoc');
 	Route::post('/themlinkbaitap', 'GiangVienController@AJAXthemLinkBaiTap');
 	Route::get('/ajaxlistlopsinhvien/{idlopmonhoc}', "GiangVienController@GetSinhVienAjax");
 	//GiangVienController end
 	//SinhViencontroller handle start
-	Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
-	Route::get('/dangkylopmonhoc', 'SinhVienController@ViewDangKyLopMonHoc')->name('viewdangkymonhoc');
+	Route::group(['middleware' => ['user']], function () {
+		Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
+		Route::get('/dangkylopmonhoc', 'SinhVienController@ViewDangKyLopMonHoc')->name('viewdangkymonhoc');
+	});
+	
+	
 	Route::get('sinhviendangkylopmonhoc/{idlopmonhoc}', 'SinhVienController@SinhVienDangKyHoc');
+	Route::get('LopMonHocSinhVienDaDangNhapDaDangKy', 'SinhVienController@LayToanBoLopHocSinhVienDaDk');
+	Route::post('HuyLopMonHocDaDangKy', 'SinhVienController@HuyLopMonHocDaDangKy');
+	
 	//phần test code
 	Route::get('routes', function () {
 		\Artisan::call('route:list');
@@ -93,8 +100,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('bcrypt', function () {
 		return bcrypt('admin');
 	});
-	Route::get('test',function(LopMonHocRespository $lop, MonRepository $mon, SinhVienRepository $sinhvien){
-	$data=$lop->ViewToanBoLopMonHoc($mon, $sinhvien);
-	dd($data);
+	Route::get('test',function(LopMonHocRespository $lop){
+		$lop->HuyLopMonHocDaDangKy();
+	
 	});
 });

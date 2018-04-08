@@ -491,7 +491,50 @@ e.preventDefault();
   var link=  $(this).attr("link");
   var flag=confirm("Xác nhận đăng ký lớp môn học này????");
   if (flag){
+     toastr.success(
+        `Đăng Ký Lớp Môn Học Này thành công`,
+        {
+          timeOut: 400
+        }
+      );
     window.location.href = link;
   } 
 });
+$(".btn-huyhocphan").on("click",function (e) {
+  e.preventDefault();
+
+    var element=$(this);
+  
+    var idsinhvien=element.attr("idsinhvien");
+    var idlopmonhoc=element.attr('idlopmonhoc');
+    var flag=  confirm("Xác nhận Hủy đăng ký lớp môn học " + idlopmonhoc);
+    if(flag){
+
+   
+
+   $.ajax({
+     headers: {
+       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+     },
+     type: "POST",
+     url: "/HuyLopMonHocDaDangKy",
+     data: {
+       idsinhvien: idsinhvien,
+       idlopmonhoc: idlopmonhoc
+     },
+     success: function(html) {
+       toastr.success(`Hủy thành công lớp môn học có id ${idlopmonhoc}`, {
+         timeOut: 2000
+       });
+       element.parent().parent().remove();
+     },
+     error: function(error) {
+       toastr.error(`Hủy thất bại!!!!!!!`, {
+         timeOut: 1000
+       });
+     }
+   });
+  }
+});
+ 
 });

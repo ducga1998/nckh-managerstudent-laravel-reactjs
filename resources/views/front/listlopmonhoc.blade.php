@@ -1,5 +1,16 @@
 @extends('front.layout',['NameAdmin' =>"csacsacsa",'GmailAdmin'=>"csacascsacsa"])
 @section('m-content')
+<div class="m-portlet">
+    <div class="m-portlet__body">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        Đăng ký Dạy
+                    </h3>
+                </div>
+            </div>
+        </div>
     <div class="m-section">
     <div class="m-section__content">
         <table class="table table-bordered table-hover">
@@ -33,7 +44,7 @@
                        {{$item->CoutSinhvien}}
                     </td>
                     <td>
-                       <a IdLopMonHoc="{{$item->IdLopMonHoc}}" href="#"  class="btn btn-deauft btn-ViewListSinhVien">Hiện thị danh sách</a>
+                       <a  data-toggle="modal" data-target="#viewlistsinhvien" IdLopMonHoc="{{$item->IdLopMonHoc}}" href="#"  class="btn btn-deauft btn-ViewListSinhVien">Hiện thị danh sách</a>
                     </td>
                     <td>
                         @if($item->Checkgiangvien==0)
@@ -41,8 +52,7 @@
 							type="button" class="btn btn-danger btn-dkLopGiangVien">
 												Chưa có người dạy
 											</button>
-                      
-                        @else
+                      @else
                         <button idlopmonhoc="{{$item->IdLopMonHoc}}"  type="button" class="btn btn-success btn-huydk">
 											{{$item->TenGiangVienDK}} Đã dạy
 											</button>
@@ -50,14 +60,14 @@
                     </td> 
                 </tr>
                 @endforeach
-               
-                 
-            </tbody>
+               </tbody>
         </table>
     </div>
 </div>
+	</div>
+</div>
 {{-- modal view list sinh vien --}}
-<button style="width:0px;height:0px;padding:0px" type="button" class="btn btn-warning btn-modal" data-toggle="modal" data-target="#viewlistsinhvien"></button>
+<button style="width:0px;height:0px;padding:0px" type="button" class="btn btn-warning btn-modal"></button>
 <div class="modal fade show" id="viewlistsinhvien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 							<div class="modal-dialog modal-lg" role="document">
 								<div class="modal-content">
@@ -146,7 +156,6 @@
 											<tbody class="viewlistsinhvien">
 													@foreach ($arrayGiangVien as $item)
 												<tr>
-													
 													<th>
 													{{$item['IdGiangVien']}}
 													</th>

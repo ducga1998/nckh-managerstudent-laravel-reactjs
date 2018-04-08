@@ -1,4 +1,112 @@
 @extends('front.layout',['NameAdmin' =>"csacsacsa",'GmailAdmin'=>"csacascsacsa"]) @section('m-content')
+<div class="m-portlet  m-viewdiglog">
+    <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon m--hide">
+                    <i class="la la-gear"></i>
+                </span>
+                <h3 class="m-portlet__head-text">
+                    Thêm Sinh Viên
+
+
+                </h3>
+            </div>
+        </div>
+    </div>
+    <!--begin::Form-->
+    <form  id="FormThemSinhVien" routethemsinhvien="{{url('themsinhvienajax')}}" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+        <div class="m-portlet__body">
+            <div class="form-group m-form__group row">
+                <label class="col-lg-1 col-form-label">
+                    ID Sinh Viên
+                </label>
+                <div class="col-lg-3">
+                    <input type="number" name="idsinhvien" class="form-control m-input" placeholder="ID Sinh viên">
+                    <span class="m-form__help">
+                        ID Sinh viên
+                    </span>
+                </div>
+                <label class="col-lg-1 col-form-label">
+                    Tên Đầy đủ
+                </label>
+                <div class="col-lg-3">
+
+                    <input name="tensinhvien" class="form-control m-input" placeholder="Full name">
+                    <span class="m-form__help">
+                        Nhập tên Sinh Viên
+                    </span>
+                </div>
+                {{-- end --}}
+
+
+                <label class="col-lg-1 col-form-label">
+                    Password
+                </label>
+                <div class="col-lg-3">
+
+                    <input name="password" class="form-control m-input" placeholder="PassWord" type="password">
+                    <span class="m-form__help">
+                        Nhập tên password
+                    </span>
+                </div>
+                {{-- end --}}
+                <label class="col-lg-1 col-form-label">
+                    Lớp Học
+                </label>
+                <div class="col-lg-3">
+
+                    <select name="lophoc" class="form-control m-input" id="selectLopHoc">
+                       @foreach ($useArrayLopHoc as $item )
+                           <option  value="{{$item["IdLop"].' '. $item["IdKhoaHoc"]}}" >
+                                {{$item["TenLop"]}} {{$item["IdKhoaHoc"]}}
+                           </option>
+                       @endforeach
+                    </select>
+
+                </div>
+                {{-- end --}}
+                <label class="col-lg-1 col-form-label">
+                   Giới Tinh
+                </label>
+                <div class="col-lg-3">
+                   
+                <label class="m-radio m-radio--bold m-radio--state-brand">
+                    <input type="radio" name="gioitinh" value="1">Nam
+                    <span></span>
+                </label>
+                <label class="m-radio m-radio--bold m-radio--state-brand">
+                    <input type="radio" name="gioitinh" value="0"> Nữ
+                    <span></span>
+                </label>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+            <div class="m-form__actions m-form__actions--solid">
+                <div class="row">
+                    <div class="col-lg-5"></div>
+                    <div class="col-lg-7">
+                        <button type="submit" class="btn btn-brand">
+                            Thêm 
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <!--end::Form-->
+</div>
 <div class="row m-row--no-padding m-row--col-separator-xl" style="margin-bottom:10px">
     <select urlLop="{{url('listlophoc')}}" urlKhoa="{{url('listkhoahoc')}}" class="form-control m-input m-input--air col-xl-4"
         id="selectcategory">
@@ -153,114 +261,7 @@
     @endif
 </div>
 </div>
-<div class="m-portlet  m-viewdiglog">
-    <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-                <span class="m-portlet__head-icon m--hide">
-                    <i class="la la-gear"></i>
-                </span>
-                <h3 class="m-portlet__head-text">
-                    Thêm Sinh Viên
 
-
-                </h3>
-            </div>
-        </div>
-    </div>
-    <!--begin::Form-->
-    <form  id="FormThemSinhVien" routethemsinhvien="{{url('themsinhvienajax')}}" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
-       <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-        <div class="m-portlet__body">
-            <div class="form-group m-form__group row">
-                <label class="col-lg-1 col-form-label">
-                    ID Sinh Viên
-                </label>
-                <div class="col-lg-3">
-                    <input type="number" name="idsinhvien" class="form-control m-input" placeholder="ID Sinh viên">
-                    <span class="m-form__help">
-                        ID Sinh viên
-                    </span>
-                </div>
-                <label class="col-lg-1 col-form-label">
-                    Tên Đầy đủ
-                </label>
-                <div class="col-lg-3">
-
-                    <input name="tensinhvien" class="form-control m-input" placeholder="Full name">
-                    <span class="m-form__help">
-                        Nhập tên Sinh Viên
-                    </span>
-                </div>
-                {{-- end --}}
-
-
-                <label class="col-lg-1 col-form-label">
-                    Password
-                </label>
-                <div class="col-lg-3">
-
-                    <input name="password" class="form-control m-input" placeholder="PassWord" type="password">
-                    <span class="m-form__help">
-                        Nhập tên password
-                    </span>
-                </div>
-                {{-- end --}}
-                <label class="col-lg-1 col-form-label">
-                    Lớp Học
-                </label>
-                <div class="col-lg-3">
-
-                    <select name="lophoc" class="form-control m-input" id="selectLopHoc">
-                       @foreach ($useArrayLopHoc as $item )
-                           <option  value="{{$item["IdLop"].' '. $item["IdKhoaHoc"]}}" >
-                                {{$item["TenLop"]}} {{$item["IdKhoaHoc"]}}
-                           </option>
-                       @endforeach
-                    </select>
-
-                </div>
-                {{-- end --}}
-                <label class="col-lg-1 col-form-label">
-                   Giới Tinh
-                </label>
-                <div class="col-lg-3">
-                   
-                <label class="m-radio m-radio--bold m-radio--state-brand">
-                    <input type="radio" name="gioitinh" value="1">Nam
-                    <span></span>
-                </label>
-                <label class="m-radio m-radio--bold m-radio--state-brand">
-                    <input type="radio" name="gioitinh" value="0"> Nữ
-                    <span></span>
-                </label>
-                </div>
-
-
-
-            </div>
-
-
-        </div>
-        <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-            <div class="m-form__actions m-form__actions--solid">
-                <div class="row">
-                    <div class="col-lg-5"></div>
-                    <div class="col-lg-7">
-                        <button type="submit" class="btn btn-brand">
-                            Thêm 
-                        </button>
-                        <button type="reset" class="btn btn-secondary">
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div class="notice-sucess"></div>
-    <!--end::Form-->
-</div>
 
     {{-- code modal update !!!!!!! --}}
     <div class="modal fade show" id="modalupdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;">

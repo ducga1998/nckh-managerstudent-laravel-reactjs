@@ -16,45 +16,17 @@ use App\Models\linkbaitap;
 
 use Illuminate\Http\Request;
 
-class Object
-{
-    public $IdLopMonHoc;
-    public $TenMonBoMon;
-    public $CoutSinhvien;
-    public $Checkgiangvien;
-    public $Listsinhvien;
 
-}
 
 class GiangVienController extends Controller
 {
    
          // có rất nhiều lớp môn học
-    public function viewListLopMonHoc(MonRepository $mon,SinhVienRepository $sinhvien){
+    public function viewListLopMonHoc(LopMonHocRespository $lopmonhoc,MonRepository $mon,SinhVienRepository $sinhvien){
         $IdUser= Auth::user()->id;
         $inforgiangvien= giangvien::where('Id', $IdUser)->first()->toArray();
-        $lopmonhoc= lopmonhoc::all()->toArray();
-        $arrayInfo=[];
-        // cần thông tin toàn bộ sinh viên. sô lượng sinh viên và bộ môn 
-        foreach ($lopmonhoc as $item) {
-            $object =new Object;
-          
-            $idlopmonhoc = $item["IdLopMonHoc"];
-            $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
-            $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
-            $listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
-            $coutSinhvien = count($listsinhvien);
-            $checkgiangvien= $item["GiangVien_Id"]==null?0:1;
-            //create object . handle object
-            $object->IdLopMonHoc = $idlopmonhoc;
-            $object->TenMonBoMon= $tenMonBoMon;
-            $object->CoutSinhvien = $coutSinhvien;
-            $object->Checkgiangvien = $checkgiangvien;
-            $object->Listsinhvien = $listsinhvien;
-            array_push($arrayInfo, $object);
-            //  return $listsinhvien
-        }
-      
+
+        $arrayInfo= $lopmonhoc->viewListLopMonHocChoGiangVien($mon, $sinhvien);
         //từ id lớp môn học query ra rất nhiều thứ
         return view('front.viewgiangvien.viewgiangvien',['array'=> $arrayInfo,
         'info'=>$inforgiangvien]);
