@@ -178,12 +178,15 @@ class LopMonHocRespository extends BaseRepository
         // id user=> thong tin sinh vien=> id sinh vien=> array id lop mon hoc -> từ mỗi id lớp
         // =>id môn  => push và
         $lopmonhoc = lopmonhoc::all()->toArray();
+      
         $ListGiangVien = giangvien::all()->toArray();
         $arrayInfo = [];
         // 
         foreach ($lopmonhoc as $item) {
             $object = new ObjectDataMergen;
             $idlopmonhoc = $item["IdLopMonHoc"];
+            $deadine_dangky = $item["deadine_dangky"];
+          
             $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
             $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
             // check in array for me wath idmon 
@@ -191,6 +194,7 @@ class LopMonHocRespository extends BaseRepository
             $listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
             $coutSinhvien = count($listsinhvien);
             //handle sinh viên
+            $object->deadine_dangky = $deadine_dangky;
             $object->idmon= $monByidlopmonhoc["IdMon"];
             $object->CheckDkMonHoc = $checkDkMonHoc;
             $object->IdLopMonHoc = $idlopmonhoc;
@@ -228,6 +232,8 @@ class LopMonHocRespository extends BaseRepository
         foreach ($arrayLopMonHoc as $item) {
             $object = new ObjectDataMergen;
             $idlopmonhoc = $item["IdLopMonHoc"];
+            $deadine_dangky = $item["deadine_dangky"];
+          
             $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
             $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
             // check in array for me wath idmon 
@@ -235,8 +241,9 @@ class LopMonHocRespository extends BaseRepository
             $listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
             $coutSinhvien = count($listsinhvien);
             //handle sinh viên
+            $object->deadine_dangky = $deadine_dangky;
             $object->idmon = $monByidlopmonhoc["IdMon"];
-          
+            
             $object->IdLopMonHoc = $idlopmonhoc;
             $object->TenMonBoMon = $tenMonBoMon;
             $object->CoutSinhvien = $coutSinhvien;
@@ -244,6 +251,7 @@ class LopMonHocRespository extends BaseRepository
             array_push($arrayInfo, $object);
             //  return $listsinhvien
         }
+      
         return $arrayInfo;
     }
     public function HuyLopMonHocDaDangKy(){
@@ -257,13 +265,22 @@ class LopMonHocRespository extends BaseRepository
         $lopmonhoc->delete();
 
     }
+    public function DataCheckAndNopBai($mon,$sinhvien){
+       
+        
+     
+    }
    
 }
 
+class objectCheckNopbai{
 
+
+}
 class ObjectDataMergen
 {
     public $idmon;
+    public $deadine_dangky;
     public $IdLopMonHoc;
     public $TenMonBoMon;
     public $CoutSinhvien;

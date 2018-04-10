@@ -96,8 +96,16 @@ $("#FormAddGiangVien").on("submit", function (e) {
       "transition": "0.6s"
     });
   });
+  $(".displayNone").on("click", function(event) {
+    $(".m-viewdiglog").css({
+      width: "0px",
+      height: "0px",
+      opacity: "0",
+      transition: "0.6s"
+    });
+  });
   $(".viewAddGiangVien").on("click", function (event) {
-    $(". btn - addStudent;").css({
+    $(".btn-addStudent;").css({
       width: "auto",
       height: "auto",
       opacity: "1",
@@ -377,7 +385,12 @@ $("#FormAddGiangVien").on("submit", function (e) {
         $("[type=reset]").click();
       },
       error: function (error) {
-        console.log(error);
+        toastr.error(
+          `Thêm Thất bại,Vui lòng Xem lại mẫu điền!!! `,
+          {
+            timeOut: 2000
+          }
+        );
       }
     });
   });

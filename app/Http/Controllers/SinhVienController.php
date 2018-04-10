@@ -36,10 +36,23 @@ class SinhVienController extends Controller
         $idUser = Auth::user()->id;
         $ThongTinSinhVienDangNhap = SinhVien::where('Id', $idUser)->first()->toArray();
         $idsinhvien = (int)$ThongTinSinhVienDangNhap["IdSinhVien"];
+       
         return view('front.ViewSinhVien.ViewLopMonHocDaChon', ["dataMergen" => $dataMergen,"idsinhvien"=>$idsinhvien]);
     }
     public function HuyLopMonHocDaDangKy(LopMonHocRespository $lopmonhoc){
         $lopmonhoc->HuyLopMonHocDaDangKy();
+    }
+    public function LayBaiTap(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
+    
+        $dataMergen = $lopmonhoc->LayToanBoLopMonHocSinhVienDaDk($mon, $sinhvien);
+        $idUser = Auth::user()->id;
+        $ThongTinSinhVienDangNhap = SinhVien::where('Id', $idUser)->first()->toArray();
+     return view('front.ViewSinhVien.LayBaiTap', ["dataMergen" => $dataMergen]);
+    }
+    public function ListBaiTapByIdLopMonHoc($idlopmonhoc,GiangVienRepository $giangvien){
+        $listlinkbaitap=$giangvien->LayAPiListBaiTap($idlopmonhoc);
+        $json = json_encode($listlinkbaitap);
+        return $json;
     }
 
 }

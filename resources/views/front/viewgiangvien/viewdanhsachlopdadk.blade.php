@@ -42,10 +42,11 @@
 								{{$item->CoutSinhvien}}
 							</td>
 							<td>
-								<a idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class=" btn m-btn--pill m-btn--air btn-outline-brand btn-ViewListSinhVien" data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị danh sách</a>
+								<a idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class=" btn m-btn--pill m-btn--air btn-outline-brand btn-ViewListSinhVien"
+								    data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị danh sách</a>
 								<a routelink="{{url('GetLinkApiLinkBaiTap/'.$item->IdLopMonHoc.'')}}" idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class="btn m-btn--pill m-btn--air btn-outline-brand btn-ViewLinkBaiTap"
 								    data-toggle="modal" data-target="#viewlistlinkbaitap">Link BT Giảng Viên Đã Giao</a>
-								<a  idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="giaobaitap btn m-btn--pill m-btn--air btn-outline-brand"
+								<a idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="giaobaitap btn m-btn--pill m-btn--air btn-outline-brand"
 								    href="#">Giao Bài tập</a>
 							</td>
 						</tr>
@@ -181,12 +182,28 @@
 									Nhập Link Bài tập
 								</span>
 							</div>
-							<div class="col-lg-4">
+
+						</div>
+						<div class="form-group m-form__group row">
+							<label class="col-form-label col-lg-2 col-sm-12">
+								Hạn Ngày Nộp
+							</label>
+							<div class="col-lg-6 col-md-9 col-sm-12">
+								<input type="text" class="form-control createDate"  placeholder="Select date">
+							</div>
+						</div>
+							<div class="form-group m-form__group row">
+						<div class="col-lg-2">
+
+						</div>
+						<div class="col-lg-1">
+							
 								<button type="submit" class="btn btn-primary">
 									Thêm
 								</button>
-							</div>
+							
 						</div>
+							</div>
 
 
 

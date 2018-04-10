@@ -41,17 +41,15 @@
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 	<!-- begin:: Page -->
-	{{-- @include('common.loading') --}}
+	@include('common.loading')
 	<div id="wait" style="display: none; position: fixed;left: 50%;z-index: 100000;top: 50%;" class="cssload-thecube">
 		<div class="cssload-cube cssload-c1"></div>
 		<div class="cssload-cube cssload-c2"></div>
 		<div class="cssload-cube cssload-c4"></div>
 		<div class="cssload-cube cssload-c3"></div>
 	</div>
-	{{--
-	<div id="wait" style="display:none;width:69px;height:89px;border:1px solid black;position:fixed;top:50%;left:50%;padding:2px;">
-		<img src='demo_wait.gif' width="64" height="64" />
-		<br>Loading..</div> --}}
+
+
 	<div class="m-grid m-grid--hor m-grid--root m-page">
 		<!-- BEGIN: Header -->
 		<header class="m-grid__item    m-header " data-minimize-offset="200" data-minimize-mobile-offset="200">
@@ -187,7 +185,7 @@
 				    data-menu-scrollable="false" data-menu-dropdown-timeout="500">
 					<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
 						<li class="m-menu__item  m-menu__item--active" aria-haspopup="true">
-							<a href="{{url(" / ")}}" class="m-menu__link ">
+							<a href="{{url("/")}}" class="m-menu__link ">
 								<i class="m-menu__link-icon flaticon-line-graph"></i>
 								<span class="m-menu__link-title">
 									<span class="m-menu__link-wrap">
@@ -234,7 +232,7 @@
 									</li>
 									@if(session('statut') == 'admin' )
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listsinhvien ")}}" class="m-menu__link ">
+										<a href="{{url("/listsinhvien ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -254,7 +252,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listlopmonhoc ")}}" class="m-menu__link ">
+										<a href="{{url("/listlopmonhoc ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -264,7 +262,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /quanlylistlophoc ")}}" class="m-menu__link ">
+										<a href="{{url("/quanlylistlophoc ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -274,7 +272,7 @@
 										</a>
 									</li>
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /quanlylistmon ")}}" class="m-menu__link ">
+										<a href="{{url("/quanlylistmon ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -286,7 +284,7 @@
 									@endif @if(session('statut') == 'redac')
 
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url(" /listlopmonhocviewgiangvien ")}}" class="m-menu__link ">
+										<a href="{{url("/listlopmonhocviewgiangvien ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -351,12 +349,15 @@
 
 										@if(session('statut') == 'admin' ) Tạo Lớp Môn Học
 										</span>
-										</a>@endif @if(session('statut') == 'redac' )
+										</a>@endif
+										 @if(session('statut') == 'redac' )
 										<a href="#" class="m-menu__link ">
-											<span class="m-menu__link-text">
+											<span class="m-menuz__link-text">
 												Quản lý Lớp Môn Học
 											</span>
-										</a>@endif @if(session('statut') == 'user' )
+										</a>
+										@endif
+										 @if(session('statut') == 'user' )
 										<a href="#" class="m-menu__link ">
 											<span class="m-menu__link-text"> Xem Các Lớp Đã Đăng ký
 											</span>
@@ -388,8 +389,20 @@
 										</a>
 
 									</li>
-									@endif 
-									@if(session('statut') == 'redac' )
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+										<a href="{{url('ViewPost')}}" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Tạo Bài Viết
+											</span>
+
+										</a>
+
+									</li>
+
+									@endif @if(session('statut') == 'redac' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
 										<a href="{{url('viewlistlopmonhocGiangVien')}}" class="m-menu__link m-menu__toggle">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -402,8 +415,8 @@
 										</a>
 
 									</li>
-									@endif 
-									@if(session('statut') == 'user' )
+									@endif
+									 @if(session('statut') == 'user' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
 										<a href="{{url('LopMonHocSinhVienDaDangNhapDaDangKy')}}" class="m-menu__link m-menu__toggle">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -416,6 +429,19 @@
 										</a>
 
 									</li>
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
+										<a href="{{url('LayBaiTap')}}" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Lấy Bài tập Giảng viên Giao
+											</span>
+
+										</a>
+
+									</li>
+									
 									@endif
 								</ul>
 							</div>
@@ -428,10 +454,12 @@
 			<!-- END: Left Aside -->
 			<div class="m-grid__item m-grid__item--fluid m-wrapper">
 
+
 				<div class="m-content">
-					@if(session('statut') == 'admin') @section('m-content') Welcome admin @show @endif @if(session('statut') == 'redac') @section('content-giangvien')
-					Welcome Giang Vien @show @endif @if(session('statut') == 'user' ) @section('content-sinhvien') Welcome Sinh Viên @show
-					@endif
+
+					@section('artical') @show @if(session('statut') == 'admin') @section('m-content') @show @endif @if(session('statut') == 'redac')
+					@section('content-giangvien') @show @endif @if(session('statut') == 'user' ) @section('content-sinhvien') @show @endif
+
 				</div>
 
 			</div>

@@ -153,7 +153,7 @@
 													</th>
 												</tr>
 											</thead>
-											<tbody class="viewlistsinhvien">
+											<tbody>
 													@foreach ($arrayGiangVien as $item)
 												<tr>
 													<th>
@@ -170,7 +170,7 @@
 													</td>
 													<td>
 														<button idlopmonhoc="" idgiangvien="{{$item['IdGiangVien']}}" type="button" class="daylophocnay btn m-btn--pill  btn-outline-brand m-btn m-btn--outline-2x ">
-															dạy 
+															Dạy 
 															</button>
 													</td>
 

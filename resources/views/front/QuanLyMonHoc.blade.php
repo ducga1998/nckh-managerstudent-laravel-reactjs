@@ -11,7 +11,13 @@
 									Thêm Môn Học
 									</h3>
 								</div>
-							</div>
+                            </div>
+                            <div class="m-portlet__head-tools">
+            <a href="#" class="btn displayNone btn-outline-danger m-btn m-btn--icon btn-sm m-btn--icon-only m-btn--pill m-btn--air">
+								<i class="fa fa-close"></i>
+						</a>
+           
+</div>
 						</div>
 						<!--begin::Form-->
 						<form id="FormMon"  class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">

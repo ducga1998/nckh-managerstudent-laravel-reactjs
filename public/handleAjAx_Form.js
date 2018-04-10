@@ -447,13 +447,30 @@ function HTMLRender(object){
          <a href="${object.LinkBaiTap}">${object.LinkBaiTap}</a> 
   </td></tr>`;
 }
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
 
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
 $("#formThemLinkBaiTap").on("submit", function(e) {
   e.preventDefault();
 
   var linkbaitap = $('input[name="linkbaitap"]').val();
   var idlopmonhoc = $(this).attr("idlopmonhoc");
-console.log(linkbaitap+" "+idlopmonhoc);
+
+  var deadline= $(".createDate").datepicker("getDate");
+  deadline = formatDate(deadline);
+// var array = deadline
+//   .split(/\//)
+//   var string = array[2] + "-" + array[1] + "-" + array[0];
+
+console.log(deadline);
   $.ajax({
     headers: {
       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -462,15 +479,15 @@ console.log(linkbaitap+" "+idlopmonhoc);
     url: "/themlinkbaitap",
     data: {
       idlopmonhoc: idlopmonhoc,
-      linkbaitap: linkbaitap
+      linkbaitap: linkbaitap,
+      deadline: deadline
     },
     success: function(html) {
-      toastr.success(
-        `Thêm Bài tập thành công cho lớp học có Id: ${idlopmonhoc}`,
-        {
-          timeOut: 1000
-        }
-      );
+      toastr.success(`Thêm Thành công`, {
+        timeOut: 1000
+      });
+      
+      
     },
     error: function(error) {
       toastr.error(`Error rồi bạn ê : (( ,Debug thôi!!!`, {
@@ -536,5 +553,104 @@ $(".btn-huyhocphan").on("click",function (e) {
    });
   }
 });
+$("#thembaiviet").on("submit", function(e) {
+  e.preventDefault();
+
+  var title = $("input[name=title]").val();
+  var content_article = $(".summernote").summernote("code");
+
+   var check = $("input[name=checkPublish]:checked").val()==1?1:0;
+  console.log(title + "  " + content_article + " " + check);
+
+  
+  
+
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    },
+    type: "POST",
+    url: "/ajaxThemPost",
+    data: {
+      title: title,
+      content_article: content_article,
+      check: check
+    },
+    success: function(html) {
+      toastr.success(`Đăng thành công bài viết `, {
+        timeOut: 2000
+      });
+      $("[type=reset]").click();
+    },
+    error: function(error) {
+      toastr.error(`Đăng Bài Viết Thất bại!!!!!`, {
+        timeOut: 2000
+      });
+    }
+  });
+});
+$(".ClearHTMl").on("click",function () {
+$(".containerLinkBaiTap").html("");
+});
+$(".laylinkbaitap").on("click",function () {
+  var url=$(this).attr("link");
  
+    fetch(url)
+      .then(resp => resp.json())
+      .then(function(data) {
+        $("loaderdisplay").css({ display: "inline-block"});
+          var HTML = "";
+          var ArrayData = JSON.parse(data["listlinkbaitap"]);
+          var tengiangvien = data["tengiangvien"];
+          var tenmonbomon = data["tenmonbomon"];
+          console.log(typeof ArrayData);
+        for (ele in ArrayData) {
+          // var d1 = new Date([ele].updated_at);
+          // var d2 = new Date(data.listlinkbaitap[ele].deadline);
+          // var notSame = d1.getTime() <= d2.getTime();
+          HTML += HTMLrenderTableLinkBaiTap(ArrayData[ele], tengiangvien, tenmonbomon);
+          // HTML += HTMLrenderTableLinkBaiTap(data[ele]);
+        }
+         $("loaderdisplay").css({ display: "none" });
+          $(".containerLinkBaiTap").html(HTML);
+      
+      });
+})
+function HTMLrenderTableLinkBaiTap(object,TenGiangVien,TenBoMon){
+   var updated_at = new Date(object.updated_at);
+   var deadline = new Date(object.deadline);
+   var ButtonHTML="";
+   //flag =false=> vướt quá deadline
+   var flag = updated_at.getTime() <= deadline.getTime();
+    if(flag){
+        ButtonHTML = `<td><button  onClick="clicknopbai()" idlopmonhoc="${object.Id_LinkBaiTap}" class="btn m-btn--pill    btn-primary btn-sm">
+											 Nộp Bài
+                    </button></td> 
+                    <script>
+                    function clicknopbai () {
+ $(".btn-nopbai").click();
+}</script>`;
+    }
+    else{
+      ButtonHTML = `<td><button  disabled="disabled" class="btn m-btn--pill    btn-primary btn-sm">
+											 Hết hạn
+										</button></td>`;
+    }
+  return `<tr>
+  <td>${object.Id_LinkBaiTap}</td>
+  <td>${TenBoMon}</td>
+  <td>${TenGiangVien}</td>
+  <td>${object.LinkBaiTap}</td>
+  ${ButtonHTML}
+  
+  
+  </tr>`;
+}
+
+
+//setup defauft
+ $(".summernote").summernote({ airMode: true, placeholder: "Write Here........................." });
+ $(".summernote").summernote("formatH1");
+ $(".summernote").summernote("formatH2");
+
 });

@@ -6,7 +6,7 @@ use App\Jobs\ChangeLocale;
 use App\Models\giangvien;
 use App\Models\admin;
 use App\Models\SinhVien;
-
+use App\Models\post;
 
 class HomeController extends Controller
 {
@@ -40,13 +40,15 @@ class HomeController extends Controller
 	public function index()
 	{
 		$infoUserCurrent=Auth::user()->toArray();
-			
+		
 			$id = $infoUserCurrent['id'];
 	
 			
 			$info =$this->SwitchDataBase($infoUserCurrent['role_id'], $id);
+			$posts=post::all()->toArray();
+			// dd($posts);
 	
-		return \View::make('front/indexNew', $info);
+		return view('front/indexNew', ['info'=>$info,'posts'=>$posts]);
 	}
 
 	

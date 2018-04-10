@@ -15,7 +15,7 @@
 				{!! Form::open(['url' => 'auth/login', 'method' => 'post', 'role' => 'form']) !!}	
 				
 				<div class="row">
-
+					
 					{!! Form::control('text', 6, 'log', $errors, trans('front/login.log')) !!}
 					{!! Form::control('password', 6, 'password', $errors, trans('front/login.password')) !!}
 					{!! Form::submit(trans('front/form.send'), ['col-lg-12']) !!}

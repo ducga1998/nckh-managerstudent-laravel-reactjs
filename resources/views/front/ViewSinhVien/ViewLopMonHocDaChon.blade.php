@@ -4,9 +4,16 @@
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text">
+                     @if($dataMergen[0]->deadine_dangky)
+            <h3 class="m-portlet__head-text">
                        Các Lớp Môn Học Đã Đăng Ký
                     </h3>
+                     @else
+            <h3 class="m-portlet__head-text">
+                      Đã Hết hạn Đăng ký và Phần bài tập để xem bài tập 
+                    </h3>
+                     @endif
+                    
                 </div>
             </div>
         </div>
@@ -44,7 +51,14 @@
                                 {{$item->CoutSinhvien}}
                             </td>
                             <td>
-                                <a idsinhvien="{{$idsinhvien}}" idlopmonhoc="{{$item->IdLopMonHoc}}" class="btn-huyhocphan btn m-btn--pill btn-outline-danger active" href="">Hủy ĐK Lớp Này</a>
+                                @if($item->deadine_dangky)
+                                      <a idsinhvien="{{$idsinhvien}}" idlopmonhoc="{{$item->IdLopMonHoc}}" class="btn-huyhocphan btn m-btn--pill btn-outline-danger active" href="">Hủy ĐK Lớp Này</a> 
+                                @else
+                                   <button type="button" class="btn m-btn--pill    btn-success m-btn m-btn--custom" disabled="disabled">
+						Đã Bắt Đầu Học
+					</button>
+                                @endif
+                             
                             </td>
                             
                         </tr>

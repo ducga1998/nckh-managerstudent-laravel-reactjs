@@ -55,9 +55,11 @@ class GiangVienController extends Controller
     public function AJAXthemLinkBaiTap(Request $request){
         $IdLopMonHoc =  $request["idlopmonhoc"];
         $linkBaiTapRequest = $request["linkbaitap"];
+        $deadline=$request["deadline"];
         $linkbaitap=new linkbaitap;
         $linkbaitap->Id_LinkBaiTap= $IdLopMonHoc;// mặc định là id link bài tập = id lớp môn học
         $linkbaitap->LinkBaiTap= $linkBaiTapRequest;
+        $linkbaitap->deadline= $deadline;
         $linkbaitap->save();
     }
  }

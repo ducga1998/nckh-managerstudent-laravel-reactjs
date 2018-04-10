@@ -17,6 +17,7 @@ use App\Models\giangvien;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\Mon;
+use App\Models\post;
 use App\Repositories\LopMonHocRespository;
 use Illuminate\Support\Facades\Input;
 class Object
@@ -227,5 +228,25 @@ class AdminController extends Controller {
 	public function profileview()
 	{
 		return view('front.profile.profile');
+	}
+
+
+	public  function ViewVietPost(){
+		return view('front.ViewAdmin.VietPost');
+	}
+	public function AJAXThemPost(Request $request){
+	/*id
+title
+content
+view
+		 */ 
+		$title=$request["title"];
+		$content_article = $request["content_article"];
+		$check = $request["check"];
+		$post= new post;
+		$post->title=$title;
+		$post->content= $content_article;
+		$post->view=$check;
+		$post->save();
 	}
 }

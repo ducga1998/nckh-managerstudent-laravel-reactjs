@@ -43,6 +43,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('listlopmonhoc', 'AdminController@ViewLopMonHoc');
 		Route::get('/taolopmonhocbangtay', "AdminController@ViewTaoLopMonHoc");
 		Route::get('/taotudong', 'AdminController@ViewTudong');
+		Route::get('ViewPost', 'AdminController@ViewVietPost');
 		//end manager lop hoc
 	});
 
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/listgiangvien/deletegiangvien', 'AdminController@DeleteGiangVien');
 	Route::post('/ajaxautothemlopmonhoc', 'AdminController@ThemAutoLopMonHoc');
 	Route::post("/ajaxthemmonhoc", "AdminController@ThemLopMonHoc");// ajax thêm môn học
+	Route::post('ajaxThemPost', "AdminController@AJAXThemPost");
 	
 	Route::get(
 		'/listsinhvientheolophoc/{idlophoc}',
@@ -69,6 +71,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/listlophoc', 'AdminController@LayToanBoLopHoc');
 	Route::get('listkhoahoc', 'AdminController@AllKhoaHoc');
 	Route::get("profileMe","AdminController@profileview");
+
 	//end request to AdminController
 	//start request to GiangVienController
 	Route::group(['middleware' => ['redac']], function () {
@@ -83,13 +86,16 @@ Route::group(['middleware' => ['web']], function () {
 	//GiangVienController end
 	//SinhViencontroller handle start
 	Route::group(['middleware' => ['user']], function () {
-		Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
-		Route::get('/dangkylopmonhoc', 'SinhVienController@ViewDangKyLopMonHoc')->name('viewdangkymonhoc');
-	});
 	
+	});
+	Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
+	Route::get('/dangkylopmonhoc', 'SinhVienController@ViewDangKyLopMonHoc')->name('viewdangkymonhoc');
+	Route::get('/LopMonHocSinhVienDaDangNhapDaDangKy', 'SinhVienController@LayToanBoLopHocSinhVienDaDk');
+	Route::get('LayBaiTap', 'SinhVienController@LayBaiTap');
+	Route::get('ListLinkBaiTap/{idlopmonhoc}', 'SinhVienController@ListBaiTapByIdLopMonHoc');
 	
 	Route::get('sinhviendangkylopmonhoc/{idlopmonhoc}', 'SinhVienController@SinhVienDangKyHoc');
-	Route::get('LopMonHocSinhVienDaDangNhapDaDangKy', 'SinhVienController@LayToanBoLopHocSinhVienDaDk');
+	
 	Route::post('HuyLopMonHocDaDangKy', 'SinhVienController@HuyLopMonHocDaDangKy');
 	
 	//phần test code
@@ -100,8 +106,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('bcrypt', function () {
 		return bcrypt('admin');
 	});
-	Route::get('test',function(LopMonHocRespository $lop){
-		$lop->HuyLopMonHocDaDangKy();
+	// Route::get('test',function(LopMonHocRespository $lop){
+	// 	$lop->HuyLopMonHocDaDangKy();
 	
-	});
+	// });
 });

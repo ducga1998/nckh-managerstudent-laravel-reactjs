@@ -3,6 +3,7 @@
 use App\Models\giangvien;
 use App\Models\User;
 use App\Models\lopmonhoc;
+use App\Models\linkbaitap;
 use Illuminate\Support\Facades\Input;
 class GiangVienRepository extends BaseRepository
 {
@@ -45,19 +46,14 @@ class GiangVienRepository extends BaseRepository
         $giangvien->BoMon = $request["bomon"];
         $giangvien->Gmail=$request["email"];
         $giangvien->password = bcrypt($request["password"]);
-    
         $giangvien->save();
-    } 
-  
-    public function deleteGiangVien($idgiangvien){
+    }
+  public function deleteGiangVien($idgiangvien){
 
         $IdUser = giangvien::where('IdGiangVien', $idgiangvien)->value('Id');
         User::where('id', $IdUser)->delete();
         giangvien::where('IdGiangVien', $idgiangvien)->delete();
-       
-      
-	
-    }
+       }
     public function DangKyMonHoc($request){
         // IdGiangVien : N01
         //     IdLopMonHoc : 3
@@ -90,7 +86,25 @@ class GiangVienRepository extends BaseRepository
         $giangvien = giangvien::find($IdSinhVien);
         $giangvien->delete();
     }
+    public function LayAPiListBaiTap($idlopmonhoc){
+        $listlinkbaitap = linkbaitap::where('Id_LinkBaiTap', $idlopmonhoc)->get()->toJson();
+       
+        $lopmonhoc = lopmonhoc::find($idlopmonhoc);
+        $mon=$lopmonhoc->LayMonTrongLopMonHoc->toArray();
+        $giangvien = $lopmonhoc->LayGiangVienTrongLopMonHoc->toArray();
+        $objectlinkbaitap= new ObjectLinkBaiTap;
+        $objectlinkbaitap->tengiangvien= $giangvien["TenGiangVien"];
+        $objectlinkbaitap->listlinkbaitap= $listlinkbaitap;
+        $objectlinkbaitap->tenmonbomon =$mon["TenMon"]."-".$mon["BoMon"];
+       return $objectlinkbaitap;
+}
 
+
+}
+class ObjectLinkBaiTap{
+    public $tengiangvien;
+    public $tenmonbomon;
+    public $listlinkbaitap;
 }
 
        
