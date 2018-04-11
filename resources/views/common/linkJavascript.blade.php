@@ -22,12 +22,7 @@
 	<script src="{{URL::asset('assets/demo/default/custom/components/base/blockui.js')}}" type="text/javascript"></script>
 	<script src="{{ URL::asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.js')}}" type="text/javascript"></script>
 	<script src="{{ URL::asset('assets/demo/default/custom/components/forms/widgets/bootstrap-datepicker.js')}}" type="text/javascript"></script>
-	<script>
-		$('.datepicker').datepicker({
-    format: 'yyyy/mm/dd',
-    startDate: '-3d'
-});
-	</script>
+
 <script src="{{ URL::asset('assets/demo/default/custom/components/forms/widgets/bootstrap-markdown.js')}}" type="text/javascript"></script>
 	<script src="{{ URL::asset('assets/app/js/dashboard.js')}}" type="text/javascript"></script>
 	

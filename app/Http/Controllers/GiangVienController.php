@@ -62,4 +62,7 @@ class GiangVienController extends Controller
         $linkbaitap->deadline= $deadline;
         $linkbaitap->save();
     }
+    public function caclopdangtrongquatrinhday(){
+        return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay');
+    }
  }

@@ -476,7 +476,7 @@ $("#FormAddGiangVien").on("submit", function (e) {
 													<td>
 													K${object.IdKhoaHoc}
 													</td>
-												</tr>`;
+											</tr>`;
   }
       
 });

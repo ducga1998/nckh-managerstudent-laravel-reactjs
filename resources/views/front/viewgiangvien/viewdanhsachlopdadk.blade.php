@@ -43,11 +43,10 @@
 							</td>
 							<td>
 								<a idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class=" btn m-btn--pill m-btn--air btn-outline-brand btn-ViewListSinhVien"
-								    data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị danh sách</a>
+								    data-toggle="modal" data-target="#viewlistsinhvien">Hiện thị DS</a>
 								<a routelink="{{url('GetLinkApiLinkBaiTap/'.$item->IdLopMonHoc.'')}}" idlopmonhoc="{{$item->IdLopMonHoc}}" href="#" class="btn m-btn--pill m-btn--air btn-outline-brand btn-ViewLinkBaiTap"
-								    data-toggle="modal" data-target="#viewlistlinkbaitap">Link BT Giảng Viên Đã Giao</a>
-								<a idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="giaobaitap btn m-btn--pill m-btn--air btn-outline-brand"
-								    href="#">Giao Bài tập</a>
+								    data-toggle="modal" data-target="#viewlistlinkbaitap">Link BT Đã Giao</a>
+								<a idlopmonhoc="{{$item->IdLopMonHoc}}" data-toggle="modal" data-target="#giaobaitap" class="giaobaitap btn m-btn--pill m-btn--air btn-outline-brand" href="#">Giao Bài tập</a>
 							</td>
 						</tr>
 						@endforeach

@@ -12,6 +12,7 @@ use App\Repositories\GiangVienRepository;
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
 use App\Models\linkbaitap;
+use App\Models\sinhviennopbai;
 use Illuminate\Http\Request;
 
 
@@ -47,12 +48,26 @@ class SinhVienController extends Controller
         $dataMergen = $lopmonhoc->LayToanBoLopMonHocSinhVienDaDk($mon, $sinhvien);
         $idUser = Auth::user()->id;
         $ThongTinSinhVienDangNhap = SinhVien::where('Id', $idUser)->first()->toArray();
-     return view('front.ViewSinhVien.LayBaiTap', ["dataMergen" => $dataMergen]);
+     return view('front.ViewSinhVien.LayBaiTap', ["dataMergen" => $dataMergen,'infosinhvien'=> $ThongTinSinhVienDangNhap]);
     }
     public function ListBaiTapByIdLopMonHoc($idlopmonhoc,GiangVienRepository $giangvien){
         $listlinkbaitap=$giangvien->LayAPiListBaiTap($idlopmonhoc);
         $json = json_encode($listlinkbaitap);
         return $json;
+    }
+    public function NopBaiTap(Request $request){
+        /* linkbainop: linkbainop,
+      idlopmonhoc: idlopmonhoc,
+      idsinhvien: idsinhvien */
+        $linkbainop=$request["linkbainop"];
+        $idlopmonhoc = $request["idlopmonhoc"];
+        $idsinhvien = $request["idsinhvien"];
+        $sinhviennopbai=new sinhviennopbai;
+        $sinhviennopbai->Id_LopMonHoc= $idlopmonhoc;
+        $sinhviennopbai->IdSinhVien=$idsinhvien;
+        $sinhviennopbai->linkNop= $linkbainop;
+        $sinhviennopbai->save();
+
     }
 
 }

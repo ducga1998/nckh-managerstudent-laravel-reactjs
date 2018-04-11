@@ -29,6 +29,7 @@ class Object
 	public $Listsinhvien;
 	public $IdGiangVien;
 	public $ListGiangVien;
+	public $deadine_dangky;
 
 }
 class AdminController extends Controller {
@@ -152,6 +153,7 @@ class AdminController extends Controller {
 		foreach ($lopmonhoc as $item) {
 			$object = new Object;
 			$idlopmonhoc = $item["IdLopMonHoc"];
+			$deadine_dangky = $item["deadine_dangky"];
 			$monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
 			$tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
 			$listsinhvien = $sinhvien->GetListSinhVienByIdLopMonHoc($idlopmonhoc);
@@ -165,7 +167,8 @@ class AdminController extends Controller {
 				$tengiangvien = "a";
 			}
 			//create object . handle object
-
+		
+			$object->deadine_dangky= $deadine_dangky;
 			$object->IdGiangVien = $item["GiangVien_Id"];
 			$object->TenGiangVienDK = $tengiangvien;
 			$object->IdLopMonHoc = $idlopmonhoc;
@@ -176,6 +179,7 @@ class AdminController extends Controller {
 			array_push($arrayInfo, $object);
             //  return $listsinhvien
 		}
+		
        //từ id lớp môn học query ra rất nhiều thứ
 		return view('front.listlopmonhoc', ['array' => $arrayInfo,'info' => $inforadmin,'arrayGiangVien'=> $ListGiangVien]);
 	}
@@ -248,5 +252,13 @@ view
 		$post->content= $content_article;
 		$post->view=$check;
 		$post->save();
+	}
+	public function HetHanDangKy(LopMonHocRespository $lopmonhoc)
+	{
+		$lopmonhoc->HetHanDk();
+		
+	}
+	public function MoDangKyLopMonHoc(LopMonHocRespository $lopmonhoc){
+		$lopmonhoc->MoDangKyLopMonHocChoSinhVien();
 	}
 }

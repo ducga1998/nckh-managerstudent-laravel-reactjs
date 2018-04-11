@@ -1,16 +1,47 @@
 @extends('front.layout',['NameAdmin' =>"csacsacsa",'GmailAdmin'=>"csacascsacsa"])
 @section('m-content')
 <div class="m-portlet">
-    <div class="m-portlet__body">
-        <div class="m-portlet__head">
+	 <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
                         Đăng ký Dạy
                     </h3>
-                </div>
-            </div>
+				</div>
+				
+			</div>
+			<div class="m-portlet__head-tools">
+			<ul class="m-portlet__nav">
+				@if($array!=null)
+				<li class="m-portlet__nav-item">
+					@if($array[0]->deadine_dangky==null)
+						<a link="{{url('hethandangkyhoc')}}" class="btn-ngunghoc btn btn-danger m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+						<span>
+							
+							<span>
+								Ngừng đăng ký học
+							</span>
+						</span>
+					</a>
+					@else
+					<a   class="btn-OnDangKyHoc btn btn m-btn--pill    btn-success m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air">
+						<span>
+							
+							<span>
+							Mở đăng ký lớp môn học
+							</span>
+						</span>
+          </a>
+					@endif
+					@else
+		  				Hãy tạo Lớp Môn Học
+					@endif
+				</li>
+			</ul>
+		</div>
         </div>
+    <div class="m-portlet__body">
+       
     <div class="m-section">
     <div class="m-section__content">
         <table class="table table-bordered table-hover">
@@ -21,14 +52,17 @@
                     </th>
                     <th>Tên Môn- Bộ môn</th>
                     <th>
-                       Số Lượng Sinh Viên Đã đăng ký vào
+                       SL Sinh Viên Đã ĐK vào
                     </th>
                     <th>
                       View Danh Sách
                     </th>
                     <th>
                         Đăng ký Dạy 
-                    </th>
+					</th>
+					<th>
+						Hạn Đăng ký
+					</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,7 +91,18 @@
 											{{$item->TenGiangVienDK}} Đã dạy
 											</button>
                             @endif
-                    </td> 
+					</td> 
+					<td>
+						@if ($item->deadine_dangky==null)
+							<span class="m-badge m-badge--success m-badge--wide">
+											Đang trong thời gian đăng ký
+										</span>
+						@else
+						<span class="m-badge m-badge--metal m-badge--wide m-badge--rounded">
+											Hết Hạn
+										</span>
+						@endif
+					</td>
                 </tr>
                 @endforeach
                </tbody>

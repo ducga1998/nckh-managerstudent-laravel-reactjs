@@ -271,27 +271,32 @@
     }
 }
 
-table {
-    overflow: hidden;
+
+/* set css deauft for modal */
+
+.modal-content {
+    height: 100%;
 }
 
-tr:hover {
-    background-color: #ffa;
+.modal-lg {
+    max-width: 100%;
+    margin: 0px;
+    height: 100%;
 }
 
-td,
-th {
-    position: relative;
+.fade-scale {
+    transform: scale(0);
+    opacity: 0;
+    -webkit-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
 }
 
-td:hover::after,
-th:hover::after {
-    content: "";
-    position: absolute;
-    background-color: #ffa;
-    left: 0;
-    top: -5000px;
-    height: 10000px;
-    width: 100%;
-    z-index: -1;
+.fade-scale.in {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.col-xl-4 {
+    max-width: 31.33333%;
 }

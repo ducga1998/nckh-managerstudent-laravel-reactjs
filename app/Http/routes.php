@@ -44,9 +44,12 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/taolopmonhocbangtay', "AdminController@ViewTaoLopMonHoc");
 		Route::get('/taotudong', 'AdminController@ViewTudong');
 		Route::get('ViewPost', 'AdminController@ViewVietPost');
+	
 		//end manager lop hoc
 	});
-
+	
+	Route::post('MoDangKyHocChoSinhVien', 'AdminController@MoDangKyLopMonHoc');
+	Route::post('hethandangkyhoc', 'AdminController@HetHanDangKy');
 	Route::post('ajaxBoNhiemGiangVienDayLopMonHoc', 'AdminController@BoNhiemGiangVien');
 	Route::post('ajaxXoaGiangVienLopMonHoc', 'AdminController@XoaGiangVienDayLopHocDcChon');
 	Route::post('ajaxupdategiangvien', 'AdminController@updategiangvien');
@@ -71,12 +74,14 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/listlophoc', 'AdminController@LayToanBoLopHoc');
 	Route::get('listkhoahoc', 'AdminController@AllKhoaHoc');
 	Route::get("profileMe","AdminController@profileview");
+	
 
 	//end request to AdminController
 	//start request to GiangVienController
 	Route::group(['middleware' => ['redac']], function () {
 		Route::get('listlopmonhocviewgiangvien', 'GiangVienController@viewListLopMonHoc');
 		Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
+		Route::get('caclopdangtrongquatrinhday', 'GiangVienController@caclopdangtrongquatrinhday');
 	});
 	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
 	//ajax giang viên đăng ký môn học
@@ -93,7 +98,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/LopMonHocSinhVienDaDangNhapDaDangKy', 'SinhVienController@LayToanBoLopHocSinhVienDaDk');
 	Route::get('LayBaiTap', 'SinhVienController@LayBaiTap');
 	Route::get('ListLinkBaiTap/{idlopmonhoc}', 'SinhVienController@ListBaiTapByIdLopMonHoc');
-	
+	Route::post('AJAXNopBaiTap', 'SinhVienController@NopBaiTap');
 	Route::get('sinhviendangkylopmonhoc/{idlopmonhoc}', 'SinhVienController@SinhVienDangKyHoc');
 	
 	Route::post('HuyLopMonHocDaDangKy', 'SinhVienController@HuyLopMonHocDaDangKy');

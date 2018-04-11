@@ -233,7 +233,7 @@ class LopMonHocRespository extends BaseRepository
             $object = new ObjectDataMergen;
             $idlopmonhoc = $item["IdLopMonHoc"];
             $deadine_dangky = $item["deadine_dangky"];
-          
+            
             $monByidlopmonhoc = $mon->GetMonByIdLopMonHoc($idlopmonhoc);
             $tenMonBoMon = $monByidlopmonhoc["TenMon"] . "-" . $monByidlopmonhoc["BoMon"];
             // check in array for me wath idmon 
@@ -265,11 +265,23 @@ class LopMonHocRespository extends BaseRepository
         $lopmonhoc->delete();
 
     }
-    public function DataCheckAndNopBai($mon,$sinhvien){
-       
-        
-     
-    }
+  public function HetHanDk(){
+      $lopmonhoc=lopmonhoc::all();
+      foreach ($lopmonhoc as $item) {
+          # code...
+          $item->deadine_dangky=1;
+          $item->save();
+      }
+
+  }
+  public function MoDangKyLopMonHocChoSinhVien(){
+        $lopmonhoc = lopmonhoc::all();
+        foreach ($lopmonhoc as $item) {
+          # code...
+            $item->deadine_dangky = null;
+            $item->save();
+        }
+  }
    
 }
 

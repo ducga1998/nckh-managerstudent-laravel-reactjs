@@ -100,7 +100,7 @@ var BootstrapDatepicker = function () {
               leftArrow: '<i class="la la-angle-left"></i>',
               rightArrow: '<i class="la la-angle-right"></i>'
             }
-          }), $(".createDate").datepicker({
+        }), $(".createDate").datepicker({
             todayHighlight: !0,
             dateFormat: "yyyy-mm-dd",
             templates: {

@@ -55,6 +55,9 @@ class SinhVienRepository extends BaseRepository
         $gioitinh =     $request->gioitinh;
         $tensinhvien =   $request->tensinhvien;
         $password =   $request->password;
+        if($password==""){
+            $password= $idsinhvien;
+        }
          // xóa tất cả khoảng trắng để làm usename
         //thêm cả user vào 
         $id = User::count() + 1;

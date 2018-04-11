@@ -195,8 +195,8 @@ class UserRepository extends BaseRepository
 	 * @param  App\Models\User $user
 	 * @return void
 	 */
-    public function destroyUser(User $user)
-    {
+    public function destroyUser(User $user)	
+	{
         $user->comments()->delete();
 
         $posts = $user->posts()->get();

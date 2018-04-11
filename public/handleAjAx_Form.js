@@ -605,11 +605,9 @@ $(".laylinkbaitap").on("click",function () {
           var tenmonbomon = data["tenmonbomon"];
           console.log(typeof ArrayData);
         for (ele in ArrayData) {
-          // var d1 = new Date([ele].updated_at);
-          // var d2 = new Date(data.listlinkbaitap[ele].deadline);
-          // var notSame = d1.getTime() <= d2.getTime();
+        
           HTML += HTMLrenderTableLinkBaiTap(ArrayData[ele], tengiangvien, tenmonbomon);
-          // HTML += HTMLrenderTableLinkBaiTap(data[ele]);
+        
         }
          $("loaderdisplay").css({ display: "none" });
           $(".containerLinkBaiTap").html(HTML);
@@ -623,13 +621,15 @@ function HTMLrenderTableLinkBaiTap(object,TenGiangVien,TenBoMon){
    //flag =false=> vướt quá deadline
    var flag = updated_at.getTime() <= deadline.getTime();
     if(flag){
-        ButtonHTML = `<td><button  onClick="clicknopbai()" idlopmonhoc="${object.Id_LinkBaiTap}" class="btn m-btn--pill    btn-primary btn-sm">
+        ButtonHTML = `<td><button  onClick="clicknopbai('${object.Id_LinkBaiTap}')" idlopmonhoc="${object.Id_LinkBaiTap}" class="btn m-btn--pill    btn-primary btn-sm">
 											 Nộp Bài
                     </button></td> 
                     <script>
-                    function clicknopbai () {
- $(".btn-nopbai").click();
-}</script>`;
+                    function clicknopbai (idlopmonhoc) {
+                      console.log(idlopmonhoc);
+                      $("#formnhapbaitap").attr("idlopmonhoc",idlopmonhoc);
+                    $(".btn-nopbai").click();
+                    }</script>`;
     }
     else{
       ButtonHTML = `<td><button  disabled="disabled" class="btn m-btn--pill    btn-primary btn-sm">
@@ -640,17 +640,116 @@ function HTMLrenderTableLinkBaiTap(object,TenGiangVien,TenBoMon){
   <td>${object.Id_LinkBaiTap}</td>
   <td>${TenBoMon}</td>
   <td>${TenGiangVien}</td>
-  <td>${object.LinkBaiTap}</td>
+  <td><a href="${object.LinkBaiTap}">Link Bài Tập(CLick)</a></td>
   ${ButtonHTML}
   
   
   </tr>`;
 }
+;
+$("#formnhapbaitap").on("submit", function(e) {
+  e.preventDefault();
 
+  var linkbainop = $("#linkbainop").val();
+  var idlopmonhoc=$(this).attr("idlopmonhoc");
+  var idsinhvien=$(this).attr("idsinhvien");
 
+ 
+
+  $.ajax({
+    headers: {
+      "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+    },
+    type: "POST",
+    url: "/AJAXNopBaiTap                          ",
+    data: {
+      linkbainop: linkbainop,
+      idlopmonhoc: idlopmonhoc,
+      idsinhvien: idsinhvien
+    },
+    success: function(html) {
+      toastr.success(`Nộp bài thành công `, {
+        timeOut: 2000
+      });
+      $("#linkbainop").val("");
+    },
+    error: function(error) {
+      toastr.error(`Nộp Thất bại.Hãy kiểm tra lại .......`, {
+        timeOut: 2000
+      });
+    }
+  });
+});
+$(".btn-ngunghoc").on("click",function () {
+  var element=$(this);
+  var link=element.attr("link");
+  var flag=confirm("Xác nhận cho Hết hạn đăng ký học");
+  if(flag){
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      type: "POST",
+      url: "/hethandangkyhoc",
+      data: {
+       
+      },
+      success: function(html) {
+        
+        toastr.success(
+          `Xác nhận hết hạn đăng ký lớp môn học`,
+          {
+            timeOut: 2000
+          }
+        );
+        window.location.href = "listlopmonhoc";
+       
+       
+      },
+      error: function(error) {
+        toastr.error(`Hủy thất bại,,Hãy Xác nhận lại`, {
+          timeOut: 2000
+        });
+      }
+    });
+  }
+  
+});
+$(".btn-OnDangKyHoc").bind("click",function () {
+     var flag = confirm("Xác Nhận Mở Đăng ký Lớp học Cho Sinh Viên?? ");
+     if (flag) {
+       $.ajax({
+         headers: {
+           "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+         },
+         type: "POST",
+         url: "/MoDangKyHocChoSinhVien",
+         data: {},
+         success: function(html) {
+           toastr.success("Mở Đăng ký Thành công ", {
+             timeOut: 2000
+           });
+            window.location.href = "listlopmonhoc";
+         },
+         error: function(error) {
+           toastr.error("Mở Đăng ký thất bại!!!", {
+             timeOut: 2000
+           });
+         }
+       });
+     }
+});
+function OnDangKyHoc() {
+  console.log("click!!!");
+}
 //setup defauft
  $(".summernote").summernote({ airMode: true, placeholder: "Write Here........................." });
  $(".summernote").summernote("formatH1");
  $(".summernote").summernote("formatH2");
 
+  
+        
 });
+
+        
+        

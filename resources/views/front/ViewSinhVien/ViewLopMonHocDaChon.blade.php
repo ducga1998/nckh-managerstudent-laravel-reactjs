@@ -4,6 +4,9 @@
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
+                    @if ($dataMergen!=null)
+                        
+                   
                      @if($dataMergen[0]->deadine_dangky)
             <h3 class="m-portlet__head-text">
                        Các Lớp Môn Học Đã Đăng Ký
@@ -13,6 +16,11 @@
                       Đã Hết hạn Đăng ký và Phần bài tập để xem bài tập 
                     </h3>
                      @endif
+                      @else
+                        <h3 class="m-portlet__head-text">
+                            Chưa có lớp môn học nào để đăng ký 
+                     </h3>
+                      @endif
                     
                 </div>
             </div>
