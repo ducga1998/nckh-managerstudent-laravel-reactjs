@@ -1,4 +1,9 @@
 @extends('front.layout') @section('content-giangvien')
+<style>
+	.m-content{
+		padding: 0px;
+	}
+</style>
 <div class="m-portlet">
 	<div class="m-portlet__body">
 		<div class="m-portlet__head">

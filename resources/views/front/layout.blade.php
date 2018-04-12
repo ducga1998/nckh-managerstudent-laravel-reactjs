@@ -310,8 +310,22 @@
 											</span>
 										</a>
 									</li>
+									
 
-									@endif {{-- của sinh viên --}} @if(session('statut') == 'user')
+									@endif {{-- của sinh viên --}}
+									 @if(Auth::user()->phutrach==1)
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url("/QuanLyTaiLieu ")}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Quản lý tài liệu(Chỉ dành cho giảng viên được phần công)
+											</span>
+										</a>
+									</li>
+									@endif
+									@if(session('statut') == 'user')
 
 									<li class="m-menu__item " aria-haspopup="true">
 										<a href="{{url("/listsinhvienlopdanghoc ")}}" class="m-menu__link ">
@@ -432,6 +446,19 @@
 										</a>
 
 									</li>
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+										<a href="{{url('quanlysinhviendanopbai')}}" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Các Lớp đang trong quá trình dạy
+											</span>
+
+										</a>
+
+									</li>
+									
 									@endif
 									 @if(session('statut') == 'user' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">

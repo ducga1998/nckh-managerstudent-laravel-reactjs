@@ -12,4 +12,7 @@ class Mon extends Model
     {
         return $this->hasMany('App\Models\lopmonhoc','Mon_Id', 'IdMon' );
     }
+    public function LayTatCaNoiDungMonHoc(){
+        return $this->hasMany('App\Models\NoiDungMonHoc','IdMon','IdMon');
+    }
 }

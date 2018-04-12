@@ -81,7 +81,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::group(['middleware' => ['redac']], function () {
 		Route::get('listlopmonhocviewgiangvien', 'GiangVienController@viewListLopMonHoc');
 		Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
+		Route::get('/quanlysinhviendanopbai', 'GiangVienController@caclopdangtrongquatrinhday');
 		Route::get('caclopdangtrongquatrinhday', 'GiangVienController@caclopdangtrongquatrinhday');
+		Route::get('QuanLyTaiLieu', 'GiangVienController@QuanLyTaiLieu');
 	});
 	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
 	//ajax giang viên đăng ký môn học

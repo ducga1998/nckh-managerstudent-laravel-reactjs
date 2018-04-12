@@ -62,7 +62,8 @@ class GiangVienController extends Controller
         $linkbaitap->deadline= $deadline;
         $linkbaitap->save();
     }
-    public function caclopdangtrongquatrinhday(){
-        return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay');
+    public function caclopdangtrongquatrinhday(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
+        $dataMergen = $lopmonhoc->QuanLySinhVienDaNopBai();
+        return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay', ["dataMergen" => $dataMergen]);
     }
  }

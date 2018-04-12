@@ -59,7 +59,7 @@
                                 {{$item->CoutSinhvien}}
                             </td>
                             <td>
-                                @if($item->deadine_dangky)
+                                @if($item->deadine_dangky==null)
                                       <a idsinhvien="{{$idsinhvien}}" idlopmonhoc="{{$item->IdLopMonHoc}}" class="btn-huyhocphan btn m-btn--pill btn-outline-danger active" href="">Hủy ĐK Lớp Này</a> 
                                 @else
                                    <button type="button" class="btn m-btn--pill    btn-success m-btn m-btn--custom" disabled="disabled">
