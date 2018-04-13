@@ -300,3 +300,14 @@
 .col-xl-4 {
     max-width: 31.33333%;
 }
+
+.clickViewChiTiet:hover {
+    background-color: #f7f7fa;
+    padding: 10px;
+}
+
+.m-list-timeline .m-list-timeline__items .m-list-timeline__item .m-list-timeline__text {
+    color: #575962;
+    font-size: 20px;
+    font-weight: bold;
+}

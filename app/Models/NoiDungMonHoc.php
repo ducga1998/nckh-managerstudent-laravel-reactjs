@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class NoiDungMonHoc extends Model
 {
     protected $table = 'NoiDungMon';
-    // protected $primaryKey = "IdMon";
+    protected $primaryKey = "Id";
     public function LayTatCaChiTietNoiDungMonHoc(){
         return $this->hasMany('App\Models\ChiTietMon','IdNoiDung','Id');
     }

@@ -2,6 +2,8 @@
 <script src="{{ URL::asset('assets/demo/default/custom/components/forms/widgets/summernote.js')}}" type="text/javascript"></script>
 	<script src="{{URL::asset('handleAjax.js')}}"></script>
 	<script src="{{URL::asset('handleAjAx_Form.js')}}"></script>
+	<script src="{{URL::asset('HandleAJAX_List.js')}}"></script>
+	
 
 	<script>
 		function noneLoading() {

@@ -313,7 +313,7 @@
 									
 
 									@endif {{-- của sinh viên --}}
-									 @if(Auth::user()->phutrach==1)
+									 @if(Auth::user()->phutrach!=null)
 									<li class="m-menu__item " aria-haspopup="true">
 										<a href="{{url("/QuanLyTaiLieu ")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -356,7 +356,9 @@
 
 						<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
-								@if(session('statut') == 'admin' ||session('statut') == 'redac') Quản lý Lớp môn học @endif @if(session('statut') == 'user')
+								@if(session('statut') == 'admin' ||session('statut') == 'redac')
+								 Quản lý Lớp môn học @endif
+								  @if(session('statut') == 'user')
 								Quản lý Phần Môn Học @endif
 
 							</h4>
@@ -485,12 +487,65 @@
 										</a>
 
 									</li>
+									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
+										<a href="{{url('LayTaiLieuTungMonHoc')}}" class="m-menu__link m-menu__toggle">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Lấy Tài Liệu Theo Từng Môn Học
+											</span>
+
+										</a>
+
+									</li>
 									
 									@endif
 								</ul>
 							</div>
 						</li>
+			{{-- thêm khóa học --}}
+			<li class="m-menu__section">
+							<h4 class="m-menu__section-text">
+							Quản lý Khóa Học						</h4>
+							<i class="m-menu__section-icon flaticon-more-v3"></i>
+						</li>
+			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+							<a href="#" class="m-menu__link m-menu__toggle autoclick">
+								<i class="m-menu__link-icon flaticon-layers"></i>
+								<span class="m-menu__link-text">
+									Quán lý quá Trình Sinh Viên học 
+								</span>
+								<i class="m-menu__ver-arrow la la-angle-right"></i>
+							</a>
+							<div class="m-menu__submenu">
+								<span class="m-menu__arrow"></span>
+								<ul class="m-menu__subnav">
+									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+										<a href="#" class="m-menu__link ">
+											<span class="m-menu__link-text">
+												 Quản lý  
+											</span>
+										</a>
+									</li>
+									 
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Tạo Khóa Học
+											</span>
+										</a>
+									</li>
+									
 
+									 									 									
+								</ul>
+							</div>
+						</li>
+			{{-- end thêm khóa --}}
 					</ul>
 				</div>
 				<!-- END: Aside Menu -->

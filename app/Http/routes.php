@@ -85,16 +85,20 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('caclopdangtrongquatrinhday', 'GiangVienController@caclopdangtrongquatrinhday');
 		Route::get('QuanLyTaiLieu', 'GiangVienController@QuanLyTaiLieu');
 	});
+	Route::get('apinoidungmonhoc/{idmon}', 'GiangVienController@ApiNoiDungMonHoc');
 	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
 	//ajax giang viên đăng ký môn học
+	Route::post('AjaxThemChiTietNoiDung', 'GiangVienController@ThemChiTietNoiDung');
+	Route::post('AjaxUpNoiDung', 'GiangVienController@ajaxUpNoiDung');
 	Route::post('/ajaxgiangviendangkylopmonhoc', 'GiangVienController@GiangVienDangKyLopMonHoc');
 	Route::post('/themlinkbaitap', 'GiangVienController@AJAXthemLinkBaiTap');
 	Route::get('/ajaxlistlopsinhvien/{idlopmonhoc}', "GiangVienController@GetSinhVienAjax");
 	//GiangVienController end
 	//SinhViencontroller handle start
 	Route::group(['middleware' => ['user']], function () {
-	
+			Route::get('LayTaiLieuTungMonHoc', 'SinhVienController@ViewTaiLieu');
 	});
+	Route::get('ChiTietNoiDungMonHoc/{idnoidung}', 'GiangVienController@ChiTietNoiDungMonHoc');
 	Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
 	Route::get('/dangkylopmonhoc', 'SinhVienController@ViewDangKyLopMonHoc')->name('viewdangkymonhoc');
 	Route::get('/LopMonHocSinhVienDaDangNhapDaDangKy', 'SinhVienController@LayToanBoLopHocSinhVienDaDk');

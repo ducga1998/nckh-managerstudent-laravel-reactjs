@@ -69,5 +69,8 @@ class SinhVienController extends Controller
         $sinhviennopbai->save();
 
     }
+    public function ViewTaiLieu(){
+        return view('front.ViewSinhVien.ViewLayTaiLieu');
+    }
 
 }

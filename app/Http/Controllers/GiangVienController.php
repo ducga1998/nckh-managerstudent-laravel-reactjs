@@ -13,8 +13,10 @@ use App\Repositories\GiangVienRepository;
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
 use App\Models\linkbaitap;
+use App\Models\ChiTietMon;
 
 use Illuminate\Http\Request;
+use App\Repositories\NoiDungRepository;
 
 
 
@@ -66,4 +68,22 @@ class GiangVienController extends Controller
         $dataMergen = $lopmonhoc->QuanLySinhVienDaNopBai();
         return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay', ["dataMergen" => $dataMergen]);
     }
+    public function QuanLyTaiLieu(MonRepository $Mon, NoiDungRepository $noidung){
+        $idmonhoc = Auth::user()->phutrach;
+        $noidung = $noidung->ToanBoNoiDungMonHoc($idmonhoc);
+       
+        return view('front.viewgiangvien.QuanLyTaiLieu',['idmonhoc'=> $idmonhoc,'ArrayNoiDung'=> $noidung]);
+    }
+ public function ajaxUpNoiDung(Request $request,NoiDungRepository $noidung){
+    $noidung->ThemNoiDung($request);
+ }  
+ 
+ public function ChiTietNoiDungMonHoc($idnoidung,NoiDungRepository $noidung){
+        $chitietnoidung= $noidung->LayToanBoChiTietMonHocTuIdNoiDung($idnoidung);
+    return $chitietnoidung;
  }
+ public function ThemChiTietNoiDung(Request $request,NoiDungRepository $noidung)
+ {
+                $noidung->ThemChiTietNoiDung($request);
+ }
+}
