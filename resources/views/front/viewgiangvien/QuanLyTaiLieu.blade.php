@@ -2,7 +2,7 @@
 <div class="m-portlet">
     <div class="m-portlet__body">
         <h3 class="m-section__heading">
-Thêm Lớp Môn Học(Bấm Save để lưu lại....)
+Thêm Nội Dung(Bấm Save để lưu lại....)
 							</h3>
 <div class="row">
     <div class="col-lg-12">
@@ -99,8 +99,13 @@ Thêm Lớp Môn Học(Bấm Save để lưu lại....)
             <div class="col-lg-5">
                 <div class="m-section">
                     <div class="m-section__content">
-
-                       <div class="summernote"> </div>;
+                        <label class="col-lg-3 col-form-label">
+														<b>Chi Tiết Nội dung:</b>
+													</label>
+                       <div class="summernote"> </div>
+                       <label class="col-lg-3 col-form-label">
+                     <b>Link Video :</b> 
+													</label>
                          <input class="form-control m-input" type="text" placeholder="link Video ..." id="linkvideo">
                     </div>
                 </div>

@@ -13,21 +13,16 @@ class GiangVienRepository extends BaseRepository
 
         $this->GiangVien = $GiangVien;
     }
-    
-   
-  
-   public function GetGiangVienByIdLopMonHoc($idlopmonhoc){
-    $lopmonhoc= lopmonhoc::find($idlopmonhoc);
-     $giangvien= $lopmonhoc->LayGiangVienTrongLopMonHoc;
-      dd($giangvien);
+    public function GetGiangVienByIdLopMonHoc($idlopmonhoc)
+    {
+        $lopmonhoc= lopmonhoc::find($idlopmonhoc);
+        $giangvien= $lopmonhoc->LayGiangVienTrongLopMonHoc;
+        dd($giangvien);
    }
    public function getAllListGiangVien(){
       $giangvien= giangvien::all()->toArray();
       return $giangvien;
    }
-//    public function ThemGiangVien(){
-
-//    }
     public function ThemGiangVien($request){
         $user=new User;
         $id = User::count() + 1;
@@ -55,40 +50,30 @@ class GiangVienRepository extends BaseRepository
         giangvien::where('IdGiangVien', $idgiangvien)->delete();
        }
     public function DangKyMonHoc($request){
-        // IdGiangVien : N01
-        //     IdLopMonHoc : 3
         $IdLopMonHoc=  $request->IdLopMonHoc;
-       
         $lopmonhoc=lopmonhoc::find($IdLopMonHoc);
         $lopmonhoc->GiangVien_Id = $request->IdGiangVien;
         $lopmonhoc->save();
-
-
     }
 
     public function UpdateInfoGiangVien()
     {
         $array = Input::all();
-       
         $giangvien = giangvien::find($array['idgiangvien']);
-
         $giangvien->Gmail = $array['gmail'];
         $giangvien->BoMon = $array['bomon'];
         $giangvien->TenGiangVien = $array['tengiangvien'];
         $giangvien->password= bcrypt($array["password"]);
-        
         $giangvien->save();
 
     }
     public function DeleteSinhVien($IdSinhVien)
     {
-
         $giangvien = giangvien::find($IdSinhVien);
         $giangvien->delete();
     }
     public function LayAPiListBaiTap($idlopmonhoc){
         $listlinkbaitap = linkbaitap::where('Id_LinkBaiTap', $idlopmonhoc)->get()->toJson();
-       
         $lopmonhoc = lopmonhoc::find($idlopmonhoc);
         $mon=$lopmonhoc->LayMonTrongLopMonHoc->toArray();
         $giangvien = $lopmonhoc->LayGiangVienTrongLopMonHoc->toArray();
@@ -96,12 +81,13 @@ class GiangVienRepository extends BaseRepository
         $objectlinkbaitap->tengiangvien= $giangvien["TenGiangVien"];
         $objectlinkbaitap->listlinkbaitap= $listlinkbaitap;
         $objectlinkbaitap->tenmonbomon =$mon["TenMon"]."-".$mon["BoMon"];
-       return $objectlinkbaitap;
+        return $objectlinkbaitap;
 }
 
 
 }
-class ObjectLinkBaiTap{
+class ObjectLinkBaiTap
+{
     public $tengiangvien;
     public $tenmonbomon;
     public $listlinkbaitap;

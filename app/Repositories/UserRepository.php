@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User, App\Models\Role;
+use App\Models\User, App\Models\Role,App\Models\giangvien;
 
 class UserRepository extends BaseRepository
 {
@@ -221,6 +221,14 @@ class UserRepository extends BaseRepository
 
 		$user->confirmed = true;
 		$user->confirmation_code = null;
+		$user->save();
+	}
+	public function PhuTrachTaiLieuUpdate($request){
+		$idgiangvien = $request["idgiangvien"];
+		$idmon = $request["idmon"];
+		$idUser = giangvien::find($idgiangvien)->Id;
+		$user = user::find($idUser);
+		$user->phutrach = $idmon;
 		$user->save();
 	}
 	

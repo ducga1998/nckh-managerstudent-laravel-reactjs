@@ -311,3 +311,18 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.modal-dialog {
+    max-width: 100%;
+    margin: 0px;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+.btn-chitietkhoahoc {
+    position: absolute;
+    top: 43px;
+    right: 64px;
+}

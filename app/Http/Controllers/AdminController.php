@@ -4,6 +4,7 @@ use Auth;
 use App\Repositories\ContactRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\BlogRepository;
+use App\Models\User;
 use App\Models\lopmonhoc;
 use App\Repositories\CommentRepository;
 use App\Repositories\GiangVienRepository;
@@ -111,6 +112,7 @@ class AdminController extends Controller {
 	public function AllSinhVien(){
 		$sinhvien=SinhVien::all()->toArray();
 		$useArrayLopHoc =lophoc::all()->toArray();
+		
 		return view("front/listsinhvien",['list'=>$sinhvien, 'useArrayLopHoc'=> $useArrayLopHoc]);
 	}
 	public function LaySinhVienBangIdSinhVien($idsinhvien,SinhVienRepository $sinhvien){
@@ -239,11 +241,6 @@ class AdminController extends Controller {
 		return view('front.ViewAdmin.VietPost');
 	}
 	public function AJAXThemPost(Request $request){
-	/*id
-title
-content
-view
-		 */ 
 		$title=$request["title"];
 		$content_article = $request["content_article"];
 		$check = $request["check"];
@@ -261,4 +258,21 @@ view
 	public function MoDangKyLopMonHoc(LopMonHocRespository $lopmonhoc){
 		$lopmonhoc->MoDangKyLopMonHocChoSinhVien();
 	}
+	public function QuanLyPhuTrachTaiLieu(MonRepository $mon){
+	$ArrayObject=	$mon->XuLyMonHocCoGiangVienPhuTrach();
+		$allMonHoc=$mon->GetToanBoMonHoc();
+		$ListGiangVienChuaDcPhuTrach=[];
+		$ListGiangVien = giangvien::all()->toArray();
+		foreach ($ListGiangVien as $itemGiangVien) {
+			$idUser=$itemGiangVien["Id"];
+			$phutrach =User::find($idUser)->phutrach;
+			if($phutrach==null){
+					array_push($ListGiangVienChuaDcPhuTrach, $itemGiangVien);
+			}
+		}
+		 return view('front.ViewAdmin.QuanLyPhuTrachTaiLieu',["ArrayObject"=>$ArrayObject,"ArrayGiangVien"=> $ListGiangVienChuaDcPhuTrach]);	
+	}
+	public function PhuTrachTaiLieu(Request $request,UserRepository $user){
+			$user->PhuTrachTaiLieuUpdate($request);
+		}
 }

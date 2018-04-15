@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Jobs\ChangeLocale;
 use App\Models\giangvien;
+use App\Models\Course;
+
+
 use App\Models\admin;
 use App\Models\SinhVien;
 use App\Models\lopmonhoc;
 
 use App\Repositories\LopMonHocRespository;
 use App\Repositories\GiangVienRepository;
+use App\Repositories\KhoaHocRepository;
+
+
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
 use App\Models\linkbaitap;
-use App\Models\ChiTietMon;
+
 
 use Illuminate\Http\Request;
 use App\Repositories\NoiDungRepository;
@@ -85,5 +91,17 @@ class GiangVienController extends Controller
  public function ThemChiTietNoiDung(Request $request,NoiDungRepository $noidung)
  {
                 $noidung->ThemChiTietNoiDung($request);
+ }
+ public function ViewQuanLyKhoaHoc(MonRepository $mon){
+   $allmon= $mon->GetToanBoMonHoc();
+  $idUser= Auth::user()->id;
+$TenGiangVien=giangvien::where('Id',$idUser)->first()->TenGiangVien;
+$Course=Course::all()->toArray();
+
+     return view('front.viewgiangvien.ViewQuanLyKhoaHoc',['Course'=> $Course,'ArrayMon'=> $allmon, "TenGiangVien"=>$TenGiangVien]);
+ }
+ public function ThemKhoaHocChoGiangVien(Request $request, KhoaHocRepository $khoahoc)
+ {
+        $khoahoc->ThemKhoaHoc($request);
  }
 }

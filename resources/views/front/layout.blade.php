@@ -298,6 +298,16 @@
 											</span>
 										</a>
 									</li>
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url("/quanlyphutrachtailieucacmonhoc")}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Quản Lý phụ trách Tài Liệu Các Môn Học
+											</span>
+										</a>
+									</li>
 									@endif @if(session('statut') == 'redac')
 
 									<li class="m-menu__item " aria-haspopup="true">
@@ -505,7 +515,7 @@
 							</div>
 						</li>
 			{{-- thêm khóa học --}}
-			<li class="m-menu__section">
+		<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
 							Quản lý Khóa Học						</h4>
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
@@ -530,7 +540,7 @@
 									</li>
 									 
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="" class="m-menu__link ">
+										<a href="{{url('ViewQuanLyKhoaHoc')}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>

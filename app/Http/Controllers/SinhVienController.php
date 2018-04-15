@@ -14,6 +14,7 @@ use App\Repositories\SinhVienRepository;
 use App\Models\linkbaitap;
 use App\Models\sinhviennopbai;
 use Illuminate\Http\Request;
+use App\Repositories\NoiDungRepository;
 
 
 
@@ -69,8 +70,15 @@ class SinhVienController extends Controller
         $sinhviennopbai->save();
 
     }
-    public function ViewTaiLieu(){
-        return view('front.ViewSinhVien.ViewLayTaiLieu');
+    public function ViewTaiLieu(NoiDungRepository $noidung,MonRepository $mon){
+          
+          $allmon= $mon->GetToanBoMonHoc();
+         
+        return view('front.ViewSinhVien.ViewLayTaiLieu',["AllMon"=>$allmon]);
+    }
+    public function ApiLayTaiLieu($idmon, NoiDungRepository $noidung){
+        $tailieu=$noidung->GetAPiTaiLieu($idmon);
+        return $tailieu;
     }
 
 }

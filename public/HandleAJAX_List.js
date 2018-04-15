@@ -47,6 +47,10 @@ $(document).ready(function () {
           timeOut: 2000
         });
         ArrayNoiDung = [];
+        setTimeout(() => {
+           window.location.href = "/QuanLyTaiLieu";
+        }, 1000);
+       
       },
       error: function (error) {
         toastr.error(`Save Thất Bại Xin hãy thử lại`, {
@@ -179,5 +183,165 @@ $(document).ready(function () {
       }
     });
   });
+  $(".btn-viewtailieumodal").on("click", function() {
+    var HTML = "";
+    var url =$(this).attr("link");
+    console.log(url);
+     var script = `
+    <script>
+   $("ul li").fadeIn();
+    $(".clicktoggle").on("click",function(){
+    
+        $(this).next().next().fadeToggle();
+    });
+     
+    </script>`;
+    fetch(url)
+      .then(resp => resp.json())
+      .then(function(ArrrayListNoiDung) {
+        for (var itemNoiDung in ArrrayListNoiDung) {
+          console.log(ArrrayListNoiDung[itemNoiDung]);
+          HTML += renderHTMLTaiLieu(ArrrayListNoiDung[itemNoiDung]);
+        }
+        HTML += script;
+        $(".LayTaiLieu").html(HTML);
+        if(HTML.length<160){
+            $(".LayTaiLieu").html("<h3 class='text-center'>Chưa Có Tài liệu Môn Học này Liên Hệ Giảng viên tìm tài liệu ...</h3>");
+        }
+      });
+    
+  });
+  function renderHTMLTaiLieu(data){
+     var HTMLEnd="";
+    var ArrrayListChitietNoiDung=data.arrayListChiTietNoiDung;
+    var noteWarning = ArrrayListChitietNoiDung.length == 0 ? "<span class='m--font-danger'>(Chưa Có Nội Dung Chi tiết)</span>" : "";
+    var HTMLNoidung = `${data.tieude}      Số Tiết:${data.sotiet} ${noteWarning}`;
+   
+   
+    var HTMLChiTietNoiDung="";
+    var count=0
+     for (var itemChitietNoiDung in ArrrayListChitietNoiDung){
+       count++;
+       HTMLChiTietNoiDung += `<li>
+       <b>Nội dung</b> <span>${count}</span> :  <h4>${ArrrayListChitietNoiDung[itemChitietNoiDung].NoiDung}</h4> 
+      <b>Link Video</b> : <a href="${ArrrayListChitietNoiDung[itemChitietNoiDung].LinkVideo}">Link Video</a>
 
+       </li><hr>`;
+      
+    
+     }
+     
+     HTMLEnd += `<h3 class="clicktoggle m--font-primary">
+														${HTMLNoidung}
+                            </h3>
+                            <hr>
+     
+     <ul class="hideSlide">${HTMLChiTietNoiDung}</ul>`;
+     return HTMLEnd;
+  }
+  $(".btn-viewbonhiemphutrach").on("click",function(){
+      var idmon=$(this).attr("idmon");
+      $("#layidmonthoi").attr("idmon",idmon);
+  });
+  $(".BonhiemTaiLieu").on("click",function(){
+     var idmon=$("#layidmonthoi").attr("idmon");
+     var idgiangvien = $(this).attr("idgiangvien");
+       $.ajax({
+         headers: {
+           "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+         },
+         type: "POST",
+         url: "/AjaxPhutTrach",
+         data: {
+           idmon: idmon,
+           idgiangvien: idgiangvien
+         },
+         success: function(html) {
+           toastr.success(
+             `Phụ trách Cho Giảng Viên quản lý Thành Công`,
+             {
+               timeOut: 2000
+             }
+           );
+           setTimeout(() => {
+             window.location.href = "/quanlyphutrachtailieucacmonhoc";
+           }, 1000);
+          
+         },
+         error: function(error) {
+           toastr.error(`Thất Bại Xin hãy thử lại`, {
+             timeOut: 2000
+           });
+         }
+       });
+  });
+$("#FormThemKhoaHoc").on('submit',function(e){
+e.preventDefault();
+
+  var tenkhoahoc=$("input[name='tenkhoahoc']").val();
+   var timestart = formatDate($("input[name='timestart']").val()); 
+     var timeend = formatDate($("input[name='timeend']").val());
+    var idmonhoc= $("#selectmonhoc").find(":selected").val();
+    var tengiangvien= $(this).attr("tengiangvien");
+  
+      $.ajax({
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        },
+        type: "POST",
+        url: "/AJAXThemKhoaHoc",
+        data: {
+          timestart: timestart,
+          timeend: timeend,
+          idmonhoc: idmonhoc,
+          tenkhoahoc: tenkhoahoc
+        },
+        success: function(html) {
+          toastr.success(`Thêm Khóa Học Thành Công`, {
+            timeOut: 2000
+          });
+          setTimeout(() => {
+            window.location.href = "/ViewQuanLyKhoaHoc";
+          }, 1000);
+          $(".containerCourse").append(`
+          <div class="col-md-12 col-lg-12 col-xl-4">
+										<!--begin:: Widgets/Stats2-1 -->
+										<div class="m-widget1">
+											<div class="avt">
+                                                <img style="width:160px" src="http://idplanguage.com/uploads/noidung/images/baiviet/study-online.png" alt="">
+                                            </div>
+                                            
+                                            <div class="title">
+                                               
+                                            </div>
+                                            <div class="author">
+                                              ${tengiangvien}
+                                            </div>
+                                            <button type="button" class="btn-themchitietnoidung btn m-btn--pill m-btn m-btn--gradient-from-info m-btn--gradient-to-accent">
+															${tenkhoahoc}
+														</button>
+										</div>
+										<!--end:: Widgets/Stats2-1 -->
+									</div>
+          `);
+        },
+        error: function(error) {
+          toastr.error(`Thất Bại Xin hãy thử lại`, {
+            timeOut: 2000
+          });
+        }
+      });
+     
+});
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
 });

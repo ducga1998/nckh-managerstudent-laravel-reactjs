@@ -14,7 +14,7 @@ class SinhVienRepository extends BaseRepository
             
             $this->SinhVien = $SinhVien;
         }
-       
+     
     public function ThemSinhVien($request)
     {
         $user = new User;
