@@ -98,7 +98,56 @@
 							</tr>
 						</thead>
 						<tbody class="viewlistsinhvien">
+								<div class="m-section__content">
+										<table class="table table-sm m-table m-table--head-bg-brand">
+											<thead class="thead-inverse">
+												<tr>
+													<th>
+														ID Giảng Viên
+													</th>
+													<th>
+													Tên Giảng Viên
+													</th>
+													<th>
+														Bộ Môn
+													</th>
+													<th>
+														Gmail
+													</th>
+													<th>
+														Setting
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+													@foreach ($arrayGiangVien as $item)
+												<tr>
+													<th>
+													{{$item['IdGiangVien']}}
+													</th>
+													<td>
+													{{$item['TenGiangVien']}}
+													</td>
+													<td>
+													{{$item['BoMon']}}
+													</td>
+													<td>
+														{{$item['Gmail']}}
+													</td>
+													<td>
+														<button idlopmonhoc="" idgiangvien="{{$item['IdGiangVien']}}" type="button" class="daylophocnay btn m-btn--pill  btn-outline-brand m-btn m-btn--outline-2x ">
+															Dạy 
+															</button>
+													</td>
 
+												</tr>
+												@endforeach
+											
+														
+												
+											</tbody>
+										</table>
+									</div>
 						</tbody>
 					</table>
 				</div>

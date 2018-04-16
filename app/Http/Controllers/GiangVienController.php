@@ -23,6 +23,7 @@ use App\Models\linkbaitap;
 
 use Illuminate\Http\Request;
 use App\Repositories\NoiDungRepository;
+use App\Repositories\NoiDungCourseRepository;
 
 
 
@@ -92,16 +93,35 @@ class GiangVienController extends Controller
  {
                 $noidung->ThemChiTietNoiDung($request);
  }
- public function ViewQuanLyKhoaHoc(MonRepository $mon){
-   $allmon= $mon->GetToanBoMonHoc();
-  $idUser= Auth::user()->id;
-$TenGiangVien=giangvien::where('Id',$idUser)->first()->TenGiangVien;
-$Course=Course::all()->toArray();
-
-     return view('front.viewgiangvien.ViewQuanLyKhoaHoc',['Course'=> $Course,'ArrayMon'=> $allmon, "TenGiangVien"=>$TenGiangVien]);
+ /// manager course 
+ public function ViewQuanLyKhoaHoc(MonRepository $mon,KhoaHocRepository $khoahoc)
+ {
+    $allmon=$mon->GetToanBoMonHoc();
+    $idUser=Auth::user()->id;
+    $TenGiangVien=giangvien::where('Id',$idUser)->first()->TenGiangVien;
+    $allkhoahoc=$khoahoc->LayToanBoKhoaHoc();
+    return view('front.viewgiangvien.ViewQuanLyKhoaHoc',
+    ['Course'=> $allkhoahoc,'ArrayMon'=> $allmon, 'TenGiangVien'=> $TenGiangVien]);
  }
  public function ThemKhoaHocChoGiangVien(Request $request, KhoaHocRepository $khoahoc)
  {
         $khoahoc->ThemKhoaHoc($request);
  }
+ public function taodulieu($idcourse,NoiDungCourseRepository $ndCourse){
+        $AllndCourse=$ndCourse->APImergenData($idcourse);
+        dd($AllndCourse);
+        return view('front.viewgiangvien.TaoDuLieuKhoaHoc');
+ }
+    public function ajaxNoiDungCourse(Request $request, NoiDungCourseRepository $noidung)
+    {
+        $noidung->ThemNoiDung($request);
+    }  
+ public function QuanlysinhViendkKhoahoc(){
+        
+        return view('front.viewgiangvien.QuanLySinhVienDaDkKhoaHoc');
+ }
+ public function APINoiDungCourse(NoiDungCourseRepository $noidungCourse){
+     return $noidungCourse->APIToanBoNoiDungMonHoc();
+ }
+     
 }

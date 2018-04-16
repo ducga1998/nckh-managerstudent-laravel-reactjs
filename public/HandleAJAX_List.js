@@ -344,4 +344,60 @@ function formatDate(date) {
 
   return [year, month, day].join("-");
 }
+$(".btn-dkkhoahoc").on("click",function(){
+    var tenmon=$(this).attr("tenmon");
+    var tengiangvien=$(this).attr("tengiangvien");
+    var IdKhoaHoc=$(this).attr("idkhoahoc");
+    $(".btn-dkonline").attr("idkhoahoc", IdKhoaHoc);
+    $(".tenkhoahoc").html(`<h2>${tenmon}</h2>`);
+    $(".tentacgia").html(`<h3 style="text-transform: uppercase;">${tengiangvien}</h3>`);
+});
+$(".btn-dkonline").on("click",function(){
+      var idkhoahoc=$(this).attr("idkhoahoc");
+      var idsinhvien=$(this).attr("idsinhvien");
+       $.ajax({
+         headers: {
+           "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+         },
+         type: "POST",
+         url: "/AJAXDangKyKhoaHoc",
+         data: {
+           idkhoahoc: idkhoahoc,
+           idsinhvien: idsinhvien
+         },
+         success: function(html) {
+           toastr.success(`Đăng ký thành Công`, {
+             timeOut: 2000
+           });
+           setTimeout(() => {
+             window.location.href = "ViewDangKyKhoaHoc";
+           }, 2300);
+         },
+         error: function(error) {
+           toastr.error(`Đăng ký thất bại`, {
+             timeOut: 2000
+           });
+         }
+       });
+});
+// $(".viewAddGiangVien").on("click", function() {
+//   $(".viewHocKhoaHoc").addClass("displayNone");
+// });
+
+//  $(".viewAddGiangVien").on("click", function(event) {
+//    $(".m-viewdiglog").css({
+//      width: "auto",
+//      height: "auto",
+//      opacity: "1",
+//      transition: "0.6s"
+//    });
+//  });
+//  $(".displayNone").on("click", function(event) {
+//    $(".m-viewdiglog").css({
+//      width: "0px",
+//      height: "0px",
+//      opacity: "0",
+//      transition: "0.6s"
+//    });
+//  });
 });

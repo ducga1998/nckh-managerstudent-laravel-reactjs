@@ -77,14 +77,17 @@ Route::group(['middleware' => ['web']], function () {
 	
 
 	//end request to AdminController
-	//start request to GiangVienController
+	//start request to GiangVienController 
 	Route::group(['middleware' => ['redac']], function () {
+		Route::get('taodulieuchokhoahoc/{idcourse}','GiangVienController@taodulieu');
+		Route::get('quanlysinhviendadkkhoahoc', 'GiangVienController@QuanlysinhViendkKhoahoc');
 		Route::get('listlopmonhocviewgiangvien', 'GiangVienController@viewListLopMonHoc');
 		Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
 		Route::get('/quanlysinhviendanopbai', 'GiangVienController@caclopdangtrongquatrinhday');
 		Route::get('caclopdangtrongquatrinhday', 'GiangVienController@caclopdangtrongquatrinhday');
 		Route::get('QuanLyTaiLieu', 'GiangVienController@QuanLyTaiLieu');
 	});
+	Route::get('APINoidungCourse', 'GiangVienController@APINoiDungCourse');
 	Route::post('AJAXThemKhoaHoc', 'GiangVienController@ThemKhoaHocChoGiangVien');
 	Route::get('apinoidungmonhoc/{idmon}', 'GiangVienController@ApiNoiDungMonHoc');
 	Route::get('GetLinkApiLinkBaiTap/{idlopmonhoc}', 'GiangVienController@apiLinkBaiTap');
@@ -99,6 +102,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::group(['middleware' => ['user']], function () {
 			Route::get('LayTaiLieuTungMonHoc', 'SinhVienController@ViewTaiLieu');
 	});
+	
 	Route::get('ViewQuanLyKhoaHoc', 'GiangVienController@ViewQuanLyKhoaHoc');
 	Route::get('ChiTietNoiDungMonHoc/{idnoidung}', 'GiangVienController@ChiTietNoiDungMonHoc');
 	Route::get('/listsinhvienlopdanghoc', 'SinhVienController@ViewTatCaSinhVienCungLop');
@@ -107,11 +111,13 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('LayBaiTap', 'SinhVienController@LayBaiTap');
 	Route::get('ListLinkBaiTap/{idlopmonhoc}', 'SinhVienController@ListBaiTapByIdLopMonHoc');
 	Route::post('AJAXNopBaiTap', 'SinhVienController@NopBaiTap');
+	Route::post('AJAXDangKyKhoaHoc','SinhVienController@DangKyKhoaHoc');
 	Route::get('sinhviendangkylopmonhoc/{idlopmonhoc}', 'SinhVienController@SinhVienDangKyHoc');
-	
+	Route::get('ViewLopKhoaHocDangHoc', 'SinhVienController@ViewLopKhoaHocDangHoc');
 	Route::post('HuyLopMonHocDaDangKy', 'SinhVienController@HuyLopMonHocDaDangKy');
 	Route::get('ApiTaiLieu/{idmon}', 'SinhVienController@ApiLayTaiLieu');
 	//phần test code
+	Route::get('ViewDangKyKhoaHoc', 'SinhVienController@viewdangkykhoahoc');
 	Route::get('routes', function () {
 		\Artisan::call('route:list');
 		return '<pre>' . \Artisan::output() . '</pre>';

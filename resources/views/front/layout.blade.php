@@ -220,8 +220,11 @@
 						</li>
 						<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
-								@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') Xem Tình
-								hình học tập @endif
+								@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý
+								 @endif
+								 @if(session('statut') == 'user') Xem Tình
+								hình học tập 
+								@endif
 							</h4>
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
 						</li>
@@ -229,7 +232,10 @@
 							<a href="#" class="m-menu__link m-menu__toggle autoclick">
 								<i class="m-menu__link-icon flaticon-layers"></i>
 								<span class="m-menu__link-text">
-									@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') Học Tập
+									@if(session('statut') == 'admin'|| session('statut') == 'redac') 
+									Quản lý @endif 
+									@if(session('statut') == 'user') 
+									Học Tập
 									@endif
 
 								</span>
@@ -241,7 +247,10 @@
 									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 										<a href="#" class="m-menu__link ">
 											<span class="m-menu__link-text">
-												@if(session('statut') == 'admin'|| session('statut') == 'redac') Quản lý @endif @if(session('statut') == 'user') Học tập
+												@if(session('statut') == 'admin'|| session('statut') == 'redac')
+												 Quản lý @endif 
+												 @if(session('statut') == 'user') 
+												 Học tập
 												@endif
 
 											</span>
@@ -249,7 +258,7 @@
 									</li>
 									@if(session('statut') == 'admin' )
 									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url("/listsinhvien ")}}" class="m-menu__link ">
+										<a href="{{url("/listsinhvien")}}" class="m-menu__link ">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 												<span></span>
 											</i>
@@ -379,8 +388,9 @@
 							<a href="#" class="m-menu__link m-menu__toggle">
 								<i class="m-menu__link-icon flaticon-interface-3"></i>
 								<span class="m-menu__link-text">
-									@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif @if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif @if(session('statut')
-									== 'user' ) Tùy Chọn Lớp Môn Học @endif
+									@if(session('statut') == 'admin' ) Tạo Lớp Môn Học @endif
+									 @if(session('statut') == 'redac' ) Quản lý Lớp Môn Học @endif
+									  @if(session('statut')== 'user' ) Tùy Chọn Lớp Môn Học @endif
 
 								</span>
 								<i class="m-menu__ver-arrow la la-angle-right"></i>
@@ -390,9 +400,12 @@
 								<ul class="m-menu__subnav">
 									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
 
-										@if(session('statut') == 'admin' ) Tạo Lớp Môn Học
+										@if(session('statut') == 'admin' ) 
+										
+										Tạo Lớp Môn Học
 										</span>
-										</a>@endif
+										</a>
+										@endif
 										 @if(session('statut') == 'redac' )
 										<a href="#" class="m-menu__link ">
 											<span class="m-menuz__link-text">
@@ -445,7 +458,8 @@
 
 									</li>
 
-									@endif @if(session('statut') == 'redac' )
+									@endif
+									 @if(session('statut') == 'redac' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
 										<a href="{{url('viewlistlopmonhocGiangVien')}}" class="m-menu__link m-menu__toggle">
 											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
@@ -470,7 +484,9 @@
 										</a>
 
 									</li>
-									
+										{{-- thêm khóa học --}}
+		
+			{{-- end thêm khóa --}}
 									@endif
 									 @if(session('statut') == 'user' )
 									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
@@ -497,25 +513,14 @@
 										</a>
 
 									</li>
-									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="false" data-menu-submenu-toggle="hover">
-										<a href="{{url('LayTaiLieuTungMonHoc')}}" class="m-menu__link m-menu__toggle">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-											Lấy Tài Liệu Theo Từng Môn Học
-											</span>
-
-										</a>
-
-									</li>
 									
+										
 									@endif
+									
 								</ul>
 							</div>
-						</li>
-			{{-- thêm khóa học --}}
-		<li class="m-menu__section">
+							@if (session('statut') == 'redac')
+								<li class="m-menu__section">
 							<h4 class="m-menu__section-text">
 							Quản lý Khóa Học						</h4>
 							<i class="m-menu__section-icon flaticon-more-v3"></i>
@@ -549,6 +554,84 @@
 											</span>
 										</a>
 									</li>
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url('taodulieuchokhoahoc')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Tạo Dữ liệu Cho Khóa Học
+											</span>
+										</a>
+									</li>
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url('quanlysinhviendadkkhoahoc')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Tạo Dữ liệu Cho Khóa Học
+											</span>
+										</a>
+									</li>
+									
+									
+
+									 									 									
+								</ul>
+							</div>
+						</li>
+							@endif
+							 @if(session('statut') == 'user' )
+							<li class="m-menu__section">
+						<h4 class="m-menu__section-text">
+							Học Khóa Học						
+						</h4>
+							<i class="m-menu__section-icon flaticon-more-v3"></i>
+						</li>
+
+{{-- thêm khóa học --}}
+										
+		
+			<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+							<a href="#" class="m-menu__link m-menu__toggle autoclick">
+								<i class="m-menu__link-icon flaticon-layers"></i>
+								<span class="m-menu__link-text">
+									Sinh Viên Học Online
+								</span>
+								<i class="m-menu__ver-arrow la la-angle-right"></i>
+							</a>
+							<div class="m-menu__submenu">
+								<span class="m-menu__arrow"></span>
+								<ul class="m-menu__subnav">
+									<li class="m-menu__item  m-menu__item--parent" aria-haspopup="true">
+										<a href="#" class="m-menu__link ">
+											<span class="m-menu__link-text">
+												Học
+											</span>
+										</a>
+									</li>
+									 
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url('ViewDangKyKhoaHoc')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+												Đăng ký Khóa học online
+											</span>
+										</a>
+									</li>
+									<li class="m-menu__item " aria-haspopup="true">
+										<a href="{{url('ViewLopKhoaHocDangHoc')}}" class="m-menu__link ">
+											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
+												<span></span>
+											</i>
+											<span class="m-menu__link-text">
+											Lớp Đang Học
+											</span>
+										</a>
+									</li>
 									
 
 									 									 									
@@ -556,6 +639,9 @@
 							</div>
 						</li>
 			{{-- end thêm khóa --}}
+@endif
+						</li>
+		
 					</ul>
 				</div>
 				<!-- END: Aside Menu -->
@@ -566,8 +652,16 @@
 
 				<div class="m-content">
 
-					@section('artical') @show @if(session('statut') == 'admin') @section('m-content') @show @endif @if(session('statut') == 'redac')
-					@section('content-giangvien') @show @endif @if(session('statut') == 'user' ) @section('content-sinhvien') @show @endif
+					@section('artical')
+					 @show
+					  @if(session('statut') == 'admin')
+					   @section('m-content') @show
+						@endif
+						 @if(session('statut') == 'redac')
+					@section('content-giangvien') @show
+					 @endif
+					  @if(session('statut') == 'user' ) 
+					  @section('content-sinhvien') @show @endif
 
 				</div>
 

@@ -38,7 +38,6 @@ class LopRepository extends BaseRepository
     }
     public function LayListSinhVienBangIdLopHoc(){
         $arrayRequestLop = Input::all();
-           
         $lophoc = lophoc::find($idlop);
         $list = $lophoc->LayToanBoSinhVienTrongLop->toArray();
         dd($lopmonhoc);

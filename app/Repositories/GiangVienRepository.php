@@ -20,8 +20,8 @@ class GiangVienRepository extends BaseRepository
         dd($giangvien);
    }
    public function getAllListGiangVien(){
-      $giangvien= giangvien::all()->toArray();
-      return $giangvien;
+        $giangvien= giangvien::all()->toArray();
+        return $giangvien;
    }
     public function ThemGiangVien($request){
         $user=new User;
