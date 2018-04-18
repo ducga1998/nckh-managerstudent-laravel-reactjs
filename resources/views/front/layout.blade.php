@@ -472,18 +472,7 @@
 										</a>
 
 									</li>
-									<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-										<a href="{{url('quanlysinhviendanopbai')}}" class="m-menu__link m-menu__toggle">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Các Lớp đang trong quá trình dạy
-											</span>
-
-										</a>
-
-									</li>
+									
 										{{-- thêm khóa học --}}
 		
 			{{-- end thêm khóa --}}
@@ -554,26 +543,8 @@
 											</span>
 										</a>
 									</li>
-									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url('taodulieuchokhoahoc')}}" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Tạo Dữ liệu Cho Khóa Học
-											</span>
-										</a>
-									</li>
-									<li class="m-menu__item " aria-haspopup="true">
-										<a href="{{url('quanlysinhviendadkkhoahoc')}}" class="m-menu__link ">
-											<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-												<span></span>
-											</i>
-											<span class="m-menu__link-text">
-												Tạo Dữ liệu Cho Khóa Học
-											</span>
-										</a>
-									</li>
+									
+									
 									
 									
 

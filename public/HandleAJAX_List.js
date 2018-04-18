@@ -380,13 +380,86 @@ $(".btn-dkonline").on("click",function(){
          }
        });
 });
+$(".viewDataCourse").on("click", function() {
+  var idcourse = $(this).attr("idcourse");
+  var link = $(this).attr("link");
+  var url = link + "/" + idcourse;
+ 
+  var HTML="";
+  console.log(url);
+  fetch(url)
+    .then(resp => resp.json())
+    .then(function(data) {
+   console.log(data);
+     
+     for (var noidungCourse in data) {
+      var ObjectDataNoiDungCourse=data[noidungCourse].dataCourse;
+     HTML += renderHTMLParentItem(ObjectDataNoiDungCourse);
+     console.log(ObjectDataNoiDungCourse);
+    
+     }
+     // thêm javascript vào cho n
+    HTML += `<script>
+  $("#mobile-nav-icon").click(function() {
+  $("#menu-main-menu").slideToggle();
+});
+
+$("#menu-main-menu > .menu-item-has-children > .sub-menu").addClass("first-sub");
+
+$("#menu-main-menu > .menu-item-has-children a").click(function() {
+  $(this)
+    .siblings(".first-sub")
+    .slideToggle();
+  $(this)
+    .closest(".menu-item-has-children")
+    .siblings()
+    .find(".sub-menu")
+    .slideUp();
+});
+</script>`;
+    if (HTML.length<443){
+       $("#menu-main-menu").html(" <h2> Khóa Học chưa đc giảng viên nhập tài liệu </h2>");
+    }
+    else{
+$("#menu-main-menu").html(HTML);
+    } 
+     console.log(HTML);
+    });
+});
+
+function renderHTMLParentItem(Objects){
+  var HTMLSubItem="";
+  var ArrayChiTietNd = Objects.lay_chi_tiet_noi_dung_khoa_hoc;
+  console.log(ArrayChiTietNd);
+  for (var item in ArrayChiTietNd) {
+    HTMLSubItem += `<li>${ArrayChiTietNd[item].NoiDung}||Link
+ Video <a href="${ArrayChiTietNd[item].LinkVideo}">linkvideo</a>
+      </li>`;
+  }
+ 
+  return `<li class="menu-item-has-children"><a>${Objects.TieuDe}|| Số Tiết:${Objects.SoTiet}</a>
+    <ul class="sub-menu first-sub">
+
+      ${HTMLSubItem}
+    </ul>
+  </li>`; 
+}
+
+$(".viewDataCourse").on("click", function(event) {
+  $(".m-viewdiglog").css({
+    width: "auto",
+    height: "auto",
+    opacity: "1",
+    transition: "0.6s"
+  });
+});
 // $(".viewAddGiangVien").on("click", function() {
 //   $(".viewHocKhoaHoc").addClass("displayNone");
 // });
 
 //  $(".viewAddGiangVien").on("click", function(event) {
 //    $(".m-viewdiglog").css({
-//      width: "auto",
+//      width: "auto",  
 //      height: "auto",
 //      opacity: "1",
 //      transition: "0.6s"

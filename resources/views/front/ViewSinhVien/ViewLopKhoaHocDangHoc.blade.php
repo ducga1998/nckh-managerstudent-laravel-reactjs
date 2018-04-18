@@ -48,7 +48,7 @@
 								{{$itemInfoKhoaHocDaDk->infoKhoaHoc['time_end']}}
 							</td>
 							<td>
-								<button data-toggle="modal" data-target="#m_modal_4" type="button" class="viewAddGiangVien  btn btn-focus">
+								<button link="{{url('APICourse')}}" idcourse="{{$itemInfoKhoaHocDaDk->infoKhoaHoc['Id']}}" data-toggle="modal" data-target="#m_modal_4" type="button" class="viewDataCourse   btn btn-focus">
 									Bắt Đầu Học
 								</button>
 							</td>
@@ -89,7 +89,25 @@
 	</div>
 	<div class="m-section">
 		<div class="m-section__content">
-				
+				<ul id="menu-main-menu">
+  <li class="menu-item-has-children"><a>parent link</a>
+    <ul class="sub-menu">
+      <li><a href="#">child link</a>
+      </li>
+      <li><a href="#">child link</a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="menu-item-has-children"><a>parent link</a>
+    <ul class="sub-menu">
+      <li><a href="#">child link</a>
+      </li>
+      <li><a href="#">child link</a>
+      </li>
+    </ul>
+  </li>
+</ul>
 		</div>
 	</div>
 </div>

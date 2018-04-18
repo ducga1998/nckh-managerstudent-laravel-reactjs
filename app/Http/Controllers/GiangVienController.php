@@ -54,6 +54,7 @@ class GiangVienController extends Controller
     public function test(MonRepository $mon){}
     public function  ViewLopMonHocGiangVienDaDangKy(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
        $dataMergen= $lopmonhoc->GetListLopMonHocDaDangKy($mon,$sinhvien);
+      
        return view('front.viewgiangvien.viewdanhsachlopdadk',["dataMergen"=> $dataMergen]);
     }
     public function apiLinkBaiTap($idlopmonhoc,LopMonHocRespository $lopmonhoc){
@@ -109,7 +110,7 @@ class GiangVienController extends Controller
  }
  public function taodulieu($idcourse,NoiDungCourseRepository $ndCourse){
         $AllndCourse=$ndCourse->APImergenData($idcourse);
-        dd($AllndCourse);
+       
         return view('front.viewgiangvien.TaoDuLieuKhoaHoc');
  }
     public function ajaxNoiDungCourse(Request $request, NoiDungCourseRepository $noidung)

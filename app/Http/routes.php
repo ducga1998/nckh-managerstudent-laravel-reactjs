@@ -79,7 +79,7 @@ Route::group(['middleware' => ['web']], function () {
 	//end request to AdminController
 	//start request to GiangVienController 
 	Route::group(['middleware' => ['redac']], function () {
-		Route::get('taodulieuchokhoahoc/{idcourse}','GiangVienController@taodulieu');
+	
 		Route::get('quanlysinhviendadkkhoahoc', 'GiangVienController@QuanlysinhViendkKhoahoc');
 		Route::get('listlopmonhocviewgiangvien', 'GiangVienController@viewListLopMonHoc');
 		Route::get('viewlistlopmonhocGiangVien', 'GiangVienController@ViewLopMonHocGiangVienDaDangKy');
@@ -87,6 +87,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('caclopdangtrongquatrinhday', 'GiangVienController@caclopdangtrongquatrinhday');
 		Route::get('QuanLyTaiLieu', 'GiangVienController@QuanLyTaiLieu');
 	});
+	Route::get('taodulieuchokhoahoc/{idcourse}', 'GiangVienController@taodulieu');
 	Route::get('APINoidungCourse', 'GiangVienController@APINoiDungCourse');
 	Route::post('AJAXThemKhoaHoc', 'GiangVienController@ThemKhoaHocChoGiangVien');
 	Route::get('apinoidungmonhoc/{idmon}', 'GiangVienController@ApiNoiDungMonHoc');
@@ -116,6 +117,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('ViewLopKhoaHocDangHoc', 'SinhVienController@ViewLopKhoaHocDangHoc');
 	Route::post('HuyLopMonHocDaDangKy', 'SinhVienController@HuyLopMonHocDaDangKy');
 	Route::get('ApiTaiLieu/{idmon}', 'SinhVienController@ApiLayTaiLieu');
+	Route::get('APICourse/{idcourse}', 'SinhVienController@GetApiCourse');
 	//phần test code
 	Route::get('ViewDangKyKhoaHoc', 'SinhVienController@viewdangkykhoahoc');
 	Route::get('routes', function () {

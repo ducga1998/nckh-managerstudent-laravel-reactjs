@@ -7,11 +7,12 @@ use App\Models\giangvien;
 use App\Models\admin;
 use App\Models\SinhVien;
 use App\Models\lopmonhoc;
+
 use App\Repositories\LopMonHocRespository;
 use App\Repositories\GiangVienRepository;
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
-
+use App\Repositories\NoiDungCourseRepository;
 use App\Repositories\KhoaHocRepository;
 use App\Models\linkbaitap;
 use App\Models\sinhviennopbai;
@@ -103,5 +104,10 @@ class SinhVienController extends Controller
         return view('front.ViewSinhVien.ViewLopKhoaHocDangHoc',
         ['ArrayInfoKhoaHocDaDk'=> $allthongtinkhoahocdadangky]);
     }
-
+    public function GetApiCourse($idcourse, NoiDungCourseRepository $ndCourse)
+    {
+        $AllndCourse = $ndCourse->APImergenData($idcourse);
+             return $AllndCourse;
+     
+    }
 }
