@@ -282,6 +282,42 @@ class LopMonHocRespository extends BaseRepository
             $item->save();
         }
   }
+  public function QuanLySinhVienDaNopBai(){
+        $arrayLopMonHoc = [];
+        $idUser = Auth::user()->id;
+        
+        $giangvien = giangvien::where('Id', $idUser)->first();
+        $ListLopMonHoc=$giangvien->LayToanBoLopGiangVienDay;
+        foreach ($ListLopMonHoc as $lopmonhoc) {
+        # code...
+            $idlopmonhoc=$lopmonhoc->IdLopMonHoc;
+            
+            $info=lopmonhoc_sinhvien::where('IdLopMonHoc',$idlopmonhoc);
+            foreach ($info as $itemlopmonhoc_sinhvien) {
+                # code...
+                $itemlopmonhoc_sinhvien->IdSinhVien;
+                $itemlopmonhoc_sinhvien->IdLopMonHoc;
+                dd($itemlopmonhoc_sinhvien->IdLopMonHoc);
+            }
+
+        }
+        $idgiangvien = (int)$ThongTinGiangVienDangNhap["IdGiangVien"];
+    
+        $pivot = lopmonhoc_sinhvien::where('IdSinhVien', $idsinhvien)->get()->toArray();
+
+        foreach ($pivot as $key => $itemlopmonhoc_sinhvien) {
+
+
+            $idlopmonhoc = $itemlopmonhoc_sinhvien["IdLopMonHoc"];
+            $lopmonhoc = lopmonhoc::findOrFail($idlopmonhoc)->toArray();
+           
+            // check Mon_id phải != null và chưa tồn tại trong mảng
+
+            array_push($arrayLopMonHoc, $lopmonhoc);
+
+        }
+  }
+  
    
 }
 

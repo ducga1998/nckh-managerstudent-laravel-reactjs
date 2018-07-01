@@ -1,4 +1,9 @@
 @extends('front.layout') @section('content-giangvien')
+<style>
+	.m-content{
+		padding: 0px;
+	}
+</style>
 <div class="m-portlet">
 	<div class="m-portlet__body">
 		<div class="m-portlet__head">
@@ -93,7 +98,8 @@
 							</tr>
 						</thead>
 						<tbody class="viewlistsinhvien">
-
+								
+										
 						</tbody>
 					</table>
 				</div>
@@ -109,7 +115,7 @@
 </div>
 
 {{-- list link bai tap --}}
-<div class="modal fade show" id="viewlistlinkbaitap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+{{-- <div class="modal fade show" id="viewlistlinkbaitap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -124,26 +130,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="m-section__content">
-					<table class="table table-sm m-table m-table--head-bg-brand">
-						<thead class="thead-inverse">
-							<tr>
-								<th>
-									Id
-								</th>
-								<th>
-									Id Link Bài tập
-								</th>
-
-								<th>
-									Link Bài Tập
-								</th>
-
-							</tr>
-						</thead>
-						<tbody class="viewlistlinkbaitap">
-
-						</tbody>
-					</table>
+					
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -154,7 +141,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> --}}
 <div class="modal fade show" id="giaobaitap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -208,6 +195,53 @@
 
 					</form>
 
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+					Close
+				</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+{{-- list link bai tap --}}
+<div class="modal fade show" id="viewlistlinkbaitap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="">
+					List Link Bài tập
+				</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">
+						×
+					</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="m-section__content">
+					<table class="table table-sm m-table m-table--head-bg-brand">
+						<thead class="thead-inverse">
+							<tr>
+								<th>
+									Id
+								</th>
+								<th>
+									Id Link Bài tập
+								</th>
+
+								<th>
+									Link Bài Tập
+								</th>
+
+							</tr>
+						</thead>
+						<tbody class="viewlistlinkbaitap">
+
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div class="modal-footer">

@@ -28,48 +28,29 @@ TenGiangVien BoMon Gmail updated_at created_at password --}}
         {!! csrf_field() !!}
         <div class="m-portlet__body">
             <div class="form-group m-form__group row">
-                <label class="col-lg-1 col-form-label">
-                    Full Name:
+                <div class="col-lg-12 row">
+                <label class="col-lg-2 col-form-label">
+                   Tên Giảng viên
                 </label>
                 <div class="col-lg-3">
-                    <input name="name" class="form-control m-input" placeholder="Full name">
+                    <input name="name" class="form-control m-input" placeholder="Tên Giảng Viên.....">
                     <span class="m-form__help">
                         Nhập tên Giảng Viên
                     </span>
                 </div>
                 <label class="col-lg-1 col-form-label">
-                    Email Của Giảng Viên:
+                    Email 
                 </label>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <input name="email" type="email" class="form-control m-input" placeholder="Email">
                     <span class="m-form__help">
                         Nhập Gmail của Giảng viên
                     </span>
                 </div>
-                <label class="col-lg-1 col-form-label">
-                    Bộ Môn
-                </label>
-                <div class="col-lg-3">
-                    <select name="bomon" class="form-control m-input m-input--square" id="exampleSelect1">
-                        <option value="KHMT">
-                            KHMT
-                        </option>
-                        <option value="CNPM">
-                            CNPM
-                        </option>
-                        <option value="MANG">
-                            MANG
-                        </option>
-                        <option value="HTTT">
-                            HTTT
-                        </option>
-                        <option value="TRIET">
-                            Triết học
-                        </option>
-                    </select>
                 </div>
-                <label class="col-lg-1 col-form-label">
-                    password
+                 <div class="col-lg-12 row">
+                <label class="col-lg-2 col-form-label">
+                    Password
                 </label>
                 <div class="col-lg-3">
                     <input name="password" type="password" class="form-control m-input" placeholder="Password">
@@ -77,6 +58,24 @@ TenGiangVien BoMon Gmail updated_at created_at password --}}
                         Nhập Password
                     </span>
                 </div>
+                <label class="col-lg-1 col-form-label">
+                    Bộ Môn
+                </label>
+                <div class="col-lg-5">
+                    <select name="bomon" class="form-control m-input m-input--square" id="exampleSelect1">
+                        <option value="KHMT">
+                            BỘ MÔN KHOA HỌC MÁY TÍNH
+                        </option>
+                        <option value="CNPM">
+                           BỘ MÔN CÔNG NGHỆ PHẦN MỀM
+                        </option>
+                        <option value="MANG">
+                            BỘ MÔN MẠNG VÀ CÁC HỆ THỐNG THÔNG TIN
+                        </option>
+                       
+                    </select>
+                </div>
+                 </div>
 
 
             </div>

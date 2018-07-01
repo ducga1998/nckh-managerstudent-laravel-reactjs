@@ -7,13 +7,17 @@ use App\Models\giangvien;
 use App\Models\admin;
 use App\Models\SinhVien;
 use App\Models\lopmonhoc;
+
 use App\Repositories\LopMonHocRespository;
 use App\Repositories\GiangVienRepository;
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
+use App\Repositories\NoiDungCourseRepository;
+use App\Repositories\KhoaHocRepository;
 use App\Models\linkbaitap;
 use App\Models\sinhviennopbai;
 use Illuminate\Http\Request;
+use App\Repositories\NoiDungRepository;
 
 
 
@@ -22,11 +26,13 @@ class SinhVienController extends Controller
     public function ViewTatCaSinhVienCungLop(SinhVienRepository $sinhvien){
         $listsinhvien= $sinhvien->getAllSinhVienTrongLop();
         $tenlop= $sinhvien->getTenLopByIdSinhVien();
-       return view('front.ViewSinhVien.ListSinhVienTrongLopHoc',['ListSinhVien'=> $listsinhvien,'TenLop'=>$tenlop]);
+       return view('front.ViewSinhVien.ListSinhVienTrongLopHoc',
+       ['ListSinhVien'=> $listsinhvien,'TenLop'=>$tenlop]);
     }
     public function ViewDangKyLopMonHoc(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
         $dataMergen = $lopmonhoc->ViewToanBoLopMonHoc($mon,$sinhvien);
-        return view('front.ViewSinhVien.ViewChonLopMonHoc',["dataMergen" => $dataMergen]);
+        return view('front.ViewSinhVien.ViewChonLopMonHoc',
+        ["dataMergen" => $dataMergen]);
     }
     public function SinhVienDangKyHoc($idlopmonhoc,LopMonHocRespository $lopmonhoc){
         $lopmonhoc->SinhVienDangKyLopMonHoc($idlopmonhoc);
@@ -69,5 +75,39 @@ class SinhVienController extends Controller
         $sinhviennopbai->save();
 
     }
-
+    public function ViewTaiLieu(NoiDungRepository $noidung,MonRepository $mon){
+          
+          $allmon= $mon->GetToanBoMonHoc();
+         
+        return view('front.ViewSinhVien.ViewLayTaiLieu',["AllMon"=>$allmon]);
+    }
+    public function ApiLayTaiLieu($idmon, NoiDungRepository $noidung){
+        $tailieu=$noidung->GetAPiTaiLieu($idmon);
+        return $tailieu;
+    }
+    public function viewdangkykhoahoc(MonRepository $mon, KhoaHocRepository $khoahoc){
+        $allmon = $mon->GetToanBoMonHoc();
+        $idUser=Auth::user()->id;
+        $IdSinhVien = sinhvien::where('Id', $idUser)->first()->IdSinhVien;
+        $allkhoahoc = $khoahoc->layToanBoKhoaHocChoSinhVien();
+        return view(
+            'front.ViewSinhVien.DangKyKhoaHoc',
+            ['Course' => $allkhoahoc, 'ArrayMon' => $allmon,
+             'IdSinhVien'=> $IdSinhVien]
+        );
+    }
+    public function DangKyKhoaHoc(Request $request,KhoaHocRepository $khoahoc){
+            $khoahoc->DangKyKhoaHoc($request);
+    }
+    public function ViewLopKhoaHocDangHoc(KhoaHocRepository $khoahoc){
+        $allthongtinkhoahocdadangky=$khoahoc->GetKhoaHocSinhVienDaDangKy();
+        return view('front.ViewSinhVien.ViewLopKhoaHocDangHoc',
+        ['ArrayInfoKhoaHocDaDk'=> $allthongtinkhoahocdadangky]);
+    }
+    public function GetApiCourse($idcourse, NoiDungCourseRepository $ndCourse)
+    {
+        $AllndCourse = $ndCourse->APImergenData($idcourse);
+             return $AllndCourse;
+     
+    }
 }

@@ -44,7 +44,7 @@
                             </td>
                             <td is="{{$item->deadine_dangky}}">
                                 
-                                @if($item->deadine_dangky==1)
+                                @if($item->deadine_dangky==null)
                                     <a class="BtnDkLopMonHocChoSinhVien btn m-btn--pill m-btn--air btn-outline-brand"  link="{{url('sinhviendangkylopmonhoc/'.$item->IdLopMonHoc.'')}}">Đăng ký</a>  
                                 @else
                                   <a  class="btn m-btn--pill   btn-secondary m-btn m-btn--custom m-btn--label-metal" disabled="disabled"> Đã Hết hạn đăng ký</a>  
@@ -62,4 +62,5 @@
         </div>
     </div>
 </div>
+
 @endsection

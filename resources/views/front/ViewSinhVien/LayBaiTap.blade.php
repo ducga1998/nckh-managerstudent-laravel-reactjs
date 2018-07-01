@@ -34,7 +34,7 @@
                     </thead>
                     <tbody>
                          @if($dataMergen!=null)
-                        @if($dataMergen[0]->deadine_dangky!=1)
+                        @if($dataMergen[0]->deadine_dangky==1)
                             
                      
                         @foreach ($dataMergen as $item )

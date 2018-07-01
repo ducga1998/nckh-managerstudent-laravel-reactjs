@@ -40,9 +40,43 @@ class MonRepository extends BaseRepository
     public function deleteMonHoc(){
         $mon=Mon::find($idmonhoc);
     }
+    public function XuLyMonHocCoGiangVienPhuTrach(){
+       $user= user::all()->pluck('phutrach')->toArray();
+       $userFilter=[];
+        foreach($user as $itemUser)
+        {
+            if($itemUser!=null){
+                array_push($userFilter,$itemUser);
+            }
+        }
+       $arrayidmon= mon::all()->pluck('IdMon')->toArray();
+        $arrayObject=[];
+        foreach ($arrayidmon as  $idmon) {
+            # code...
+            if(in_array($idmon,$userFilter)){
+              $ObjectMonHoc=new ObjectMonHoc;
+              $ObjectMonHoc->TenGiangVienPhuTrach=User::where('phutrach',$idmon)->first()->username;
+                $ObjectMonHoc->InfoMon=mon::find($idmon)->toArray();
+                array_push($arrayObject,$ObjectMonHoc);
+
+            }
+
+            else{
+                  $ObjectMonHoc=new ObjectMonHoc;
+              $ObjectMonHoc->TenGiangVienPhuTrach="";
+                $ObjectMonHoc->InfoMon=mon::find($idmon)->toArray();
+                array_push($arrayObject,$ObjectMonHoc);
+            }
+        }
+      return $arrayObject;
+    }
 
 
 
+}
+class ObjectMonHoc{
+    public $TenGiangVienPhuTrach;
+    public $InfoMon;
 }
 
        

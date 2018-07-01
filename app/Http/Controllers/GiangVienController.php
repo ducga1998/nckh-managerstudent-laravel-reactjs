@@ -4,17 +4,26 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Jobs\ChangeLocale;
 use App\Models\giangvien;
+use App\Models\Course;
+
+
 use App\Models\admin;
 use App\Models\SinhVien;
 use App\Models\lopmonhoc;
 
 use App\Repositories\LopMonHocRespository;
 use App\Repositories\GiangVienRepository;
+use App\Repositories\KhoaHocRepository;
+
+
 use App\Repositories\MonRepository;
 use App\Repositories\SinhVienRepository;
 use App\Models\linkbaitap;
 
+
 use Illuminate\Http\Request;
+use App\Repositories\NoiDungRepository;
+use App\Repositories\NoiDungCourseRepository;
 
 
 
@@ -45,6 +54,7 @@ class GiangVienController extends Controller
     public function test(MonRepository $mon){}
     public function  ViewLopMonHocGiangVienDaDangKy(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
        $dataMergen= $lopmonhoc->GetListLopMonHocDaDangKy($mon,$sinhvien);
+      
        return view('front.viewgiangvien.viewdanhsachlopdadk',["dataMergen"=> $dataMergen]);
     }
     public function apiLinkBaiTap($idlopmonhoc,LopMonHocRespository $lopmonhoc){
@@ -62,7 +72,57 @@ class GiangVienController extends Controller
         $linkbaitap->deadline= $deadline;
         $linkbaitap->save();
     }
-    public function caclopdangtrongquatrinhday(){
-        return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay');
+    public function caclopdangtrongquatrinhday(LopMonHocRespository $lopmonhoc, MonRepository $mon, SinhVienRepository $sinhvien){
+        $dataMergen = $lopmonhoc->QuanLySinhVienDaNopBai();
+        return view('front.viewgiangvien.ViewCacLopTrongQuaTrinhDay', ["dataMergen" => $dataMergen]);
     }
+    public function QuanLyTaiLieu(MonRepository $Mon, NoiDungRepository $noidung){
+        $idmonhoc = Auth::user()->phutrach;
+        $noidung = $noidung->ToanBoNoiDungMonHoc($idmonhoc);
+       
+        return view('front.viewgiangvien.QuanLyTaiLieu',['idmonhoc'=> $idmonhoc,'ArrayNoiDung'=> $noidung]);
+    }
+ public function ajaxUpNoiDung(Request $request,NoiDungRepository $noidung){
+    $noidung->ThemNoiDung($request);
+ }  
+ 
+ public function ChiTietNoiDungMonHoc($idnoidung,NoiDungRepository $noidung){
+        $chitietnoidung= $noidung->LayToanBoChiTietMonHocTuIdNoiDung($idnoidung);
+    return $chitietnoidung;
  }
+ public function ThemChiTietNoiDung(Request $request,NoiDungRepository $noidung)
+ {
+                $noidung->ThemChiTietNoiDung($request);
+ }
+ /// manager course 
+ public function ViewQuanLyKhoaHoc(MonRepository $mon,KhoaHocRepository $khoahoc)
+ {
+    $allmon=$mon->GetToanBoMonHoc();
+    $idUser=Auth::user()->id;
+    $TenGiangVien=giangvien::where('Id',$idUser)->first()->TenGiangVien;
+    $allkhoahoc=$khoahoc->LayToanBoKhoaHoc();
+    return view('front.viewgiangvien.ViewQuanLyKhoaHoc',
+    ['Course'=> $allkhoahoc,'ArrayMon'=> $allmon, 'TenGiangVien'=> $TenGiangVien]);
+ }
+ public function ThemKhoaHocChoGiangVien(Request $request, KhoaHocRepository $khoahoc)
+ {
+        $khoahoc->ThemKhoaHoc($request);
+ }
+ public function taodulieu($idcourse,NoiDungCourseRepository $ndCourse){
+        $AllndCourse=$ndCourse->APImergenData($idcourse);
+       
+        return view('front.viewgiangvien.TaoDuLieuKhoaHoc');
+ }
+    public function ajaxNoiDungCourse(Request $request, NoiDungCourseRepository $noidung)
+    {
+        $noidung->ThemNoiDung($request);
+    }  
+ public function QuanlysinhViendkKhoahoc(){
+        
+        return view('front.viewgiangvien.QuanLySinhVienDaDkKhoaHoc');
+ }
+ public function APINoiDungCourse(NoiDungCourseRepository $noidungCourse){
+     return $noidungCourse->APIToanBoNoiDungMonHoc();
+ }
+     
+}

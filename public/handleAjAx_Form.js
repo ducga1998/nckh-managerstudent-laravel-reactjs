@@ -615,7 +615,8 @@ $(".laylinkbaitap").on("click",function () {
       });
 })
 function HTMLrenderTableLinkBaiTap(object,TenGiangVien,TenBoMon){
-   var updated_at = new Date(object.updated_at);
+   var updated_at = new Date();
+   console.log(updated_at);
    var deadline = new Date(object.deadline);
    var ButtonHTML="";
    //flag =false=> vướt quá deadline
@@ -623,7 +624,8 @@ function HTMLrenderTableLinkBaiTap(object,TenGiangVien,TenBoMon){
     if(flag){
         ButtonHTML = `<td><button  onClick="clicknopbai('${object.Id_LinkBaiTap}')" idlopmonhoc="${object.Id_LinkBaiTap}" class="btn m-btn--pill    btn-primary btn-sm">
 											 Nộp Bài
-                    </button></td> 
+                    </button>
+                    </td> 
                     <script>
                     function clicknopbai (idlopmonhoc) {
                       console.log(idlopmonhoc);
@@ -653,9 +655,6 @@ $("#formnhapbaitap").on("submit", function(e) {
   var linkbainop = $("#linkbainop").val();
   var idlopmonhoc=$(this).attr("idlopmonhoc");
   var idsinhvien=$(this).attr("idsinhvien");
-
- 
-
   $.ajax({
     headers: {
       "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
