@@ -1,3 +1,6 @@
-Project Nghiên cứu khoa học. năm 2018 . code xử lý 
-.......... chưa hoàn thành (3/4/2018)<br>
-Hoàn thành chức năng cho admin ngày 6/4/2018
+- Use fw Laravel , react
+- Category Project: Manager Student 
+- Use Patter : Singleton parrent,  responsible parrent
+- Use Language: javascript, php 
+- Author : Nguyen Minh Duc
+- data complete: not complete
